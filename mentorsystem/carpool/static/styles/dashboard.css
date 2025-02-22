@@ -1,0 +1,314 @@
+:root {
+    --main-bg-color: rgba(0, 0, 0, 0.7);
+    --text-color: #ffffff;
+    --highlight-color: #FFD700;
+    --border-color: #000;
+}
+
+body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    text-align: left;
+    background-color: rgba(0, 0, 0, 0.08) !important;
+    transition: background-color 0.3s ease; /* Smooth transition for background */
+}
+
+.dashboards {
+    width: 100%;
+    height: 0%;
+    background: rgba(0, 0, 0, 0.08);
+    color: black;
+    margin-top: 80px;
+    padding: 20px;
+    transition: background-color 0.3s ease; /* Transition for background */
+}
+
+h3, h4, h5, h6 {
+    margin-bottom: .5rem;
+    font-weight: 500;
+    line-height: 1.2;
+}
+
+.dash, .dashboards {
+    background-color: white;
+    transition: background-color 0.3s ease; /* Transition for dashboard background */
+}
+
+.topnav {
+    z-index: 10;
+    overflow: hidden;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: var(--main-bg-color);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 80px;
+    animation: fadeIn 0.5s; /* Fade in effect */
+}
+
+.topnav img.logo {
+    display: block;
+    height: 40px;
+    margin: 0;
+    transition: transform 0.3s ease; /* Logo scaling effect */
+}
+
+.topnav img.logo:hover {
+    transform: scale(1.1); /* Scale effect on hover */
+}
+
+.topnav #name h1 {
+    color: #1a1a2a;
+    margin: 0;
+    left: 15px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+#rest {
+    display: flex;
+    justify-content: flex-end;
+    padding-top: 40px;
+}
+
+#rest ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+#rest ul a {
+    display: block;
+    color: rgb(255, 255, 255);
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+    font-weight: bold;
+    margin-left: 20px;
+    transition: background-color 0.3s ease, color 0.3s ease, padding 0.3s ease, transform 0.3s ease; /* Include transform */
+    border-radius: 25px; /* Rounded corners */
+}
+
+#rest ul a:hover {
+    background-color: #fc8019; /* Background color on hover */
+    color: white; /* Text color on hover */
+    padding: 12px 22px; /* Slightly increase padding on hover */
+    transform: translateY(-2px); /* Lift effect on hover */
+}
+
+#rest ul a:focus {
+    outline: none; /* Remove default focus outline */
+    box-shadow: 0 0 5px rgba(252, 128, 25, 0.7); /* Glow effect on focus */
+}
+
+.hamburger {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    position: absolute;
+    top: 15px;
+    right: 15px;
+}
+
+.hamburger div {
+    width: 25px;
+    height: 3px;
+    background-color: white;
+    margin: 4px 0;
+    transition: all 0.3s ease; /* Transition for hamburger lines */
+}
+
+.hamburger:hover div {
+    background-color: #fc8019; /* Change color on hover */
+}
+
+@media screen and (max-width: 375px) {
+    .topnav ul {
+        display: none;
+    }
+
+    .vertical-nav {
+        width: 0;
+        position: fixed;
+        top: 80px;
+        right: -200px;
+        height: calc(100% - 80px);
+        background-color: var(--main-bg-color);
+        padding-top: 20px;
+        transition: transform 0.3s ease, width 0.3s ease;
+        z-index: 1000;
+        overflow: hidden;
+    }
+
+    .vertical-nav a {
+        padding: 15px 25px;
+        text-align: left;
+        text-decoration: none;
+        font-size: 18px;
+        font-weight: bold;
+        color: white;
+        display: block;
+        transition: background-color 0.3s ease, transform 0.3s ease; /* Include transform */
+    }
+
+    .vertical-nav a:hover {
+        background-color: #31464d;
+        color: #ffffff;
+        transform: translateX(5px); /* Slide effect on hover */
+    }
+
+    .vertical-nav.active {
+        width: 200px;
+        transform: translateX(0);
+    }
+
+    
+    .menu-toggle {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        z-index: 1001;
+        display: block;
+        font-size: 24px;
+        padding: 5px;
+        cursor: pointer;
+        color: white;
+        background-color: black;
+        transition: background-color 0.3s ease; /* Button color transition */
+    }
+
+    .menu-toggle:hover {
+        background-color: #fc8019; /* Change background on hover */
+    }
+
+    .dashboards {
+        display: block;
+        padding: 20px;
+        padding-top: 20px;
+        box-sizing: border-box;
+    }
+
+    .hamburger {
+        display: flex;
+    }
+
+    .section1 {
+        float: left;
+        width: 33%;
+        margin-bottom: 20px;
+        animation: slideIn 0.5s; /* Slide in effect */
+    }
+}
+
+.circles {
+    width: 170px;
+    height: 170px;
+    line-height: 120px;
+    border-radius: 50%;
+    font-size: 50px;
+    color: #fff;
+    text-align: center;
+    background: #000;
+    display: inline-block;
+    margin-right: 60px;
+    word-wrap: break-word;
+    transition: transform 0.3s ease; /* Transition for circles */
+}
+
+.circles:hover {
+    background: orange;
+    color: white;
+    transform: scale(1.05); /* Scale effect on hover */
+}
+
+.circles a {
+    text-decoration: none;
+    color: rgb(254, 254, 254);
+    font-size: medium;
+    font-weight: 700;
+}
+
+.dashboard {
+    height: 300px;
+    padding: 50px;
+    margin-top: 50px;
+    margin-bottom: 10px;
+    transition: box-shadow 0.3s ease; /* Transition for shadow */
+}
+
+.h3 {
+    margin-bottom: .5rem;
+    font-weight: 500;
+    line-height: 1.2;
+    color: black;
+}
+
+h2 {
+    color: white;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    line-height: 1.2;
+}
+
+.footer {
+    background: var(--main-bg-color);
+    padding: 30px;
+    text-decoration: none;
+    bottom: 0;
+    height: 180px;
+    color: #FFFFFF;
+    margin-top: 110px;
+    transition: background-color 0.3s ease; /* Transition for footer */
+}
+
+.footer:hover {
+    background-color: rgba(0, 0, 0, 0.9); /* Darker footer on hover */
+}
+
+.footer a {
+    border-bottom: 1px solid rgb(151, 140, 140);
+    padding-bottom: 5px;
+    text-decoration: none;
+    color: white;
+    padding-top: 3px;
+    transition: color 0.3s ease; /* Color transition for footer links */
+}
+
+.footer a:hover {
+    color: #565665;
+    text-decoration: none;
+    margin-bottom: 20px;
+}
+
+.section1 {
+    float: left;
+    width: 33%;
+    margin-bottom: 20px;
+}
+
+.section2 {
+    float: right;
+    width: 33%;
+    margin-bottom: 20px;
+}
+
+/* Keyframe animations */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideIn {
+    from { transform: translateY(20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}

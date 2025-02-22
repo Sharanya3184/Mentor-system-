@@ -1,0 +1,346 @@
+body{
+
+  justify-content: center;
+  align-items: center;
+  background-color: #c6c5c8;
+}
+.container1 {
+  max-width: 700px;
+  width: 100%;
+  background-color: #fffefe;
+  padding: 25px 30px;
+  border-radius: 5px;
+  box-shadow: 0 0 40px rgba(8, 7, 16, 0.6);
+  margin: 0 auto;
+  margin-bottom: 5%;
+}
+
+.shine-text {
+  position: relative;
+  overflow: hidden;
+  display: inline-block; /* Ensure the shine effect is confined to the text */
+}
+
+.shine-text::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.6) 0%, rgba(255, 255, 255, 0) 100%);
+  transition: left 0.5s; /* Use transition instead of animation */
+}
+
+.shine-text.active::before {
+  animation: shine 1.5s infinite;
+}
+
+@keyframes shine {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+
+.container1 h3{
+font-size: 32px;
+font-weight: 800;
+line-height: 50px;
+text-align: center;
+/* background-color: #07411a; */
+color: #0d0d0d;
+font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+
+.container2{
+  max-width: 700px;
+  width: 100%;
+  background-color: #cacaca;
+  padding: 25px 30px;
+  border-radius: 5px;
+  box-shadow: 0 0 40px rgba(8,7,16,0.6);
+  /* top: 40%;
+  left: 50%; */
+  margin-top: 5%;
+  margin-left: 25%;
+  margin-bottom: 5%;
+
+  
+}
+.container1 .container2 .title{
+  font-size: 25px;
+  font-weight: 500;
+  position: center;
+  font-size: 32px;
+  font-weight: 800;
+  line-height: 50px;
+  text-align: center;
+  /* background-color: #07411a; */
+  color: #c2c2c3;
+
+ 
+}
+.container1 .container2 .title::before{
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 3px;
+  width: 30px;
+  border-radius: 5px;
+  background: #07411a;
+
+  
+}
+.content form .user-details{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: 20px 0 12px 0;
+}
+form .user-details .input-box{
+  margin-bottom: 15px;
+  width: calc(100% / 2 - 20px);
+}
+form .input-box span.details1{
+  display: block;
+  font-weight: 500;
+  margin-bottom: 5px;
+}
+.user-details .input-box input{
+  height: 45px;
+  width: 100%;
+  outline: none;
+  font-size: 16px;
+  border-radius: 5px;
+  padding-left: 15px;
+  border: 1px solid #0c0b0b;
+}
+/* .user-details .input-box input:focus,
+.user-details .input-box input:valid{
+  border-color: #07411a;
+} */
+ form .gender-details .gender-title{
+  font-size: 20px;
+  font-weight: 500;
+  margin-left: 5px;
+ }
+ form .category{
+   display: flex;
+   width: 100%;
+   margin: 14px 0 ;
+   justify-content: space-between;
+ }
+ form .category label{
+   display: flex;
+   align-items: center;
+   cursor: pointer;
+ }
+ /* form .category label .dot{
+  height: 18px;
+  width: 18px;
+  border-radius: 50%;
+  margin-left: 10px;
+  background: #d9d9d9;
+  border: 5px solid transparent;
+  transition: all 0.3s ease;
+}
+ #dot-1:checked ~ .category label .one,
+ #dot-2:checked ~ .category label .two,
+ #dot-3:checked ~ .category label .three{
+   background: #07411a;
+   border-color: #d9d9d9;
+} */
+
+ form input[type="radio"]{
+   display: none;
+ }
+ form .button{
+   height: 45px;
+   margin: 35px 0
+ }
+ form .button input {
+  height: 100%;
+  width: 100%;
+  border-radius: 5px;
+  border: none;
+  color: #111010;
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background: #32c6ef;
+}
+
+form .button input:hover {
+  background: orange; /* Change to a darker shade on hover */
+  transform: scale(1.05); /* Optional: Slightly enlarge the button */
+}
+
+ @media(max-width: 584px){
+ .container{
+  max-width: 100%;
+}
+
+.shine-text {
+  position: relative;
+  overflow: hidden;
+  display: inline-block; /* Ensure the shine effect is confined to the text */
+}
+
+.shine-text::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.6) 0%, rgba(255, 255, 255, 0) 100%);
+  transition: left 0.5s; /* Use transition instead of animation */
+}
+
+.shine-text.active::before {
+  animation: shine 1.5s infinite;
+}
+
+@keyframes shine {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+form .user-details .input-box{
+    margin-bottom: 15px;
+    width: 100%;
+  }
+  form .category{
+    width: 100%;
+  }
+  .content form .user-details{
+    max-height: 300px;
+    overflow-y: scroll;
+  }
+  .user-details::-webkit-scrollbar{
+    width: 5px;
+  }
+  }
+  @media(max-width: 459px){
+  .container .content .category{
+    flex-direction: column;
+  }
+}
+
+#car-details {
+  display: none;
+}
+
+#car-details:target {
+  display: block;
+  max-width: 1000px;
+}
+
+.cssanimation, .cssanimation span {
+  animation-duration: 0.8s;
+  animation-fill-mode: both;
+}
+
+.cssanimation span { display: inline-block }
+
+.fadeInBottom { animation-name: fadeInBottom }
+@keyframes fadeInBottom {
+  from {
+      opacity: 0;
+      transform: translateY(100%);
+  }
+  to { opacity: 1 }
+}
+
+ 
+.nav  {
+  color: black;
+  font-size: 1rem; /* Adjusts text size (base size) */
+  font-weight: 600; /* Makes the text bold */
+  text-decoration: none; /* Removes underline from the link */
+  padding: 0.5rem 1rem; /* Adds padding to the link */
+  border-radius: 30px; /* Rounds the corners (full pill shape) */
+  transition: all 0.2s ease-in-out; /* Smooth transition for hover effects */
+}
+
+.nav:hover {
+  background-color: #fc8019; /* Sets hover background color */
+  color: rgb(10, 10, 10); /* Changes text color on hover */
+  padding: 0.75rem 0.85rem; /* Adds more padding on hover for a 'pop' effect */
+}
+
+.nav:focus {
+  background-color: #fc8019; /* Sets focus background color */
+  color: black; /* Changes text color on focus */
+}
+/* Footer container */
+.footer {
+  display: flex;
+  justify-content: space-between;
+  padding: 5px 10px; /* Keep minimal padding */
+  background-color: #0d0d0d;
+  border-top: 1px solid #faf8f8;
+  font-family: Arial, sans-serif;
+  width: 100%; /* Full width */
+  margin: 0;
+  max-width: 1800px; /* Max width */
+  height: auto; /* Allow height to adjust based on content */
+}
+
+/* Styling for each section */
+.footer .section1, .footer .section2 {
+  flex: 1;
+  margin: 0 15px; /* Adjusted margin for spacing */
+}
+
+.footer h3 {
+  font-size: 14px;
+  color: gold;
+  margin-bottom: 55px; /* Reduced margin-bottom */
+  margin-top: 20px;
+  text-transform: uppercase;
+}
+
+.footer i {
+  margin-right: 10px; /* Reduced icon margin */
+  color: rgb(249, 248, 246);
+}
+
+.footer a {
+  display: block;
+  color: #007bff;
+  text-decoration: none;
+  margin-bottom: -15px; /* Reduced link margin */
+}
+
+.footer a:hover {
+  text-decoration: underline;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .footer {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 10px; /* Keep minimal padding */
+    background-color: #0d0d0d;
+    border-top: 1px solid #faf8f8;
+    font-family: Arial, sans-serif;
+    width: 100%; /* Full width */
+    margin: 0;
+    max-width: 1800px; /* Max width */
+    height: auto; /* Allow height to adjust based on content */
+  }
+
+}

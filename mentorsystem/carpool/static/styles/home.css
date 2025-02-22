@@ -1,0 +1,1285 @@
+
+body {
+  background: rgba(250, 250, 249, 0.6);
+}
+
+:root {
+  --main-bg-color: rgba(0, 0, 0, 0.7);
+  --text-color: #ffffff;
+  --highlight-color: #FFD700;
+  --border-color: #000;
+}
+
+@media (min-width: 769px) {
+  /* Top Navigation */
+  .topnav {
+    background-color: #191919;
+    padding: 10px 20px;
+    box-shadow: 0 4px 6px rgba(9, 9, 9, 0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 10;
+    overflow: hidden;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 80px;
+    color: white;
+  }
+
+  .topnav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+  }
+
+  /* Logo */
+  #name-logo {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+  }
+
+  #name-logo .flex {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 10px;
+    border-radius: 50px;
+    background-color: rgba(252, 128, 25, 0.8);
+    transition: background-color 0.4s ease, box-shadow 0.4s ease;
+    position: relative; /* Enable positioning for the shine effect */
+  }
+
+  #name-logo .flex:hover {
+    background-color: rgba(252, 128, 25, 1);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  }
+
+  #name-logo .flex::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0) 100%);
+    transition: left 0.5s ease;
+    z-index: 0; /* Behind the content */
+  }
+
+  #name-logo .flex:hover::before {
+    left: 100%; /* Move the shine effect */
+  }
+
+  #name-logo .relative {
+    position: relative;
+    width: 60px;
+    height: 60px;
+  }
+
+  #name-logo .relative img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+
+  #name-logo .relative img:hover {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+
+  #name-logo h1 a {
+    font-size: 1.75rem;
+    color: #fffcfc;
+    text-decoration: none;
+    font-weight: bold;
+    margin-left: 10px;
+  }
+
+  #name-logo h1 a:hover {
+    color: #fc8019;
+  }
+
+  /* Navigation Links */
+  #rest {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+
+  #rest a {
+    font-size: 1rem;
+    color: #f8f8f8;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  #rest a:hover {
+    background-color: #fc8019;
+    color: white;
+    border-radius: 30px;
+    transform: scale(1.05); /* Scale effect on hover */
+  }
+
+  .explore-link {
+    display: inline-block; /* Ensure it's an inline block for padding and margins */
+    padding: 10px 20px; /* Base padding */
+    color: black; /* Default text color */
+    background-color: transparent; /* No background by default */
+    transition: all 0.2s ease; /* Smooth transitions */
+    text-decoration: none; /* Remove underline */
+    position: relative;
+  }
+
+  .explore-link:hover {
+    padding-left: 1.25rem; /* Change padding on hover */
+    padding-right: 1.25rem;
+    background-color: #fc8019; /* Background color on hover */
+    color: white; /* Text color on hover */
+    opacity: 0.8; /* Background opacity on hover */
+    transform: scale(0.95); /* Zoom out effect */
+  }
+
+  .explore-link:focus {
+    color: black; /* Text color on focus */
+    background-color: #fc8019; /* Background color on focus */
+  }
+
+  /* Active state for click effect */
+  .explore-link:active {
+    transform: scale(0.90) translateY(2px); /* Zoom out and move down on click */
+    transition: transform 0.1s ease; /* Quick transition for click */
+  }
+
+  /* Additional styles for text size and hover effects */
+  .text-sm {
+    font-size: 0.875rem; /* Small text size */
+  }
+
+  .text-base {
+    font-size: 1rem; /* Base text size */
+  }
+
+  .peer {
+    position: relative;
+    width: 100%;
+    height: calc(100vh - 100px);
+    overflow: hidden;
+  }
+
+  .peer__background-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top;
+    z-index: -1;
+    animation: fadeIn 1.5s ease; /* Fade-in effect for background */
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  .button-container {
+    position: absolute;
+    top: 50%;
+    left: 30%;
+    transform: translateY(-50%);
+  }
+
+  .service-text {
+    font-size: 26px;
+    color: black;
+    margin-bottom: 20px;
+    line-height: 1.5;
+    padding: 15px 30px;
+  }
+
+  .service-text .same-style {
+    font-family: "Clarkson", Helvetica, sans-serif;
+    font-weight: 300; 
+  }
+
+  .service-text .different-style {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
+    color: #FFD700;
+  }
+
+  .shine-text {
+    position: relative;
+    overflow: hidden;
+    display: inline-block; /* Ensure the shine effect is confined to the text */
+  }
+
+  .shine-text::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0.6) 0%, rgba(255, 255, 255, 0) 100%);
+    transition: left 0.5s; /* Use transition instead of animation */
+  }
+
+  .shine-text.active::before {
+    animation: shine 1.5s infinite;
+  }
+
+  @keyframes shine {
+    0% {
+      left: -100%;
+    }
+    100% {
+      left: 100%;
+    }
+  }
+
+  .book-service-btn {
+    display: inline-block;
+    background-color: black;
+    color: white;
+    padding: 15px 30px;
+    font-size: 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Added transform for hover */
+  }
+
+  .book-service-btn:hover {
+    background-color: orange;
+    color: whitesmoke;
+    transform: translateY(-3px); /* Lift effect on hover */
+  }
+
+  .content-header-container {
+    margin-top: 25px;
+    margin-bottom: 40px;
+    font-size: 2.5rem;
+    justify-content: center;
+    display: flex;
+    text-align: center;
+    margin: 20px 0;
+  }
+
+  .content-header {
+    font-size: 2.5rem; /* Larger font size */
+    color: #040404; /* Gold color for the text */
+    font-family: 'Stylis', sans-serif; /* Use the Stylis font */
+    letter-spacing: 1px; /* Slight letter spacing */
+    text-transform: capitalize; /* Uppercase text for emphasis */
+    transition: transform 0.3s ease; /* Transition for hover effect */
+    background-color: orange; /* Dark background color */
+    padding: 20px 30px; /* Add some padding */
+    border-radius: 50px; /* Rounded corners */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Subtle shadow effect */
+    text-align: center; /* Center align the content */
+    margin-bottom: 15px; /* Space below the header */
+  }
+
+  .content-header-container:hover .content-header {
+    transform: scale(1.05); /* Slight zoom effect on hover */
+    color: whitesmoke;
+  }
+
+  .container {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.7);
+    border: 1px solid grey;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
+    box-sizing: border-box;
+    margin-bottom: 40px;
+    margin-top: 20px;
+    transition: transform 0.3s ease; /* Smooth transition */
+  }
+
+  .container:hover {
+    transform: scale(1.02); /* Slightly enlarge on hover */
+  }
+
+  .image-container {
+    position: relative;
+    width: 100%;
+    height: 300px; /* Set a fixed height for the image container */
+  }
+
+  /* Image Styles */
+  .image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Cover the container */
+    border-radius: 10px;
+    transition: transform 0.3s ease; /* Smooth transition for zoom effects */
+  }
+
+  .overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
+    transition: opacity 0.3s ease, transform 0.3s ease; /* Smooth transitions for opacity and scale */
+    opacity: 0; /* Start with overlay hidden */
+  }
+
+  .image-container:hover .overlay {
+    opacity: 0.4; /* Change opacity on hover */
+    transform: scale(1.05); /* Slight zoom-in effect on hover */
+  }
+
+  /* Optional: Scale image on hover */
+  .image-container:hover img {
+    transform: scale(1.1); /* Slight zoom-in effect for the image */
+  }
+
+  .image-container p {
+    position: absolute;
+    bottom: 16px; /* Position at the bottom */
+    right: 16px; /* Position to the right */
+    color: white; /* Text color */
+    font-size: 1.2rem; /* Text size */
+    font-weight: bold; /* Text weight */
+    z-index: 1; /* Bring text above overlay */
+  }
+
+  .content {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 20px; /* Add padding for spacing */
+    transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease; /* Smooth transitions */
+    background-color: white; /* Light background by default */
+    border-radius: 10px; /* Rounded corners for aesthetics */
+    max-width: 900px; /* Adjust the max width as needed */
+    margin: 10px auto; /* Center the div */
+  }
+
+  /* Hover effect */
+  .content:hover {
+    transform: scale(1.05); /* Slight zoom-in effect on hover */
+    background-color: orange; /* Darker background on hover */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); /* Add shadow on hover */
+  }
+
+  /* Click effect */
+  .content:active {
+    transform: scale(0.95); /* Zoom-out effect when clicked */
+    transition: transform 0.1s ease; /* Quick transition for click */
+  }
+
+  .content h1 {
+    font-size: 28px;
+    margin-bottom: 10px;
+    color: brown; /* Gold color for the title */
+    transition: color 0.3s ease; /* Smooth transition for text color */
+  }
+
+  .content:hover h1 {
+    color: darkslategray; /* Change title color on hover */
+  }
+
+  .content p {
+    font-size: 20px;
+    line-height: 1.6;
+    color: #070707;
+    margin-top: 0;
+    text-align: left; /* Align text to the left */
+    transition: color 0.3s ease; /* Smooth transition for text color */
+  }
+
+  .content:hover p {
+    color: rgb(235, 235, 229); /* Change paragraph color on hover */
+  }
+
+  .features {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: flex-start;
+    margin: 40px 0;
+    padding: 0 20px;
+    margin-top: 50px;
+  }
+
+  .box {
+    flex: 1;
+    max-width: 350px;
+    margin: 0 10px;
+  }
+
+  .card {
+    position: relative;
+    background: linear-gradient(white, orange);
+    color: rgb(250, 249, 249);
+    padding: 25px;
+    border-radius: 10px;
+    border: 1px solid #c1c1c1;
+    box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.1),
+      0 0 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    height: 500px;
+    box-sizing: border-box;
+    overflow: hidden;
+    transition: transform 0.3s ease; /* Add transition */
+  }
+
+  .card:hover {
+    background: orange;
+    transform: scale(1.05); /* Slightly enlarge the card on hover */
+  }
+
+  .card::before {
+    content: "";
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    right: -10px;
+    bottom: -10px;
+    border-radius: 15px;
+    background: rgba(0, 0, 0, 0.1);
+    z-index: -1;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  }
+
+  .card img {
+    width: 100px;
+    height: auto;
+    margin-bottom: 50px;
+    border-radius: 8px;
+    transition: transform 0.3s ease; /* Add transition for the image */
+  }
+
+  .card:hover img {
+    transform: scale(1.1); /* Slight zoom effect on image hover */
+  }
+
+  .card h1 {
+    font-size: 20px;
+    color: #060606;
+    margin-bottom: 15px;
+    transition: color 0.3s ease; /* Smooth transition for title color */
+  }
+
+  .card:hover h1 {
+    color: #fff; /* Change title color on hover */
+  }
+
+  .card p {
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: auto;
+    color: black;
+    font-weight: 20px;
+  }
+
+  .card p:last-child {
+    margin-bottom: 0;
+  }
+
+  .fade-in {
+    animation: slide-in 0.5s ease forwards; /* Adjust duration and easing as needed */
+  }
+
+  /* Optional: Delay for staggered effects */
+  .fade-in:nth-child(1) {
+    animation-delay: 0.1s;
+  }
+  .fade-in:nth-child(2) {
+    animation-delay: 0.2s;
+  }
+  .fade-in:nth-child(3) {
+    animation-delay: 0.3s;
+  }
+
+  .footer {
+      background-color:#191919;
+        color: #FFFFFF;
+      padding: 30px;
+    }
+
+  .footer-container {
+      display: flex;
+      justify-content: space-between;
+    }
+
+  .footer h3 {
+      color: orange;
+      color: #f0f8ff; /* Light background for contrast */
+      padding: 10px; /* Add some padding */
+      border-radius: 5px; /* Rounded corners */
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2); /* Subtle shadow effect */
+    }
+
+
+  .footer h3:hover{
+    color:orange;
+  }
+
+
+  .footer p {
+      margin: 0;
+    }
+
+  .footer i {
+      color: white;
+      margin-right: 5px;
+    }
+
+  .footer a {
+      color: white;
+      border-bottom: 1px solid rgb(151, 140, 140);
+      text-decoration: none;
+    }
+
+  .footer a:hover {
+      color: #FFD700;
+    }
+
+  .section1,
+  .section2 {
+      flex-grow: 2;
+    }
+
+  .section2 {
+      text-align: left;
+    }
+
+  .menu-toggle, .vertical-nav {
+        display: none;
+    }
+  }
+
+  /* Styles for smaller screens (mobile view) */
+  @media (max-width: 768px) {
+  .menu-toggle {
+        display: block;
+        color: var(--text-color);
+        background-color: transparent;
+        border: none;
+        padding: 5px;
+        font-size: 24px;
+        cursor: pointer;
+        z-index: 1001;
+        position: absolute;
+        right: 2px;
+        top: 15px;
+    }
+
+  .menu-toggle:hover {
+        background-color: var(--main-bg-color);
+    }
+
+  .vertical-nav {
+        width: 200px;
+        height: calc(100% - 60px);
+        background-color: var(--main-bg-color);
+        padding: 10px;
+        display: flex;
+        flex-direction: column;
+        position: fixed;
+        top: 60px;
+        right: 0;
+        bottom: 0;
+        transform: translateX(100%);
+        transition: transform 0.3s ease;
+        z-index: 1000;
+    }
+
+  .vertical-nav.active {
+        transform: translateX(0px);
+    }
+
+  .vertical-nav a {
+    padding: 15px 10px;
+    text-align: left;
+    text-decoration: none;
+    font-size: 18px;
+    color: white;
+    display: block;
+    line-height: 1.5;
+    transition: 0.3s;
+    font-size: 18px;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+  .vertical-nav a:hover {
+        background-color: orange;
+        color: white;
+        transform: translateY(-2px); 
+    }
+
+
+    #rest {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+  
+    #rest a {
+      font-size: 1rem;
+      color: #f8f8f8;
+      text-decoration: none;
+      padding: 0.5rem 1rem;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+  
+    #rest a:hover {
+      background-color: #fc8019;
+      color: white;
+      border-radius: 30px;
+      transform: scale(1.05); /* Scale effect on hover */
+    }
+  
+    .explore-link {
+      display: inline-block; /* Ensure it's an inline block for padding and margins */
+      padding: 10px 20px; /* Base padding */
+      color: black; /* Default text color */
+      background-color: transparent; /* No background by default */
+      transition: all 0.2s ease; /* Smooth transitions */
+      text-decoration: none; /* Remove underline */
+      position: relative;
+    }
+  
+    .explore-link:hover {
+      padding-left: 1.25rem; /* Change padding on hover */
+      padding-right: 1.25rem;
+      background-color: #fc8019; /* Background color on hover */
+      color: white; /* Text color on hover */
+      opacity: 0.8; /* Background opacity on hover */
+      transform: scale(0.95); /* Zoom out effect */
+    }
+  
+    .explore-link:focus {
+      color: black; /* Text color on focus */
+      background-color: #fc8019; /* Background color on focus */
+    }
+  
+    /* Active state for click effect */
+    .explore-link:active {
+      transform: scale(0.90) translateY(2px); /* Zoom out and move down on click */
+      transition: transform 0.1s ease; /* Quick transition for click */
+    }
+  
+    /* Additional styles for text size and hover effects */
+    .text-sm {
+      font-size: 0.875rem; /* Small text size */
+    }
+  
+    .text-base {
+      font-size: 1rem; /* Base text size */
+    }
+  
+    .topnav {
+      background-color: #1a1a1a;
+      padding: 10px 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 10;
+      overflow: hidden;
+      width: 100%;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 65px;
+      color:rgb(255, 255, 255);
+      }
+
+      
+  .topnav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+  }
+    
+      
+  .topnav > ul {
+        margin: 0;
+        padding: 0;
+        }
+
+  /* Logo */
+  #name-logo {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+  }
+
+  #name-logo .flex {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 10px;
+    border-radius: 50px;
+    background-color: rgba(252, 128, 25, 0.8);
+    transition: background-color 0.4s ease, box-shadow 0.4s ease;
+  }
+
+  #name-logo .flex:hover {
+    background-color: rgba(252, 128, 25, 1);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  }
+
+  #name-logo .relative {
+    position: relative;
+    width: 60px;
+    height: 60px;
+  }
+
+        #name-logo .relative img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+        
+        #name-logo .relative img:hover {
+          opacity: 1;
+          transform: scale(1.05);
+        }
+        
+        #name-logo h1 a {
+          font-size: 1.25rem;
+          color: #fdfbfb;
+          text-decoration: none;
+          font-weight: bold;
+          margin-left: 2px;
+        }
+        
+        
+        #name-logo h1 a:hover {
+          color: #fc8019;
+        }
+        
+        /* Navigation Links */
+        #rest {
+          display: flex;
+          align-items: center;
+          gap: 5px;
+        }
+        
+        
+  #rest a {
+    font-size: 1rem;
+    color: #ffffff;
+    text-decoration: none;
+    padding: 4px;
+    margin-right: 30px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+        
+        #rest a:hover {
+          background-color: #fc8019;
+          color: white;
+          border-radius: 35px;
+        }
+        
+        
+  /* Menu Toggle Button */
+  .menu-toggle {
+    font-size: 1.5rem;
+    background: none;
+    border: none;
+    color: #f6f4f4;
+    cursor: pointer;
+    transition: color 0.3s ease;
+  }
+
+        
+  .peer {
+    position: relative;
+    width: 100%;
+    height: 600px;
+    margin-top: 60px;
+    overflow: hidden;
+    line-height: 50%;
+  }
+
+
+  .peer__background-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 40%;
+    object-fit: cover;
+    object-position: top;
+    z-index: -1;
+  }
+
+  .peer-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    box-sizing: border-box;
+  }
+
+  .button-container {
+    position: absolute;
+    top: 55%;
+    left: 30%;
+    transform: translateY(-50%);
+    text-align: center;
+      }
+
+
+  .service-text {
+    font-size: 26px;
+    color: black;
+    margin-bottom: 20px;
+    line-height: 1.5;
+    padding: 15px 30px;
+      }
+
+      .service-text .same-style {
+        font-family: "Clarkson", Helvetica, sans-serif;
+        font-weight: 300; 
+        }
+      
+      
+      .service-text .different-style {
+        font-family: 'Roboto', sans-serif;
+        font-weight: 700;
+        color: #FFD700;
+      }
+      
+      .shine-text {
+        position: relative;
+        overflow: hidden;
+        display: inline-block; /* Ensure the shine effect is confined to the text */
+      }
+      
+      .shine-text::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, rgba(255, 255, 255, 0.6) 0%, rgba(255, 255, 255, 0) 100%);
+        transition: left 0.5s; /* Use transition instead of animation */
+      }
+      
+      .shine-text.active::before {
+        animation: shine 1.5s infinite;
+      }
+      
+      @keyframes shine {
+        0% {
+          left: -100%;
+        }
+        100% {
+          left: 100%;
+        }
+      }
+      
+      /* Button Styles */
+  .book-service-btn {
+    display: inline-block;
+    background-color: black;
+    color: white;
+    padding: 15px 30px;
+    font-size: 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+  }
+
+  .book-service-btn:hover {
+    background-color: white;
+    color: grey;
+  }
+
+  /* Heading Styles */
+  h1 {
+    font-size: 15px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+  }
+
+  /* Layout and Positioning */
+  .pull-up {
+    margin-top: -53vh;
+  }
+
+  .content-body {
+    margin-top: 4vh;
+  }
+  .content-header-container {
+    margin: -40px 0; /* Consolidate margins */
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    
+  }
+
+  .content-header {
+    font-size: 2rem; /* Adjust font size for mobile */
+    color: #040404; 
+    font-family: 'Stylis', sans-serif; 
+    letter-spacing: 1px; 
+    text-transform: capitalize; 
+    transition: transform 0.3s ease; 
+    background-color: orange; 
+    padding: 10px; /* Reduced padding */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); 
+    margin-bottom: 20px; 
+    margin-top:-100px;
+  }
+
+  .content-header-container:hover .content-header {
+    transform: scale(1.05); 
+    color: whitesmoke;
+  }
+
+  .container {
+    display: flex;
+    flex-direction: column; /* Stack elements vertically on mobile */
+    align-items: center; /* Center content */
+    padding: 10px; /* Reduced padding for mobile */
+    background-color: rgba(0, 0, 0, 0.7);
+    border: 1px solid grey;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
+    box-sizing: border-box;
+    margin-bottom: 20px; /* Adjust margin for mobile */
+    margin-top: -160px;
+  }
+
+  .image-container {
+    position: relative;
+    width: 100%;
+    height: 200px; /* Reduced height for mobile */
+  }
+
+  /* Image Styles */
+  .image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Cover the container */
+    border-radius: 10px;
+    transition: transform 0.3s ease; /* Smooth transition for zoom effects */
+  }
+
+  .overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
+    transition: opacity 0.3s ease, transform 0.3s ease; /* Smooth transitions for opacity and scale */
+    opacity: 0; /* Start with overlay hidden */
+  }
+
+  .image-container:hover .overlay {
+    opacity: 0.4; /* Change opacity on hover */
+    transform: scale(1.05); /* Slight zoom-in effect on hover */
+  }
+
+  /* Scale image on hover */
+  .image-container:hover img {
+    transform: scale(1.1); /* Slight zoom-in effect for the image */
+  }
+
+  .image-container p {
+    position: absolute;
+    bottom: 16px; /* Position at the bottom */
+    right: 16px; /* Position to the right */
+    color: white; /* Text color */
+    font-size: 1.2rem; /* Text size */
+    font-weight: bold; /* Text weight */
+    z-index: 1; /* Bring text above overlay */
+  }
+
+  /* Content styles */
+  .content {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 15px; /* Reduced padding for mobile */
+    transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease; /* Smooth transitions */
+    background-color: whitesmoke; /* Light background by default */
+    border-radius: 10px; /* Rounded corners for aesthetics */
+    font-weight: bold;
+  }
+
+  /* Hover effect */
+  .content:hover {
+    transform: scale(1.05); /* Slight zoom-in effect on hover */
+    background-color: orange; /* Darker background on hover */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); /* Add shadow on hover */
+  }
+
+  /* Click effect */
+  .content:active {
+    transform: scale(0.95); /* Zoom-out effect when clicked */
+    transition: transform 0.1s ease; /* Quick transition for click */
+  }
+
+  .content h1 {
+    font-size: 24px; /* Reduced font size for mobile */
+    margin-bottom: 10px;
+    color: brown; /* Gold color for the title */
+    transition: color 0.3s ease; /* Smooth transition for text color */
+  }
+
+  .content:hover h1 {
+    color: darkslategray; /* Change title color on hover */
+  }
+
+  .content p {
+    font-size: 16px; /* Reduced font size for mobile */
+    line-height: 1.4; /* Adjusted line height for readability */
+    color: #060606;
+    margin-top: 0;
+    text-align: left; /* Align text to the left */
+    transition: color 0.3s ease; /* Smooth transition for text color */
+  }
+
+  .content:hover p {
+    color: #e0e0e0; /* Change paragraph color on hover */
+  }
+
+  /* Media query for larger screens */
+  @media (min-width: 768px) {
+    .container {
+        flex-direction: row; /* Switch back to row layout on larger screens */
+    }
+
+    .image-container {
+        height: 300px; /* Restore height for larger screens */
+    }
+
+    .content {
+        padding: 20px; /* Increase padding for larger screens */
+    }
+
+    .content h1 {
+        font-size: 28px; /* Restore title size for larger screens */
+    }
+
+    .content p {
+        font-size: 20px; /* Restore paragraph size for larger screens */
+    }
+  }
+
+  /* Media Query for further adjustments on smaller screens */
+  @media (max-width: 768px) {
+    .content-header {
+      font-size: 1.8rem; /* Slightly smaller for mobile */
+    }
+
+    .content h1 {
+      font-size: 1.5rem; 
+    }
+
+    .content p {
+      font-size: 0.9rem; 
+    }
+  }
+
+
+  /* Features Section */
+  .features {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: flex-start;
+    margin: 40px 0;
+    padding: 0 20px;
+  }
+
+  /* Box Styles */
+  .box {
+    flex: 1;
+    max-width: 350px;
+    margin: 0 10px;
+  }
+
+  /* Card Styles */
+  .card {
+    position: relative;
+    background:linear-gradient(white,orange);
+    color: white;
+    padding: 25px;
+    border-radius: 10px;
+    border: 1px solid #c1c1c1;
+    box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.1),
+                0 0 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    height: 500px;
+    box-sizing: border-box;
+    overflow: hidden;
+    transition: transform 0.3s ease; /* Smooth hover effect */
+
+  }
+
+  .card:hover {
+    background: orange;
+    color: #000;
+    transform: scale(1.05); /* Slightly enlarge the card on hover */
+  }
+
+
+  .card::before {
+    content: "";
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    right: -10px;
+    bottom: -10px;
+    border-radius: 15px;
+    background: rgba(0, 0, 0, 0.1);
+    z-index: -1;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  }
+
+  .card img {
+    width: 100px;
+    height: auto;
+    margin-bottom: 20px;
+    border-radius: 5px;
+  }
+
+  .card h1 {
+    font-size: 16px;
+    color: #0d0d0d;
+    margin-bottom: 15px;
+  }
+
+  .card p {
+    font-size:11px;
+    line-height: 1.6;
+    margin-bottom: auto;
+    color: #0a0a0a;
+    font-weight: bold;
+  }
+
+  .card p:last-child {
+    margin-bottom: 0;
+  }
+
+          }
+          
+          .footer {
+            background-color: #191919;
+              color: #FFFFFF;
+            padding: 30px;
+          }
+          
+          .footer:hover{
+            background-color:#191919;
+          }
+          .footer-container {
+            display: flex;
+            justify-content: space-between;
+          }
+          
+          .footer h3 {
+            color: #FFD700;
+          }
+          
+
+          .footer p {
+            font-size: 15px; /* Adjust font size */
+          }
+          .footer a:hover {
+            color:rgb(0, 255, 242);
+          }
+        
+        .section1 {
+            flex-grow: 2;
+            text-align: left;
+          }
+        
+        .section2, section3 {
+            text-align: left;
+          }
+        
+          #rest {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+          }
+        
+          #rest a {
+            font-size: 1rem;
+            color: #f8f8f8;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            transition: background-color 0.3s ease, color 0.3s ease;
+          }
+        
+          #rest a:hover {
+            background-color: #fc8019;
+            color: white;
+            border-radius: 30px;
+            transform: scale(1.05); /* Scale effect on hover */
+          }
+        
+          .explore-link {
+            display: inline-block; /* Ensure it's an inline block for padding and margins */
+            padding: 10px 20px; /* Base padding */
+            color: black; /* Default text color */
+            background-color: transparent; /* No background by default */
+            transition: all 0.2s ease; /* Smooth transitions */
+            text-decoration: none; /* Remove underline */
+            position: relative;
+          }
+        
+          .explore-link:hover {
+            padding-left: 1.25rem; /* Change padding on hover */
+            padding-right: 1.25rem;
+            background-color: #fc8019; /* Background color on hover */
+            color: white; /* Text color on hover */
+            opacity: 0.8; /* Background opacity on hover */
+            transform: scale(0.95); /* Zoom out effect */
+          }
+        
+          .explore-link:focus {
+            color: black; /* Text color on focus */
+            background-color: #fc8019; /* Background color on focus */
+          }
+        
+          /* Active state for click effect */
+          .explore-link:active {
+            transform: scale(0.90) translateY(2px); /* Zoom out and move down on click */
+            transition: transform 0.1s ease; /* Quick transition for click */
+          }
+        
+          /* Additional styles for text size and hover effects */
+          .text-sm {
+            font-size: 0.875rem; /* Small text size */
+          }
+        
+          .text-base {
+            font-size: 1rem; /* Base text size */
+          }
+        

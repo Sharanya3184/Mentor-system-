@@ -1,0 +1,2287 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="UTF-8">
+  <title> Registration Form </title>
+  <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon">
+  <!-- <link rel="stylesheet" type="text/css" href="{% static 'styles/home.css'%}"> -->
+  <link rel="stylesheet" type="text/css" href="{% static 'styles/registration.css'%}">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link href='https://fonts.googleapis.com/css?family=Kalam' rel='stylesheet'>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.css">
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="path/to/jquery.min.js"></script>
+
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+    integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"
+    integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
+    crossorigin="anonymous"></script>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.js"></script>
+  <script src="{% static 'js/home.js'%}"></script>
+</head>
+
+<body>
+<body>
+  <!-- Bootstrap Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark" style="background-color:rgb(33, 33, 33); margin-bottom: 100px;">
+    <a class="navbar-brand" href="/">
+      <img src="{% static 'images/guru tech logo.jpg' %}" alt="Guru Tech Logo" class="logo" style="height: 40px;">
+    </a>
+    <!-- Toggler button for small screens -->
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav">
+          <a class="nav-link " href= "/" title="" class="text-base text-black       hover:px-1 hover:py-1.5  transition-all duration-200 hover:bg-[#fc8019] hover:text-black focus:text-black focus:bg-[#fc8019] font-semibold hover:text-white   rounded-full"> 
+          Home</a>
+        <li class="nav">
+          <a class="nav-link" href= "/register" title="" class="text-base text-black       hover:px-5 hover:py-2.5  transition-all duration-200 hover:bg-[#fc8019] hover:text-black focus:text-black focus:bg-[#fc8019] font-semibold hover:text-white   rounded-full"> 
+          Register</a>
+        </li>
+        <li class="nav">
+          <a class="nav-link" href= "/login" title="" class="text-base text-black       hover:px-5 hover:py-2.5  transition-all duration-200 hover:bg-[#fc8019] hover:text-black focus:text-black focus:bg-[#fc8019] font-semibold hover:text-white   rounded-full"> 
+          Login</a>
+        <li class="nav">
+          <a class="nav-link" href="/contact">Contact Us</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Your existing page content goes here -->
+
+</body>
+
+
+  <div>
+    {% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+      <center>{{ message }}</center>
+    </div>
+    {% endfor %}
+    {% endif %}
+  </div>
+
+  <div class="cssanimation sequence fadeInBottom">
+    <div class="container1">
+      <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item">
+          <a class="nav-link  shine-text  active" id="user-tab" data-toggle="tab" href="#user" role="tab" aria-controls="user" aria-selected="true">Student Registration</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link  shine-text " id="driver-tab" data-toggle="tab" href="#driver" role="tab" aria-controls="driver" aria-selected="false">Mentor Registration</a>
+        </li>
+      </ul>
+      <div class="title">
+        <h3>Sign Up Into New Account</h3>
+      </div>
+
+
+      <!-- User Registration Form -->
+      <div id="user-registration" class="registration-form">
+        <div class="content">
+          <form action="" method="post">
+            {% csrf_token %}
+            <div class="user-details">
+              <div class="input-box">
+                <span class="details">Full Name</span>
+                <input type="text" id="fname" name="fname" placeholder="Enter your name" required="">
+                <span id="name-error" style="color: red; display: none;">Please enter a valid name with alphabets only.</span>
+              </div>
+      
+              <div class="input-box">
+                <span class="details">Username</span>
+                <input type="text" id="username" name="usern" placeholder="Enter your username" required>
+                <span id="username-error" class="error-text">Username must contain only alphabets and numbers</span>
+              </div>
+              
+                    
+                    <div class="input-box">
+                      <span class="details">Password</span>
+                      <input type="password" id="password" name="password" placeholder="Enter your password" required>
+                      <span id="toggle-password" class="toggle-password">👁️‍🗨️</span> <!-- Eye icon for toggle --> 
+                      <span id="password-error" class="error-text"></span>
+                      
+                  </div>
+      
+                  <div class="input-box">
+                    <span class="details">Email</span>
+                    <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                    <span id="email-error" class="error-text">Please enter a valid Gmail address.</span>
+                </div>
+                
+                
+                
+                <div class="input-box">
+                  <span class="details">Phone Number</span>
+                  <input type="text" id="phone" name="mobile" placeholder="Enter your number" required oninput="validatePhoneNumber()">
+                  <small class="error-text" id="phone-error">Phone number must contain only digits and be between 1 and 15 digits long.</small>
+              </div>
+      
+              <div class="gender-details">
+                <input type="radio" name="gender" value="Male" id="dot-1" required="">
+                <input type="radio" name="gender" value="Female" id="dot-2" required="">
+                <input type="radio" name="gender" value="Prefer not to say" id="dot-3" required="">
+
+                <span class="gender-title">Gender</span>
+
+                <div class="category">
+                  <label for="dot-1">
+                    <span class="dot one"></span>
+                    <span class="gender">Male</span>
+                  </label>
+
+                  <label for="dot-2">
+                    <span class="dot two"></span>
+                    <span class="gender">Female</span>
+                  </label>
+
+                  <label for="dot-3">
+                    <span class="dot three"></span>
+                    <span class="gender">Prefer not to say</span>
+                  </label>
+                </div>
+              </div>
+
+
+              <!-- Select box for languages spoken in India -->
+              <!-- Hidden input to store selected languages -->
+        <input type="hidden" name="languages_user" id="selected-languages-user" >
+
+        <div class="input-box" style="width: 100%;">
+          <label for="languages_user">Languages Spoken</label>
+          <select class="form-control" name="languages_user_select" id="languages-select-user" required ="" style="border:1px solid black;" required="">
+            <option value="" disabled selected>Select Language</option>
+            <option value="Hindi">Hindi</option>
+            <option value="Bengali">Bengali</option>
+            <option value="Telugu">Telugu</option>
+            <option value="Marathi">Marathi</option>
+            <option value="Tamil">Tamil</option>
+            <option value="Urdu">Urdu</option>
+            <option value="Gujarati">Gujarati</option>
+            <option value="Kannada">Kannada</option>
+            <option value="Odia">Odia (Oriya)</option>
+            <option value="Punjabi">Punjabi</option>
+            <option value="Malayalam">Malayalam</option>
+            <option value="Assamese">Assamese</option>
+            <option value="Maithili">Maithili</option>
+            <option value="Santali">Santali</option>
+            <option value="Kashmiri">Kashmiri</option>
+            <option value="Nepali">Nepali</option>
+            <option value="Konkani">Konkani</option>
+            <option value="Sindhi">Sindhi</option>
+            <option value="Manipuri">Manipuri</option>
+            <option value="Dogri">Dogri</option>
+          </select>
+        </div>
+
+              <!-- Container to display added languages for user -->
+              <div id="languages-container-user"></div>
+              <!-- Select box for current status -->
+              <div class="input-box" style="width: 100%;">
+                <label for="current-status">Current Status</label>
+                <select class="form-control" name="current-status" id="current-status-select" required="" style="border:1px solid black ">
+                    <option value="">Select Current Status</option>
+                    <option value="Student">Student</option>
+                    <option value="Fresher">Fresher</option>
+                    <option value="Working Professional">Working Professional</option>
+                </select>
+              </div>
+              <!-- Additional fields for working professional -->
+              <div id="working-professional-fields" class="input-box" style="display: none;">
+                <div class="input-box">
+                  <span class="details">Company Name</span>
+                  <input type="text" name="company-name" placeholder="Enter your company name" style="width: 300px;" required="">
+                </div>
+                <div class="input-box">
+                  <span class="details">Role</span>
+                  <input type="text" name="role" placeholder="Enter your role" style="width: 300px;" required="">
+                </div>
+              </div>
+
+              <h3>Education Qualification</h3>
+
+              <div class="input-box">
+                <span class="details">College</span>
+                <input type="text" name="college" placeholder="Enter your college" required="">
+              </div>
+              <div class="input-box">
+                <span class="details">Degree</span>
+                <input type="text" name="degree" placeholder="Enter your degree" required="">
+              </div>
+              <div class="input-box">
+                <span class="details">Field of Study</span>
+                <input type="text" name="field_of_study" placeholder="Enter your field of study" required="">
+              </div>
+
+              <div class="input-box">
+                <span class="details">Year of Graduation</span>
+                <input type="text" name="graduation_year" placeholder="Enter your graduation year" required="">
+              </div>
+              <div class="input-box" style="width: 100%;">
+                <span class="details">Address</span>
+                <input type="text" id="address" name="address" placeholder="Enter your address" required oninput="validateAddress()">
+                <small id="address-error" class="error-text">Address must be at least 5 characters long and contain no special characters.</small>
+            </div>
+
+
+              <div class="input-box">
+                <label for="inputState">State</label>
+                <select class="form-control" name="state" id="inputState" style="border:1px solid black" required="">
+                  <option value="" disabled selected>Select State</option>
+                  <option value="Andhra Pradesh">Andhra Pradesh</option>
+                  <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+                  <option value="Assam">Assam</option>
+                  <option value="Bihar">Bihar</option>
+                  <option value="Chhattisgarh">Chhattisgarh</option>
+                  <option value="Goa">Goa</option>
+                  <option value="Gujarat">Gujarat</option>
+                  <option value="Haryana">Haryana</option>
+                  <option value="Himachal Pradesh">Himachal Pradesh</option>
+                  <option value="Jammu and Kashmir">Jammu and Kashmir</option>
+                  <option value="Jharkhand">Jharkhand</option>
+                  <option value="Karnataka">Karnataka</option>
+                  <option value="Kerala">Kerala</option>
+                  <option value="Madhya Pradesh">Madhya Pradesh</option>
+                  <option value="Maharashtra">Maharashtra</option>
+                  <option value="Manipur">Manipur</option>
+                  <option value="Meghalaya">Meghalaya</option>
+                  <option value="Mizoram">Mizoram</option>
+                  <option value="Nagaland">Nagaland</option>
+                  <option value="Orissa">Orissa</option>
+                  <option value="Punjab">Punjab</option>
+                  <option value="Rajasthan">Rajasthan</option>
+                  <option value="Sikkim">Sikkim</option>
+                  <option value="Tamil Nadu">Tamil Nadu</option>
+                  <option value="Telangana">Telangana</option>
+                  <option value="Tripura">Tripura</option>
+                  <option value="Uttaranchal">Uttaranchal</option>
+                  <option value="Uttar Pradesh">Uttar Pradesh</option>
+                  <option value="West Bengal">West Bengal</option>
+                  <option disabled style="background-color:#aaa; color:#fff">UNION Territories</option>
+                  <option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
+                  <option value="Chandigarh">Chandigarh</option>
+                  <option value="Dadar and Nagar Haveli">Dadar and Nagar Haveli</option>
+                  <option value="Daman and Diu">Daman and Diu</option>
+                  <option value="Delhi">Delhi</option>
+                  <option value="Lakshadeep">Lakshadeep</option>
+                  <option value="Pondicherry">Pondicherry</option>
+                </select>
+              </div>
+              <div class="input-box">
+                <label for="inputDistrict">City</label>
+                <select class="form-control" id="inputDistrict" name="city" required="" style="border:1px solid black">
+                  <option value="">Select City </option>
+                </select>
+              </div>
+
+              <!--<div class="input-box">
+                <span class="details">City</span>
+                <input type="text" name="city" placeholder="Enter your City" required="">
+              </div>
+
+              <div class="input-box">
+                <span class="details">State</span>
+                <input type="text" name="state" placeholder="Enter your State" required="">
+              </div>-->
+            </div>
+
+            <div class="button">
+              <input type="submit" value="Register">
+            </div>
+          </form>
+          <p style="text-align: center;">Or <a href="{% url 'login' %}" id="link">LOGIN</a> here</p>
+        </div>
+      </div>
+
+      <!-- Driver Registration Form -->
+<div id="driver-registration" class="registration-form" style="display: none;">
+  <div class="content">
+    <form action="" method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      <div class="user-details">
+        <div class="input-box" style="width: 100%; text-align: center;">
+          <input type="file" name="profile_picture" id="profile-picture-input" accept="image/*" style="display: none;" onchange="showCropModal(event)">
+          <div class="profile-picture-container">
+            <label class="profile-picture-label">
+              <img src="" id="profile-picture-preview" class="profile-picture-preview" alt="Profile Picture" style="display: none;">
+              <span id="upload-symbol" class="upload-symbol" onclick="document.getElementById('profile-picture-input').click();" style="display: inline-block;">+</span>
+            </label>
+          </div>
+          <div id="crop-modal">
+            <div class="cropper-container">
+              <img id="crop-image" src="" alt="Crop Image">
+            </div>
+            <button type="button" onclick="cropImage()" class="button-style save-button">Save</button>
+            <button type="button" onclick="closeCropModal()" class="button-style cancel-button">Cancel</button>
+          </div>
+          <input type="hidden" name="cropped_image_data" id="cropped-image-data">
+          <button type="button" id="delete-button" onclick="deleteImage()" class="button-style delete-button">Delete</button>
+
+
+        </div>
+
+        
+        <div class="input-box">
+          <span class="details">Full Name</span>
+          <input type="text" id="fname_driver" name="fname_driver" placeholder="Enter your name" required="">
+          <span id="name-error" class="error-text">Please enter a valid name with alphabets only.</span>
+        </div>
+
+        <div class="input-box">
+          <span class="details">Username</span>
+          <input type="text" id="username_driver" name="usern_driver" placeholder="Enter your username" required>
+          <span id="username-error" class="error-text">Username must contain only alphabets and numbers</span>
+      </div>
+      
+        
+        
+
+        <div class="input-box">
+          <span class="details">Password</span>
+          <div class="password-container">
+              <input type="password" id="password_driver" name="password_driver" placeholder="Enter your password" required>
+              <span id="toggle-eye" class="toggle-password">👁️‍🗨️</span>
+             
+          </div>
+          <span id="password-error" class="error-text">Password must be at least 6 characters long and include both letters and numbers.</span>
+      </div>
+
+      
+      <div class="input-box">
+        <span class="details">Email</span>
+        <input type="email" id="email_driver" name="email_driver" placeholder="Enter your email" required="">
+        <span id="email-error" class="error-text">Please enter a valid email address.</span>
+    </div>
+    
+    <div class="input-box">
+      <span class="details">Phone Number</span>
+      <input type="text" name="mobile_driver" id="mobile_driver" placeholder="Enter your number" required>
+      <span id="phone-error" class="error-message"></span>
+  </div>
+
+
+        <div class="gender-details">
+          <input type="radio" name="gender_driver" value="Male" id="dot-1-driver" >
+          <input type="radio" name="gender_driver" value="Female" id="dot-2-driver" >
+          <input type="radio" name="gender_driver" value="Prefer not to say" id="dot-3-driver" >
+
+          <span class="gender-title">Gender</span>
+
+          <div class="category">
+            <label for="dot-1-driver">
+              <span class="dot one"></span>
+              <span class="gender">Male</span>
+            </label>
+
+            <label for="dot-2-driver">
+              <span class="dot two"></span>
+              <span class="gender">Female</span>
+            </label>
+
+            <label for="dot-3-driver">
+              <span class="dot three"></span>
+              <span class="gender">Prefer not to say</span>
+            </label>
+          </div>
+
+        </div>
+
+        <div class="input-box" style="width: 100%;">
+          <span class="details">Role</span>
+          <input type="text" name="role" placeholder="Enter your Role" required="">
+        </div>
+        <div class="input-box" style="width: 100%;">
+          <label for="year-of-experience">Year of Experience</label>
+          <select class="form-control" name="year-of-experience" id="year-of-experience-select" required="" style="border:1px solid black">
+              <option value="">Select Year of Experience</option>
+              <option value="1">1 year</option>
+              <option value="2">2 years</option>
+              <option value="greater_than_2">Greater than 2 years</option>
+          </select>
+        </div>
+        <!-- Select box for languages spoken in India -->
+        <input type="hidden" name="languages_driver" id="selected-languages-driver">
+
+        <div class="input-box" style="width: 100%;">
+          <label for="languages_driver">Languages Spoken</label>
+          <select class="form-control" name="languages_driver_select" id="languages-select-driver" required ="" style="border:1px solid black">
+            <option value="">Select Language</option>
+            <option value="Hindi">Hindi</option>
+            <option value="Bengali">Bengali</option>
+            <option value="Telugu">Telugu</option>
+            <option value="Marathi">Marathi</option>
+            <option value="Tamil">Tamil</option>
+            <option value="Urdu">Urdu</option>
+            <option value="Gujarati">Gujarati</option>
+            <option value="Kannada">Kannada</option>
+            <option value="Odia">Odia (Oriya)</option>
+            <option value="Punjabi">Punjabi</option>
+            <option value="Malayalam">Malayalam</option>
+            <option value="Assamese">Assamese</option>
+            <option value="Maithili">Maithili</option>
+            <option value="Santali">Santali</option>
+            <option value="Kashmiri">Kashmiri</option>
+            <option value="Nepali">Nepali</option>
+            <option value="Konkani">Konkani</option>
+            <option value="Sindhi">Sindhi</option>
+            <option value="Manipuri">Manipuri</option>
+            <option value="Dogri">Dogri</option>
+            <!-- Add more languages as options -->
+          </select>
+        </div>
+        <!-- Container to display added languages -->
+        <div id="languages-container-driver"></div>
+        <div class="input-box" style="width: 100%;">
+          <span class="details">Service</span>
+          <div class="services-input-container">
+            <input type="type" name="services_driver" id="service-input" required="" placeholder="Enter your service" style="margin-right: 10px;" >
+            <button type="button" id="add-service-button">Save</button>
+          </div>
+          <div id="service-error" style="color: red; display: none;">Please enter a service</div>
+        </div>
+        <!-- Container to display added skills -->
+        <div id="services-container"></div>
+        <!-- Description Box -->
+        <div class="input-box" style="width: 100%;">
+          <span class="details">Description</span>
+          <textarea name="description_driver" id="description_driver" placeholder="Enter a description (max 200 characters)" required="" style="width: 100%; height: 100px; border: 1px solid black;" oninput="checkCharacterCount(event)"></textarea>
+          <span id="character-count" style="font-size: 12px; color: #555;">0/200 characters</span>
+        </div>
+
+
+
+        <div class="input-box" style="width: 100%;">
+          <span class="details">Address</span>
+          <input type="text" id="address_driver" name="address_driver" placeholder="Enter your address" required>
+          <span id="address-error" class="error-text">Address must contain only alphanumeric characters and spaces</span>
+        </div>
+
+
+        <div class="input-box">
+          <label for="inputStateDriver">State</label>
+          <select class="form-control" name="state_driver" id="inputStateDriver" required="" style="border:1px solid black">
+            <option value="" disabled selected>Select State</option>
+            <option value="Andhra Pradesh">Andhra Pradesh</option>
+            <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+            <option value="Assam">Assam</option>
+            <option value="Bihar">Bihar</option>
+            <option value="Chhattisgarh">Chhattisgarh</option>
+            <option value="Goa">Goa</option>
+            <option value="Gujarat">Gujarat</option>
+            <option value="Haryana">Haryana</option>
+            <option value="Himachal Pradesh">Himachal Pradesh</option>
+            <option value="Jammu and Kashmir">Jammu and Kashmir</option>
+            <option value="Jharkhand">Jharkhand</option>
+            <option value="Karnataka">Karnataka</option>
+            <option value="Kerala">Kerala</option>
+            <option value="Madhya Pradesh">Madhya Pradesh</option>
+            <option value="Maharashtra">Maharashtra</option>
+            <option value="Manipur">Manipur</option>
+            <option value="Meghalaya">Meghalaya</option>
+            <option value="Mizoram">Mizoram</option>
+            <option value="Nagaland">Nagaland</option>
+            <option value="Orissa">Orissa</option>
+            <option value="Punjab">Punjab</option>
+            <option value="Rajasthan">Rajasthan</option>
+            <option value="Sikkim">Sikkim</option>
+            <option value="Tamil Nadu">Tamil Nadu</option>
+            <option value="Telangana">Telangana</option>
+            <option value="Tripura">Tripura</option>
+            <option value="Uttaranchal">Uttaranchal</option>
+            <option value="Uttar Pradesh">Uttar Pradesh</option>
+            <option value="West Bengal">West Bengal</option>
+            <option disabled style="background-color:#aaa; color:#fff">UNION Territories</option>
+            <option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
+            <option value="Chandigarh">Chandigarh</option>
+            <option value="Dadar and Nagar Haveli">Dadar and Nagar Haveli</option>
+            <option value="Daman and Diu">Daman and Diu</option>
+            <option value="Delhi">Delhi</option>
+            <option value="Lakshadeep">Lakshadeep</option>
+            <option value="Pondicherry">Pondicherry</option>
+          </select>
+        </div>
+
+        <div class="input-box">
+          <label for="inputDistrictDriver">City</label>
+          <select class="form-control" id="inputDistrictDriver" name="city_driver" required="" style="border:1px solid black">
+            <option value="">Select City </option>
+          </select>
+        </div>
+      </div>
+
+      <div class="button">
+        <input type="submit" value="Register">
+      </div>
+    </form>
+    <p style="text-align: center;">Or <a href="{% url 'login' %}" id="link">LOGIN</a> here</p>
+  </div>
+</div>
+
+
+
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <div class="section1">
+      <h3>Contact us</h3>
+      <i class="fa fa-home">Address No: XXXXXXX Street</i></br>
+      <i class="fa fa-phone">Mobile: 1234567890</i></br>
+      <i class="fa fa-envelope">Email: gurutechharkscorp@gmail.com</i></br>
+    </div>
+
+
+    <div class="section1">
+      <h3>Project Links</h3>
+      <a href="{% url 'home' %}">Home</a></br>
+      <a href="{% url 'contact' %}">Contact</a></br>
+      <a href="{% url 'login' %}">Login</a></br>
+      <a href="{% url 'register' %}">Register</a></br>
+    </div>
+
+  </div>
+  <script>
+    $(document).ready(function() {
+      $('#driver-tab').on('click', function(e) {
+        e.preventDefault();
+        $('#user-registration').hide();
+        $('#driver-registration').show();
+        $('#driver-tab').addClass('active');
+        $('#user-tab').removeClass('active');
+      });
+
+      $('#user-tab').on('click', function(e) {
+        e.preventDefault();
+        $('#user-registration').show();
+        $('#driver-registration').hide();
+        $('#user-tab').addClass('active');
+        $('#driver-tab').removeClass('active');
+      });
+    });
+
+    $(document).ready(function() {
+    // Function to handle state change for user registration
+    $("#inputState").change(function(){
+        updateDistrictOptions($(this).val(), "#inputDistrict");
+    });
+
+    // Function to handle state change for driver registration
+    $("#inputStateDriver").change(function(){
+        updateDistrictOptions($(this).val(), "#inputDistrictDriver");
+    });
+
+    function updateDistrictOptions(state, districtSelector) {
+        var optionsList;
+        var htmlString = "";
+
+        switch (state) {
+            case "Andhra Pradesh":
+                optionsList = AndhraPradesh;
+                break;
+            case "Arunachal Pradesh":
+                optionsList = ArunachalPradesh;
+                break;
+            case "Assam":
+                optionsList = Assam;
+                break;
+            case "Bihar":
+                optionsList = Bihar;
+                break;
+            case "Chhattisgarh":
+                optionsList = Chhattisgarh;
+                break;
+            case "Goa":
+                optionsList = Goa;
+                break;
+            case "Gujarat":
+                optionsList = Gujarat;
+                break;
+            case "Haryana":
+                optionsList = Haryana;
+                break;
+            case "Himachal Pradesh":
+                optionsList = HimachalPradesh;
+                break;
+            case "Jammu and Kashmir":
+                optionsList = JammuKashmir;
+                break;
+            case "Jharkhand":
+                optionsList = Jharkhand;
+                break;
+            case "Karnataka":
+                optionsList = Karnataka;
+                break;
+            case "Kerala":
+                optionsList = Kerala;
+                break;
+            case "Madhya Pradesh":
+                optionsList = MadhyaPradesh;
+                break;
+            case "Maharashtra":
+                optionsList = Maharashtra;
+                break;
+            case "Manipur":
+                optionsList = Manipur;
+                break;
+            case "Meghalaya":
+                optionsList = Meghalaya;
+                break;
+            case "Mizoram":
+                optionsList = Mizoram;
+                break;
+            case "Nagaland":
+                optionsList = Nagaland;
+                break;
+            case "Orissa":
+                optionsList = Orissa;
+                break;
+            case "Punjab":
+                optionsList = Punjab;
+                break;
+            case "Rajasthan":
+                optionsList = Rajasthan;
+                break;
+            case "Sikkim":
+                optionsList = Sikkim;
+                break;
+            case "Tamil Nadu":
+                optionsList = TamilNadu;
+                break;
+            case "Telangana":
+                optionsList = Telangana;
+                break;
+            case "Tripura":
+                optionsList = Tripura;
+                break;
+            case "Uttaranchal":
+                optionsList = Uttaranchal;
+                break;
+            case "Uttar Pradesh":
+                optionsList = UttarPradesh;
+                break;
+            case "West Bengal":
+                optionsList = WestBengal;
+                break;
+            case "Andaman and Nicobar Islands":
+                optionsList = AndamanNicobar;
+                break;
+            case "Chandigarh":
+                optionsList = Chandigarh;
+                break;
+            case "Dadar and Nagar Haveli":
+                optionsList = DadraHaveli;
+                break;
+            case "Daman and Diu":
+                optionsList = DamanDiu;
+                break;
+            case "Delhi":
+                optionsList = Delhi;
+                break;
+            case "Lakshadeep":
+                optionsList = Lakshadeep;
+                break;
+            case "Pondicherry":
+                optionsList = Pondicherry;
+                break;
+        }
+
+        for (var i = 0; i < optionsList.length; i++) {
+            htmlString += "<option value='" + optionsList[i] + "'>" + optionsList[i] + "</option>";
+        }
+        $(districtSelector).html(htmlString);
+    }
+
+    // AJAX-based district population for user registration
+    $("#inputState").change(function() {
+        var state = $("#inputState").val();
+        var url = "cities.php?state=" + state;
+        $.get(url, function(data, status) {
+            $("#inputDistrict").html(data);
+        });
+    });
+
+    // AJAX-based district population for driver registration
+    $("#inputStateDriver").change(function() {
+        var state = $("#inputStateDriver").val();
+        var url = "cities.php?state=" + state;
+        $.get(url, function(data, status) {
+            $("#inputDistrictDriver").html(data);
+        });
+    });
+});
+
+function addService() {
+  var serviceInput = document.getElementById("service-input");
+  var service = serviceInput.value.trim();
+  if (service === "") {
+    document.getElementById("service-error").style.display = "block";
+    serviceInput.setAttribute("required", "required"); // Add 'required' attribute if service is empty
+    return;
+  }
+  document.getElementById("service-error").style.display = "none";
+  serviceInput.removeAttribute("required"); // Remove 'required' attribute if service is not empty
+
+  // Append the entered service to the services container
+  var serviceDiv = document.createElement("div");
+  serviceDiv.classList.add("service-item");
+  var serviceSpan = document.createElement("span");
+  serviceSpan.textContent = service;
+  var crossSymbol = document.createElement("span");
+  crossSymbol.innerHTML = "&times;";
+  crossSymbol.classList.add("cross-symbol");
+  crossSymbol.addEventListener("click", function() {
+    serviceDiv.remove();
+    updateHiddenInputs(); // Update hidden inputs after removing a service
+    checkServiceValidation(); // Check service validation after removing a service
+  });
+  serviceDiv.appendChild(serviceSpan);
+  serviceDiv.appendChild(crossSymbol);
+  document.getElementById("services-container").appendChild(serviceDiv);
+
+  // Clear the service input field
+  serviceInput.value = "";
+
+  updateHiddenInputs(); // Update hidden inputs after adding a service
+  checkServiceValidation(); // Check service validation after adding a service
+}
+
+function updateHiddenInputs() {
+  var servicesContainer = document.getElementById("services-container");
+  var serviceItems = servicesContainer.getElementsByClassName("service-item");
+
+  // Remove existing hidden inputs
+  var existingHiddenInputs = servicesContainer.querySelectorAll("input[type=hidden]");
+  existingHiddenInputs.forEach(function(input) {
+    input.remove();
+  });
+
+  // Add hidden inputs for each service item
+  for (var i = 0; i < serviceItems.length; i++) {
+    var service = serviceItems[i].querySelector("span").textContent;
+    var hiddenInput = document.createElement("input");
+    hiddenInput.type = "hidden";
+    hiddenInput.name = "services_driver[]"; // Use [] for array-like submission
+    hiddenInput.value = service;
+    servicesContainer.appendChild(hiddenInput);
+  }
+}
+
+function checkServiceValidation() {
+  var servicesContainer = document.getElementById("services-container");
+  var services = servicesContainer.getElementsByClassName("service-item");
+  var serviceInput = document.getElementById("service-input");
+
+  if (services.length === 0) {
+    serviceInput.setAttribute("required", "required"); // Add 'required' attribute if no services are present
+  } else {
+    serviceInput.removeAttribute("required"); // Remove 'required' attribute if services are present
+  }
+}
+
+document.getElementById("add-service-button").addEventListener("click", addService);
+
+
+// JavaScript code for adding languages in user registration form
+// JavaScript code for adding languages in user registration form
+document.getElementById("languages-select-user").addEventListener("change", function (event) {
+    event.preventDefault(); // Prevent default form submission behavior
+    addLanguage("languages-select-user", "languages-container-user", "selected-languages-user");
+});
+
+// JavaScript code for adding languages in driver registration form
+document.getElementById("languages-select-driver").addEventListener("change", function (event) {
+    event.preventDefault(); // Prevent default form submission behavior
+    addLanguage("languages-select-driver", "languages-container-driver", "selected-languages-driver");
+});
+
+function addLanguage(selectId, containerId, inputId) {
+    var select = document.getElementById(selectId);
+    var selectedLanguage = select.options[select.selectedIndex].value;
+    if (selectedLanguage === "") {
+        return;
+    }
+
+    var languageDiv = document.createElement("div");
+    languageDiv.classList.add("language-item");
+    var languageSpan = document.createElement("span");
+    languageSpan.textContent = selectedLanguage;
+    var crossSymbol = document.createElement("span");
+    crossSymbol.innerHTML = "&times;";
+    crossSymbol.classList.add("cross-symbol");
+    crossSymbol.addEventListener("click", function () {
+        languageDiv.remove();
+        updateSelectedLanguages(inputId, containerId);
+    });
+    languageDiv.appendChild(languageSpan);
+    languageDiv.appendChild(crossSymbol);
+    document.getElementById(containerId).appendChild(languageDiv);
+
+    updateSelectedLanguages(inputId, containerId);
+
+    // Set the selected option in the select box
+    select.value = selectedLanguage;
+}
+
+
+// Function to update selected languages
+function updateSelectedLanguages(inputId, containerId) {
+    var languages = [];
+    var container = document.getElementById(containerId);
+    var languageItems = container.getElementsByClassName("language-item");
+    for (var i = 0; i < languageItems.length; i++) {
+        languages.push(languageItems[i].getElementsByTagName("span")[0].textContent);
+    }
+    document.getElementById(inputId).value = languages.join(",");
+}
+
+//Show additional fields for working professionals
+document.getElementById("current-status-select").addEventListener("change", function () {
+    showAdditionalFields();
+});
+
+function showAdditionalFields() {
+    var currentStatus = document.getElementById("current-status-select").value;
+    var companyField = document.getElementsByName("company-name")[0];
+    var roleField = document.getElementsByName("role")[0];
+
+    if (currentStatus === "Working Professional") {
+        companyField.required = true;
+        roleField.required = true;
+        document.getElementById("working-professional-fields").style.display = "block";
+    } else {
+        companyField.required = false;
+        roleField.required = false;
+        document.getElementById("working-professional-fields").style.display = "none";
+    }
+}
+
+
+
+        // Function to update selected languages
+        function updateSelectedLanguages(inputId, containerId) {
+            var languages = [];
+            var container = document.getElementById(containerId);
+            var languageItems = container.getElementsByClassName("language-item");
+            for (var i = 0; i < languageItems.length; i++) {
+                languages.push(languageItems[i].getElementsByTagName("span")[0].textContent);
+            }
+            document.getElementById(inputId).value = languages.join(",");
+        }
+//Show additional fields for working professionals
+  document.getElementById("current-status-select").addEventListener("change", function() {
+    showAdditionalFields();
+  });
+
+  function showAdditionalFields() {
+    var currentStatus = document.getElementById("current-status-select").value;
+    var workingProfessionalFields = document.getElementById("working-professional-fields");
+
+    if (currentStatus === "Working Professional") {
+      workingProfessionalFields.style.display = "block";
+    } else {
+      workingProfessionalFields.style.display = "none";
+    }
+  }
+
+  let cropper;
+  let croppedCanvas;
+
+  function showCropModal(event) {
+    const file = event.target.files[0];
+    const reader = new FileReader();
+    reader.onload = function (e) {
+        document.getElementById('crop-image').src = e.target.result;
+        document.getElementById('crop-modal').style.display = 'block';
+        if (cropper) {
+          cropper.destroy();
+        }
+        cropper = new Cropper(document.getElementById('crop-image'), {
+          viewMode: 1,
+          autoCropArea: 1,
+        });
+    };
+    reader.readAsDataURL(file);
+  }
+
+  function cropImage() {
+    if (cropper) {
+      croppedCanvas = cropper.getCroppedCanvas();
+      const croppedImageData = croppedCanvas.toDataURL('image/png');
+      document.getElementById('profile-picture-preview').src = croppedImageData;
+      document.getElementById('profile-picture-preview').style.display = 'block';
+      document.getElementById('upload-symbol').style.display = 'none';
+      document.getElementById('cropped-image-data').value = croppedImageData;
+      closeCropModal();
+    }
+  }
+
+  function closeCropModal() {
+    document.getElementById('crop-modal').style.display = 'none';
+    if (cropper) {
+      cropper.destroy();
+    }
+  }
+
+  function deleteImage() {
+    document.getElementById('profile-picture-preview').style.display = 'none';
+    document.getElementById('upload-symbol').style.display = 'inline-block';
+    document.getElementById('profile-picture-input').value = '';
+    document.getElementById('cropped-image-data').value = '';
+  }
+
+  function checkCharacterCount(event) {
+            var text = event.target.value;
+            var characterCount = text.length;
+
+            var characterCountElement = document.getElementById('character-count');
+            characterCountElement.textContent = characterCount + '/200 characters';
+
+            if (characterCount > 200) {
+              event.target.value = text.slice(0, 200);
+              characterCountElement.textContent = '200/200 characters';
+            }
+          }
+  document.addEventListener('DOMContentLoaded', function () {
+    const statusSelect = document.getElementById('current-status-select');
+    const workingFields = document.getElementById('working-professional-fields');
+    const companyNameInput = workingFields.querySelector('input[name="company-name"]');
+    const roleInput = workingFields.querySelector('input[name="role"]');
+
+    statusSelect.addEventListener('change', function () {
+      if (this.value === 'Working Professional') {
+        workingFields.style.display = 'block';
+        companyNameInput.setAttribute('required', 'required');
+        roleInput.setAttribute('required', 'required');
+      } else {
+        workingFields.style.display = 'none';
+        companyNameInput.removeAttribute('required');
+        roleInput.removeAttribute('required');
+      }
+    });
+  });
+
+
+//fullname
+
+document.addEventListener('DOMContentLoaded', () => {
+  const nameInput = document.getElementById('fname');
+  const errorSpan = document.getElementById('name-error');
+
+  // Function to show error message and apply error styling
+  function showError(message) {
+    errorSpan.textContent = message;
+    errorSpan.style.display = 'block';
+    nameInput.classList.add('error');
+    nameInput.classList.remove('valid');
+  }
+
+  // Function to hide error message and apply valid styling
+  function hideError() {
+    errorSpan.style.display = 'none';
+    nameInput.classList.remove('error');
+    nameInput.classList.add('valid');
+  }
+
+  // Function to validate the name input
+  function validateName(value) {
+    // Regular expression to allow only alphabets and spaces
+    const isValid = /^[A-Za-z\s]*$/.test(value);
+
+    if (isValid) {
+      hideError(); // Hide error if input is valid
+    } else {
+      showError('Please enter a valid name with alphabets only.'); // Show error if input is invalid
+    }
+  }
+
+  // Event listener for input events on the name input field
+  nameInput.addEventListener('input', () => {
+    validateName(nameInput.value);
+  });
+});
+
+
+//full_driver
+document.addEventListener('DOMContentLoaded', () => {
+  const nameInput = document.getElementById('fname_driver');
+  const errorSpan = document.getElementById('name-error');
+
+  // Function to update the input field and error message based on validity
+  function updateValidationState(isValid, message) {
+    if (isValid) {
+      errorSpan.style.display = 'none'; // Hide error message if input is valid
+      nameInput.classList.remove('error');
+      nameInput.classList.add('valid');
+    } else {
+      errorSpan.textContent = message;
+      errorSpan.style.display = 'block'; // Show error message if input is invalid
+      nameInput.classList.remove('valid');
+      nameInput.classList.add('error');
+    }
+  }
+
+  // Function to validate the name input
+  function validateName(value) {
+    // Regular expression to allow only alphabets and spaces
+    const isValid = /^[A-Za-z\s]*$/.test(value);
+
+    // Provide error message if invalid
+    updateValidationState(isValid, 'Please enter a valid name with alphabets only.');
+  }
+
+  // Event listener for input events on the name input field
+  nameInput.addEventListener('input', () => {
+    validateName(nameInput.value);
+  });
+});
+
+
+//password 
+
+document.addEventListener('DOMContentLoaded', () => {
+  const passwordInput = document.getElementById('password');
+  const passwordError = document.getElementById('password-error');
+  const togglePasswordIcon = document.getElementById('toggle-password');
+
+  // Function to apply valid state styles and hide the error message
+  function applyValidState() {
+    passwordInput.classList.remove('error');
+    passwordInput.classList.add('valid');
+    passwordError.style.display = 'none';
+  }
+
+  // Function to apply invalid state styles and show the error message
+  function applyInvalidState(message) {
+    passwordInput.classList.remove('valid');
+    passwordInput.classList.add('error');
+    passwordError.textContent = message;
+    passwordError.style.display = 'block';
+  }
+
+  // Function to validate the password input
+  function validatePassword() {
+    const password = passwordInput.value;
+    const minLength = 8; // Define minimum length for the password
+    if (password.length >= minLength) {
+      applyValidState();
+    } else {
+      applyInvalidState(`Password must be at least ${minLength} characters long.`);
+    }
+  }
+
+  // Event listener for input events on the password field
+  passwordInput.addEventListener('input', validatePassword);
+
+  // Function to toggle password visibility
+  function togglePasswordVisibility() {
+    if (passwordInput.type === 'password') {
+      passwordInput.type = 'text';
+    } else {
+      passwordInput.type = 'password';
+    }
+  }
+
+  // Event listener for the toggle icon
+  togglePasswordIcon.addEventListener('click', togglePasswordVisibility);
+});
+
+
+//password_driver
+document.addEventListener('DOMContentLoaded', () => {
+    const passwordInput = document.getElementById('password_driver');
+    const toggleEye = document.getElementById('toggle-eye');
+    const error = document.getElementById('password-error');
+
+    // Function to validate the password
+    function validatePassword() {
+        const password = passwordInput.value;
+        // Basic validation criteria
+        const isValid = password.length >= 6 &&
+                         /[a-zA-Z]/.test(password) &&
+                         /[0-9]/.test(password);
+
+        if (isValid) {
+            // Apply valid state
+            passwordInput.classList.remove('error');
+            passwordInput.classList.add('valid');
+            error.style.display = 'none'; // Hide error message
+        } else {
+            // Apply invalid state
+            passwordInput.classList.remove('valid');
+            passwordInput.classList.add('error');
+            error.style.display = 'block'; // Show error message
+            error.textContent = 'Password must be at least 6 characters long and include both letters and numbers.';
+        }
+    }
+
+    // Event listener for password input
+    passwordInput.addEventListener('input', validatePassword);
+
+    // Function to toggle password visibility
+    function togglePasswordVisibility() {
+        const type = passwordInput.type === 'password' ? 'text' : 'password';
+        passwordInput.type = type;
+        // Change eye icon based on visibility
+        toggleEye.textContent = type === 'password' ? '👁️‍🗨️' : '👁️‍🗨️'; // Adjust icons as needed
+    }
+
+    // Event listener for eye icon click
+    toggleEye.addEventListener('click', togglePasswordVisibility);
+});
+
+
+//username
+
+document.addEventListener('DOMContentLoaded', () => {
+    const usernameInput = document.getElementById('username');
+    const errorElement = document.getElementById('username-error');
+
+    // Function to validate the username
+    function validateUsername() {
+        const username = usernameInput.value;
+        // Regex to allow only alphabets and numbers
+        const isValid = /^[a-zA-Z0-9]+$/.test(username);
+
+        if (isValid) {
+            // Apply valid state
+            usernameInput.classList.remove('error');
+            usernameInput.classList.add('valid');
+            errorElement.style.display = 'none'; // Hide error message
+        } else {
+            // Apply invalid state
+            usernameInput.classList.remove('valid');
+            usernameInput.classList.add('error');
+            errorElement.style.display = 'block'; // Show error message
+        }
+    }
+
+    // Event listener for username input
+    usernameInput.addEventListener('input', validateUsername);
+});
+
+//username_driver 
+
+document.addEventListener('DOMContentLoaded', () => {
+    const usernameInput = document.getElementById('username_driver');
+    const errorElement = document.getElementById('username-error');
+
+    // Function to validate the username
+    function validateUsername() {
+        const username = usernameInput.value;
+        // Regex to allow only alphabets and numbers
+        const isValid = /^[a-zA-Z0-9]+$/.test(username);
+
+        if (isValid) {
+            // Apply valid state
+            usernameInput.classList.remove('error');
+            usernameInput.classList.add('valid');
+            errorElement.style.display = 'none'; // Hide error message
+        } else {
+            // Apply invalid state
+            usernameInput.classList.remove('valid');
+            usernameInput.classList.add('error');
+            errorElement.style.display = 'block'; // Show error message
+        }
+    }
+
+    // Event listener for username input
+    usernameInput.addEventListener('input', validateUsername);
+});
+
+
+
+//email_driver
+
+// Function to validate the email address
+function validateEmail() {
+    var emailInput = document.getElementById('email_driver');
+    var emailError = document.getElementById('email-error');
+
+    // Regular expression for validating an email address
+    var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!emailRegex.test(emailInput.value)) {
+        emailError.textContent = 'Please enter a valid email address.';
+        emailError.style.display = 'block';
+        emailInput.classList.add('error');
+        emailInput.classList.remove('valid');
+    } else {
+        emailError.textContent = '';
+        emailError.style.display = 'none';
+        emailInput.classList.remove('error');
+        emailInput.classList.add('valid');
+    }
+}
+
+// Add event listener to trigger validation on input
+document.addEventListener('DOMContentLoaded', () => {
+    var emailInput = document.getElementById('email_driver');
+    emailInput.addEventListener('input', validateEmail);
+
+    var phoneInput = document.getElementById('mobile_drive');
+    phoneInput.addEventListener('input', validatePhoneNumber);
+});
+
+//phone number
+
+// Function to validate the phone number
+function validatePhoneNumber() {
+    const phoneInput = document.getElementById('phone');
+    const errorText = document.getElementById('phone-error');
+    const phoneRegex = /^\d{1,15}$/; // Only allows digits and limits length to 1-15
+
+    if (phoneRegex.test(phoneInput.value)) {
+        phoneInput.classList.remove('error');
+        phoneInput.classList.add('valid');
+        errorText.textContent = ''; // Clear any existing error message
+        errorText.style.display = 'none'; // Hide the error message
+    } else {
+        phoneInput.classList.remove('valid');
+        phoneInput.classList.add('error');
+        errorText.textContent = 'Phone number must contain only digits and be between 1 and 15 digits long.';
+        errorText.style.display = 'block'; // Show the error message
+    }
+}
+
+// Add event listener to trigger validation on input
+document.addEventListener('DOMContentLoaded', () => {
+    const phoneInput = document.getElementById('phone');
+    phoneInput.addEventListener('input', validatePhoneNumber);
+});
+
+
+//address
+
+// Function to validate the address
+function validateAddress() {
+    const addressInput = document.getElementById('address');
+    const errorText = document.getElementById('address-error');
+
+    // Regular expression for validating an address
+    const addressRegex = /^[a-zA-Z0-9\s,.'-]{5,}$/;
+
+    if (!addressRegex.test(addressInput.value)) {
+        errorText.textContent = 'Address must be at least 5 characters long and contain no special characters.';
+        errorText.style.display = 'block';
+        addressInput.classList.add('error');
+        addressInput.classList.remove('valid');
+    } else {
+        errorText.textContent = '';
+        errorText.style.display = 'none';
+        addressInput.classList.remove('error');
+        addressInput.classList.add('valid');
+    }
+}
+
+// Add event listener to trigger validation on input
+document.addEventListener('DOMContentLoaded', () => {
+    const addressInput = document.getElementById('address');
+    addressInput.addEventListener('input', validateAddress);
+});
+
+//address_driver
+
+document.addEventListener('DOMContentLoaded', () => {
+  const addressInput = document.getElementById('address_driver');
+  const errorMessage = document.getElementById('address-error');
+
+  // Function to apply valid state styles and hide the error message
+  function applyValidState() {
+    addressInput.classList.remove('invalid');
+    addressInput.classList.add('valid');
+    errorMessage.style.display = 'none';
+  }
+
+  // Function to apply invalid state styles and show the error message
+  function applyInvalidState() {
+    addressInput.classList.remove('valid');
+    addressInput.classList.add('invalid');
+    errorMessage.style.display = 'block';
+  }
+
+  // Function to validate the input
+  function validateInput() {
+    const regex = /^[a-zA-Z0-9\s,.\-_']+$/; // Regex to allow alphanumeric characters, spaces, and special characters
+    if (regex.test(addressInput.value)) {
+      applyValidState();  // Apply valid state if input matches the regex
+    } else {
+      applyInvalidState(); // Apply invalid state if input does not match the regex
+    }
+  }
+
+  // Event listener for input events on the address input field
+  addressInput.addEventListener('input', validateInput);
+});
+
+//email
+
+document.addEventListener('DOMContentLoaded', () => {
+  const emailInput = document.getElementById('email');
+  const errorMessage = document.getElementById('email-error');
+
+  // Function to apply valid state styles and hide the error message
+  function applyValidState() {
+    emailInput.classList.remove('invalid');
+    emailInput.classList.add('valid');
+    errorMessage.style.display = 'none';
+  }
+
+  // Function to apply invalid state styles and show the error message
+  function applyInvalidState() {
+    emailInput.classList.remove('valid');
+    emailInput.classList.add('invalid');
+    errorMessage.style.display = 'block';
+  }
+
+  // Function to validate the input
+  function validateInput() {
+    // Regex to match Gmail addresses
+    const regex = /^[a-zA-Z0-9._%+-]+@gmail\.com$/;
+    if (regex.test(emailInput.value)) {
+      applyValidState();  // Apply valid state if input matches the regex
+    } else {
+      applyInvalidState(); // Apply invalid state if input does not match the regex
+    }
+  }
+
+  // Event listener for input events on the email input field
+  emailInput.addEventListener('input', validateInput);
+});
+
+//mobile number_driver
+
+document.addEventListener('DOMContentLoaded', () => {
+  const phoneInput = document.getElementById('mobile_driver');
+  const errorMessage = document.getElementById('phone-error');
+
+  // Function to apply valid state styles and hide the error message
+  function applyValidState() {
+    phoneInput.classList.remove('invalid');
+    phoneInput.classList.add('valid');
+    errorMessage.style.display = 'none';
+  }
+
+  // Function to apply invalid state styles and show the error message
+  function applyInvalidState() {
+    phoneInput.classList.remove('valid');
+    phoneInput.classList.add('invalid');
+    errorMessage.style.display = 'block';
+  }
+
+  // Function to validate the input
+  function validateInput() {
+    // Regex to match phone numbers (e.g., US phone numbers)
+    const regex = /^\+?\d{10,15}$/; // Adjust regex based on specific format needs
+    if (regex.test(phoneInput.value)) {
+      applyValidState();  // Apply valid state if input matches the regex
+    } else {
+      applyInvalidState(); // Apply invalid state if input does not match the regex
+      errorMessage.textContent = 'Please enter a valid phone number.';
+    }
+  }
+
+  // Event listener for input events on the phone number input field
+  phoneInput.addEventListener('input', validateInput);
+});
+
+
+
+document.addEventListener('DOMContentLoaded', () => {
+    const shineElements = document.querySelectorAll('.shine-text');
+
+    shineElements.forEach(element => {
+      element.addEventListener('click', () => {
+        element.classList.toggle('active');
+
+        // Optional: Remove the class after the animation completes
+        setTimeout(() => {
+          element.classList.remove('active');
+        }, 1500); // Match the duration of the animation
+      });
+    });
+  });
+
+
+
+
+  document.addEventListener("scroll", function() {
+  const elements = document.querySelectorAll('.fadeIn');
+  const viewportHeight = window.innerHeight;
+
+  elements.forEach(element => {
+    const rect = element.getBoundingClientRect();
+    if (rect.top < viewportHeight) {
+      element.classList.add('visible');
+    }
+  });
+});
+
+
+  </script>
+  <style>
+
+:root {
+    --main-bg-color: rgba(0, 0, 0, 0.7);
+    --text-color: #ffffff;
+    --highlight-color: #FFD700;
+    --border-color: #000;
+    }
+
+body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    text-align: left;
+    background-color: rgba(0, 0, 0, 0.08);
+}
+
+a {
+    color: var(--main-bg-color);
+    text-decoration: none;
+    background-color: transparent;
+    -webkit-text-decoration-skip: objects;
+}
+
+
+    /* Ensure each tab takes up an equal amount of space */
+/* Ensure each tab takes up an equal amount of space */
+.nav-tabs {
+  background-color:var(--main-bg-color);
+  display: flex;
+  justify-content: space-between;
+  padding: 0 20px;
+}
+
+/* Set text color for tabs */
+.nav-tabs .nav-link {
+  color: #ffffff;
+  padding: 10px 15px;
+}
+
+/* Ensure the tabs are aligned vertically centered */
+.nav-tabs ul {
+  display: flex;
+  align-items: center;
+}
+form .category label .dot {
+  height: 18px;
+  width: 18px;
+  border-radius: 50%;
+  margin-left: 10px;
+  background: #d9d9d9;
+  border: 5px solid transparent;
+  transition: all 0.3s ease;
+}
+
+#dot-1:checked ~ .category label[for="dot-1"] .dot,
+#dot-2:checked ~ .category label[for="dot-2"] .dot,
+#dot-3:checked ~ .category label[for="dot-3"] .dot,
+#dot-1-driver:checked ~ .category label[for="dot-1-driver"] .dot,
+#dot-2-driver:checked ~ .category label[for="dot-2-driver"] .dot,
+#dot-3-driver:checked ~ .category label[for="dot-3-driver"] .dot {
+  background: #07411a;
+  border-color: #d9d9d9;
+}
+
+.service-input-container {
+  display: flex;
+}
+
+#service-input {
+  margin-right: 10px;
+}
+
+#add-service-button {
+  background-color: #09333f;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.input-box {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+}
+
+.services-input-container {
+  display: flex;
+  align-items: center;
+}
+
+.services-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.service-item {
+  display: flex;
+  align-items: center;
+  margin-right: 5px;
+  margin-bottom: 5px;
+  padding: 5px 10px;
+  border-radius: 20px;
+  background-color: #f0f0f0;
+}
+
+.service-item span {
+  margin-right: 5px;
+}
+
+.cross-symbol, #add-service-button {
+  cursor: pointer;
+}
+
+#services-container, #languages-container-driver, #languages-container-user {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
+
+.language-item {
+  display: inline-flex;
+  align-items: center;
+  margin-right: 5px;
+  margin-bottom: 5px;
+  padding: 5px 10px;
+  border-radius: 20px;
+  background-color: #f0f0f0;
+}
+body{
+
+justify-content: center;
+align-items: center;
+background-color: #f2f1f8;
+}
+.profile-picture-container {
+    position: relative;
+    display: inline-block;
+    width: 100px;
+    height: 100px;
+    margin: 0 auto; /* Center the container */
+  }
+
+  .profile-picture-label {
+    width: 100%;
+    height: 100%;
+    display: inline-block;
+  }
+
+  .profile-picture-preview {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    display: block;
+    margin: 0 auto; /* Center the image */
+  }
+
+  .upload-symbol {
+    width: 100px;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px dashed #09333f;
+    border-radius: 50%;
+    font-size: 36px;
+    color: #09333f;
+    margin: 0 auto; /* Center the symbol */
+    cursor: pointer;
+  }
+
+  .upload-symbol:hover {
+    background-color: #e0e0e0;
+  }
+  .cropper-container {
+    width: 100%;
+    max-height: 400px;
+
+  }
+  #crop-modal {
+    display: none;
+    position: fixed;
+    top: 25%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+    background-color: white;
+    padding: 10px;
+    border: 1px solid #ccc;
+  }
+
+  .button-style {
+    padding: 3px 6px; /* Smaller padding for even smaller button size */
+    border: none;
+    border-radius: 3px; /* Smaller border radius for a smaller button */
+    cursor: pointer;
+    font-size: 12px; /* Smaller font size for a smaller button */
+}
+
+.delete-button {
+    background-color: #e74c3c; /* Red */
+    color: white;
+    display: block; /* Make button a block element */
+    margin: 0 auto; /* Center the button horizontally */
+    width: fit-content; /* Adjust width to fit content */
+}
+
+
+
+  .button-style {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px; /* Optional: Adjust font size */
+}
+
+.save-button {
+    background-color: #4CAF50; /* Green */
+    color: rgb(255, 255, 255);
+}
+
+.cancel-button {
+    background-color: #f44336; /* Red */
+    color: rgb(223, 235, 245);
+}
+
+
+/* full name */
+
+/* General styling for the input box container */
+.input-box {
+  margin-bottom: 20px;
+}
+
+/* Styling for the label/details above the input */
+.input-box .details {
+  font-size: 16px;
+  font-weight: 500;
+  color: #333;
+  margin-bottom: 5px;
+  display: block;
+}
+
+/* General styling for the input field */
+.input-box input[type="text"] {
+  width: 100%;
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+  outline: none;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Styling for input field in error state */
+.input-box input[type="text"].error {
+  border-color: red;
+  box-shadow: 0 0 5px rgba(255, 0, 0, 0.3);
+}
+
+/* Styling for input field in valid state */
+.input-box input[type="text"].valid {
+  border-color: green;
+  box-shadow: 0 0 5px rgba(0, 255, 0, 0.3);
+}
+
+/* Styling for the error message */
+#error {
+  font-size: 13px;
+  color: red; /* Error message color */
+  margin-top: 5px;
+  display: none; /* Hidden by default */
+}
+
+/* fullname_driver */
+
+/* General styling for input box container */
+.input-box {
+  margin-bottom: 20px;
+}
+
+/* Styling for the label/details above the input */
+.input-box .details {
+  font-size: 16px;
+  font-weight: 500;
+  color: #333;
+  margin-bottom: 5px;
+  display: block;
+}
+
+/* General styling for the input field */
+.input-box input[type="text"] {
+  width: 100%;
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+  outline: none;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Styling for input field in error state */
+.input-box input[type="text"].error {
+  border-color: red;
+  box-shadow: 0 0 5px rgba(255, 0, 0, 0.3);
+}
+
+/* Styling for input field in valid state */
+.input-box input[type="text"].valid {
+  border-color: green;
+  box-shadow: 0 0 5px rgba(0, 255, 0, 0.3);
+}
+
+/* Styling for the error message */
+.error-text {
+  font-size: 13px;
+  color: red; /* Error message color */
+  margin-top: 5px;
+  display: none; /* Hidden by default */
+}
+
+/* password*/
+
+/* General styling for input box container */
+.input-box {
+  margin-bottom: 20px;
+  position: relative; /* For positioning the toggle icon */
+}
+
+/* Styling for the label/details above the input */
+.input-box .details {
+  font-size: 16px;
+  font-weight: 500;
+  color: #333;
+  margin-bottom: 5px;
+  display: block;
+}
+
+/* General styling for the input field */
+.input-box input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+  outline: none;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+logo {
+  width: 70px;
+  height: 70px;
+  margin-right: 150px;
+  border-radius: 50%;
+  margin-top: 20px;
+}
+
+/* Styling for the toggle icon */
+.toggle-password {
+  position: absolute;
+  top: 50%;
+  right: 10px; /* Adjust this value to position the icon correctly */
+  transform: translateY(-50%);
+  cursor: pointer;
+  font-size: 1.2em;
+}
+
+/* Styling for input field in error state */
+.input-box input[type="password"].error {
+  border-color: red;
+  box-shadow: 0 0 5px rgba(255, 0, 0, 0.3);
+}
+
+/* Styling for input field in valid state */
+.input-box input[type="password"].valid {
+  border-color: green;
+  box-shadow: 0 0 5px rgba(0, 255, 0, 0.3);
+}
+
+/* Styling for the error message */
+.error-text {
+  font-size: 13px;
+  color: red; /* Error message color */
+  margin-top: 5px;
+  display: none; /* Hidden by default */
+}
+
+/*password_driver*/
+
+/* General styling for input box container */
+.input-box {
+  margin-bottom: 20px;
+  position: relative; /* For positioning the toggle icon */
+}
+
+/* Styling for the label/details above the input */
+.input-box .details {
+  font-size: 16px;
+  font-weight: 500;
+  color: #333;
+  margin-bottom: 5px;
+  display: block;
+}
+
+/* General styling for the input field */
+.input-box input[type="password"] {
+  width: 100%;
+  padding: 10px 40px 10px 10px; /* Add padding-right to make space for the icon */
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+  outline: none;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Styling for input field in error state */
+.input-box input[type="password"].error {
+  border-color: red;
+  box-shadow: 0 0 5px rgba(255, 0, 0, 0.3);
+}
+
+/* Styling for input field in valid state */
+.input-box input[type="password"].valid {
+  border-color: green;
+  box-shadow: 0 0 5px rgba(0, 255, 0, 0.3);
+}
+
+/* Styling for the toggle icon */
+.input-box .toggle-password { /* Updated class to match .input-box context */
+  position: absolute;
+  right: 15px; /* Adjust spacing from the right edge */
+  top: 50%; /* Center vertically within the input box */
+  transform: translateY(-50%); /* Adjust vertical alignment */
+  cursor: pointer;
+  font-size: 20px;
+  color: #007bff;
+  z-index: 1; /* Ensure it appears above the input field */
+}
+
+/* Styling for the error message */
+.input-box .error-text { /* Updated class to match .input-box context */
+  font-size: 13px;
+  color: red; /* Error message color */
+  margin-top: 5px;
+  display: none; /* Hidden by default */
+}
+
+/*username*/
+
+/* General styling for input box container */
+.input-box {
+    margin-bottom: 20px;
+    position: relative; /* For positioning the error message */
+}
+
+/* Styling for the label/details above the input */
+.input-box .details {
+    font-size: 16px;
+    font-weight: 500;
+    color: #333;
+    margin-bottom: 5px;
+    display: block;
+}
+
+/* General styling for the input field */
+.input-box input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    outline: none;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Styling for input field in error state */
+.input-box input[type="text"].error {
+    border-color: red;
+    box-shadow: 0 0 5px rgba(255, 0, 0, 0.3);
+}
+
+/* Styling for input field in valid state */
+.input-box input[type="text"].valid {
+    border-color: green;
+    box-shadow: 0 0 5px rgba(0, 255, 0, 0.3);
+}
+
+/* Styling for the error message */
+.error-text {
+    font-size: 13px;
+    color: red; /* Error message color */
+    margin-top: 5px;
+    display: none; /* Hidden by default */
+}
+
+
+/* username_driver*/
+
+/* General styling for input box container */
+.input-box {
+    margin-bottom: 20px;
+    position: relative; /* For positioning the error message */
+}
+
+/* Styling for the label/details above the input */
+.input-box .details {
+    font-size: 16px;
+    font-weight: 500;
+    color: #333;
+    margin-bottom: 5px;
+    display: block;
+}
+
+/* General styling for the input field */
+.input-box input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    outline: none;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Styling for input field in error state */
+.input-box input[type="text"].error {
+    border-color: red;
+    box-shadow: 0 0 5px rgba(255, 0, 0, 0.3);
+}
+
+/* Styling for input field in valid state */
+.input-box input[type="text"].valid {
+    border-color: green;
+    box-shadow: 0 0 5px rgba(0, 255, 0, 0.3);
+}
+
+/* Styling for the error message */
+.error-text {
+    font-size: 13px;
+    color: red; /* Error message color */
+    margin-top: 5px;
+    display: none; /* Hidden by default */
+}
+/*email_driver*/
+
+
+
+/* General styling for input box */
+.input-box {
+    margin-bottom: 20px;
+}
+
+.input-box .details {
+    font-size: 16px;
+    font-weight: 500;
+    color: #333;
+    margin-bottom: 5px;
+    display: block;
+}
+
+/* Input field styling */
+.input-box input[type="email"] {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    outline: none;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Invalid input state */
+.input-box input[type="email"].error {
+    border-color: red;
+    box-shadow: 0 0 5px rgba(255, 0, 0, 0.3);
+}
+
+/* Valid input state */
+.input-box input[type="email"].valid {
+    border-color: green;
+    box-shadow: 0 0 5px rgba(0, 255, 0, 0.3);
+}
+
+/* Error message styling */
+.error-text {
+    font-size: 13px;
+    color: red; /* Color for error messages */
+    margin-top: 5px;
+    display: none; /* Hide error message by default */
+}
+
+/* Show error message when invalid */
+.error-text.active {
+    display: block;
+}
+
+
+
+/*mobile number*/
+
+/* General styling for input box */
+.input-box {
+    margin-bottom: 20px;
+}
+
+.input-box .details {
+    font-size: 16px;
+    font-weight: 500;
+    color: #333;
+    margin-bottom: 5px;
+    display: block;
+}
+
+/* Input field styling */
+.input-box input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    outline: none;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Invalid input state */
+.input-box input[type="text"].error {
+    border-color: red;
+    box-shadow: 0 0 5px rgba(255, 0, 0, 0.3);
+}
+
+/* Valid input state */
+.input-box input[type="text"].valid {
+    border-color: green;
+    box-shadow: 0 0 5px rgba(0, 255, 0, 0.3);
+}
+
+/* Error message styling */
+.error-text {
+    font-size: 13px;
+    color: red; /* Color for error messages */
+    margin-top: 5px;
+    display: none; /* Hide error message by default */
+}
+
+/* Show error message when invalid */
+.error-text.active {
+    display: block;
+}
+
+/*address*/
+
+/* General styling for input box */
+.input-box {
+    margin-bottom: 20px;
+}
+
+.input-box .details {
+    font-size: 16px;
+    font-weight: 500;
+    color: #333;
+    margin-bottom: 5px;
+    display: block;
+}
+
+/* Input field styling */
+.input-box input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    outline: none;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Invalid input state */
+.input-box input.error {
+    border-color: red;
+    box-shadow: 0 0 5px rgba(255, 0, 0, 0.3);
+}
+
+/* Valid input state */
+.input-box input.valid {
+    border-color: green;
+    box-shadow: 0 0 5px rgba(0, 255, 0, 0.3);
+}
+
+/* Error message styling */
+.error-text {
+    font-size: 13px;
+    color: red; /* Color for error messages */
+    margin-top: 5px;
+    display: none; /* Hide error message by default */
+}
+
+/* Show error message when invalid */
+.error-text.active {
+    display: block;
+}
+
+/*address_driver*/
+
+/* General styling for the input box */
+.input-box {
+  margin-bottom: 20px;
+}
+
+/* Styling for the input field */
+.input-box input {
+  width: 100%;
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+  outline: none;
+  background-color: #fff; /* White background color */
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Styling for the input field when it's in a valid state */
+.input-box input.valid {
+  border-color: green;
+  box-shadow: 0 0 5px rgba(0, 255, 0, 0.3);
+}
+
+/* Styling for the input field when it's in an invalid state */
+.input-box input.invalid {
+  border-color: red;
+  box-shadow: 0 0 5px rgba(255, 0, 0, 0.3);
+}
+
+/* Styling for the error message */
+.error-text {
+  font-size: 13px;
+  color: red;
+  margin-top: 5px;
+  display: none; /* Hide by default, shown when input is invalid */
+}
+
+/*email*/
+
+/* General styling for the input box */
+.input-box {
+  margin-bottom: 20px;
+}
+
+/* Styling for the input field */
+.input-box input {
+  width: 100%;
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+  outline: none;
+  background-color: #fff; /* White background color */
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Styling for the input field when it's in a valid state */
+.input-box input.valid {
+  border-color: green;
+  box-shadow: 0 0 5px rgba(0, 255, 0, 0.3);
+}
+
+/* Styling for the input field when it's in an invalid state */
+.input-box input.invalid {
+  border-color: red;
+  box-shadow: 0 0 5px rgba(255, 0, 0, 0.3);
+}
+
+/* Styling for the error message */
+.error-text {
+  font-size: 13px;
+  color: red;
+  margin-top: 5px;
+  display: none; /* Hide by default, shown when input is invalid */
+}
+
+
+/*mobile_number_driver
+
+/* General styling for the input box */
+.input-box {
+  margin-bottom: 20px;
+}
+
+/* Styling for the input field */
+.input-box input {
+  width: 100%;
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+  outline: none;
+  background-color: #fff; /* White background color */
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Styling for the input field when it's in a valid state */
+.input-box input.valid {
+  border-color: green;
+  box-shadow: 0 0 5px rgba(0, 255, 0, 0.3);
+}
+
+/* Styling for the input field when it's in an invalid state */
+.input-box input.invalid {
+  border-color: red;
+  box-shadow: 0 0 5px rgba(255, 0, 0, 0.3);
+}
+
+/* Styling for the error message */
+.error-message {
+  font-size: 13px;
+  color: red;
+  margin-top: 5px;
+  display: none; /* Hide by default, shown when input is invalid */
+}
+
+
+
+  </style>
+
+  </style>
+
+
+
+
+</body>
+
+</html>

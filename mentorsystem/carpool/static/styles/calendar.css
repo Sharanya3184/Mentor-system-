@@ -1,0 +1,539 @@
+body {
+    background: rgba(0, 0, 0, 0.08);
+}
+:root {
+    --main-bg-color: rgba(0, 0, 0, 0.7);
+    --text-color: #ffffff;
+    --highlight-color: #FFD700;
+    --border-color: #000;
+    }
+
+
+
+.topnav {
+z-index: 10;
+    overflow: hidden;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: rgb(23, 23, 23);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 80px;
+    }
+
+
+    #rest {
+        display: flex;
+        justify-content: flex-end;
+        padding-top: 40px;
+    }
+    
+    #rest ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+    }
+    
+    #rest ul a {
+        display: block;
+        color: var(--text-color);
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+        font-size: 17px;
+        font-weight: bold;
+        margin-left: 20px;
+        transition: background-color 0.3s ease, transform 0.2s ease, color 0.2s ease;
+    }
+    
+    #rest ul a:hover,
+    #rest ul a:focus {
+        background-color: #fc8019;
+        color: white;
+        transform: scale(1.05);
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    }
+    
+.vertical-nav {
+        width: 175px;
+        height: calc(100% - 80px);
+        background-color: rgb(23, 23, 23);
+        padding-top: 20px;
+        display: flex;
+        top: 80px;
+        flex-direction: column;
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        transform: transform 0.3s ease;
+        z-index: 1000;
+    }
+    .vertical-nav a {
+        padding: 15px 25px;
+        text-align: left;
+        text-decoration: none;
+        font-size: 18px;
+        font-weight: bold;
+        color: white;
+        display: block;
+        transition: background-color 0.3s ease, padding 0.2s ease;
+        animation: fadeIn 0.3s ease; /* Fade in effect */
+    }
+    
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    
+    .vertical-nav a:hover {
+        background-color: #0b0b0b;
+        color: orange;
+        padding-left: 30px; /* Add padding on hover */
+    }
+    
+    .vertical-nav.active {
+        transform: translateX(0);
+        right: 0;
+    }
+    
+
+.page-content {
+display: flex;
+flex: 1;
+overflow: hidden;
+position: relative;
+margin-top: 115px;
+opacity: 0; /* Start hidden */
+    transform: translateY(20px); /* Start slightly lower */
+    transition: opacity 0.5s ease, transform 0.5s ease; 
+}
+
+.page-content.active {
+    opacity: 1; /* Fade in */
+    transform: translateY(0); /* Move to original position */
+}
+
+/* Optional: Slide in effect on page load */
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Apply the animation on load */
+.page-content.loaded {
+    animation: slideIn 0.5s ease forwards; /* Slide in effect */
+}
+
+.calendar-container {
+flex: 1;
+padding: 15px;
+overflow-y: auto;
+background-color: #fff;
+display: flex;
+flex-direction: column;
+}
+
+.save-button-container {
+display: flex;
+justify-content: flex-start;
+}
+button.save-button{
+background-color: #50a0bb
+}
+
+#schedule-table {
+width: 100%;
+border-collapse: collapse;
+margin-top: 10px;
+}
+
+#schedule-table th, #schedule-table td {
+border: 1px solid #ddd;
+padding: 8px;
+text-align: center;
+}
+
+.form-table-container {
+display: flex;
+flex-wrap: wrap;
+gap: 20px;
+padding-top: 20px;
+}
+
+#calendar-form, #selected-schedule {
+flex: 1;
+}
+
+
+.user-details {
+display: flex;
+flex-direction: column;
+}
+
+.time-select {
+border: 1px solid #ddd;
+padding: 7px;
+margin-top: 10px;
+display: flex;
+align-items: center;
+}
+
+.time-select label {
+margin-right: 10px;
+}
+
+.time-select select {
+padding: 7px;
+margin-right: 10px;
+border: 1px solid #ddd;
+}
+
+.selected-schedule-header {
+text-align: center;
+width: 80%;
+}
+
+.no-wrap{
+flex-wrap: nowrap;
+display: flex;
+}
+
+ul.messages li {
+padding-top: 20px !important;
+padding-bottom: 0px;
+}
+.add-button .plus-sign::before,
+.remove-button .minus-sign::before {
+content: "+";
+font-weight: bold;
+font-size: 16px;
+}
+
+.remove-button .minus-sign::before {
+content: "-";
+font-weight: bold;
+font-size: 16px;
+}
+
+.add-button .plus-sign,
+.remove-button .minus-sign {
+height: 100%;
+text-align: center;
+line-height: 18px;
+}
+
+.add-button:focus,
+.remove-button:focus {
+outline: 2px solid #50a0bb;
+outline-offset: 2px;
+}
+
+
+/* Styles for larger screens (normal view) */
+@media (min-width: 769px) {
+.user-details{
+padding-top: 20px
+}
+
+
+.selected-schedule-header {
+padding-bottom: 20px;
+}
+
+.schedule {
+width: 40%;
+}
+.selected-schedule{
+width: 40%;
+}
+
+#schedule-table {
+width: 80%;
+padding-top: 20px;
+}
+
+.page-content {
+margin-left: 200px;
+margin-right: 40px;
+opacity: 0; /* Start hidden */
+    transform: translateY(20px); /* Start slightly lower */
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+
+.page-content.active {
+    opacity: 1; /* Fade in */
+    transform: translateY(0); /* Move to original position */
+}
+
+/* Optional: Slide in effect on page load */
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Apply the animation on load */
+.page-content.loaded {
+    animation: slideIn 0.5s ease forwards; /* Slide in effect */
+}
+
+
+.calendar-container {
+margin-left: 20px;
+}
+
+.selected-schedule {
+margin-left: 20px;
+}
+
+
+.menu-toggle {
+display: none;
+}
+
+.add-button,
+.remove-button,
+.delete-button {
+width: 24px;
+height: 24px;
+border-radius: 50%;
+font-size: 16px;
+display: inline-flex;
+justify-content: center;
+align-items: center;
+cursor: pointer;
+margin-right: 10px;
+transition: background-color 0.3s ease;
+border: none;
+outline: none;
+}
+
+.add-button {
+background-color: green;
+color: white;
+}
+
+.add-button:hover {
+background-color: #45a049;
+}
+
+.remove-button:hover {
+background-color: #ff4848;
+}
+
+.remove-button {
+background-color: red;
+color: white;
+}
+
+.delete-button {
+background-color: red;
+color: white;
+}
+.logo {
+width: 70px;
+height: 70px;
+margin-right: 150px;
+margin-top: 10px;
+margin-left: 30px;
+}
+}
+
+
+/* Styles for smaller screens (mobile view) */
+@media (max-width: 768px) {
+
+
+    .topnav {
+width: 100%;
+display: flex;
+flex-direction: row;
+justify-content: space-between;
+align-items: center;
+background-color:  rgb(23, 23, 23);
+padding: 10px 20px;
+position: fixed;
+top: 0;
+left: 0;
+right: 0;
+z-index: 1000;
+height: 80px;
+}
+
+    .topnav img.logo {
+        display: block;
+        height: 40px;
+        margin: 0;
+    }
+
+
+    .topnav #rest {
+        display:flex;
+         margin-left: 0;
+    }
+
+    .topnav #rest ul {
+        display:  flex;
+        margin: 0;
+        padding: 0;
+    }
+    .topnav #rest ul a {
+        text-decoration: none;
+        color: white;
+        padding: 5px 10px;
+        display: block;
+        font-size: 16px;
+        margin: 0;
+        font-weight: bold;
+
+    }
+    .topnav::after {
+        content: "";
+        display: table;
+        clear: both;
+        }
+
+.vertical-nav {
+    width: 200px;
+    height: calc(100% - 80px);
+    background-color:  rgb(23, 23, 23);
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 80px;
+    right: 0;
+    bottom: 0;
+    transform: translateX(200%);
+    transition: transform 0.3s ease;
+    z-index: 1000;
+}
+
+
+.vertical-nav.active {
+            width: 180px;
+            transform: translate(200px);
+        }
+
+
+
+
+ .menu-toggle {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            z-index: 1001;
+            display: block;
+            font-size: 24px;
+            padding: 5px;
+            cursor: pointer;
+            color: white;
+            background-color: black;
+        }
+
+        .calendar-container {
+        display: block;
+        padding: 20px;
+        padding-top: 60px;
+        box-sizing: border-box;
+        }
+
+
+
+.calendar-container.menu-active {
+    margin-right: 200px;
+}
+
+.selected-schedule.menu-active {
+    margin-right: 200px;
+}
+
+.time-select {
+    font-size: 12px;
+    padding: 7px;
+    border: 1px solid #ddd;
+    margin-top: 10px;
+}
+
+.time-select label, .time-select select {
+    font-size: 12px;
+}
+
+/* Adjust days with checkboxes to the right */
+.days {
+    margin-left: auto;
+    margin-right: 20px;
+}
+h1 {
+    margin-right: .5rem;
+}
+h3 {
+    margin-top: -50px;
+    margin-bottom: 20px;
+}
+.add-button,
+.remove-button, .delete-button {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    font-size: 16px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+.add-button {
+    background-color: green;
+    color: white;
+}
+
+.remove-button {
+    background-color: red;
+    color: white;
+}
+.delete-button {
+    background-color: red;
+    color: white;
+}
+
+.schedule {
+    width: 100%;
+}
+}
+
+/* Slide down animation for the top navigation */
+@keyframes slideDown {
+    from {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}

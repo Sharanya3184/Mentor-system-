@@ -1,0 +1,275 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+    <link rel="shortcut icon" href="/static/images/favicon.ico" type="image/x-icon">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link href='https://fonts.googleapis.com/css?family=Kalam' rel='stylesheet'>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"></script>
+   <title>My Bookings</title>
+  <link rel="stylesheet" type="text/css" href="{% static 'styles/registration.css'%}">
+<!--  <link rel="stylesheet" type="text/css" href="{% static 'styles/home.css'%}">-->
+
+  <style>
+
+body {
+    background: rgba(0, 0, 0, 0.08);
+}
+:root {
+    --main-bg-color: rgba(0, 0, 0, 0.7);
+    --text-color: #ffffff;
+    --highlight-color: #FFD700;
+    --border-color: #000;
+    }
+
+.topnav {
+    z-index: 10;
+    overflow: hidden;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: var(--main-bg-color);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 80px;
+    }
+
+h1 {
+    margin-bottom: .5rem;
+    font-family: inherit;
+    font-weight: 500;
+    line-height: 1.2;
+    color: var(--text-color);;
+}
+
+#rest {
+    display: flex;
+    justify-content: flex-end;
+    }
+
+#rest ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    }
+
+#rest ul a {
+    display: block;
+    color: var(--text-color);
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+    font-weight: bold;
+    margin-left: 20px;
+    transition: background-color 0.3s ease;
+    }
+
+#rest ul a:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    }
+
+
+
+.booking-container {
+      border: 1px solid #ddd;
+      padding: 10px;
+      border-radius: 5px;
+      background-color: var(--main-bg-color);
+      max-width: 400px;
+      margin: auto;
+      color:white;
+    }
+
+.booking-title {
+      font-size: 18px;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+.booking-detail {
+      font-size: 14px;
+      margin-bottom: 3px;
+    }
+
+div#myTabContent.tab-content{
+    padding-top:30px;
+    }
+
+
+.nav-tabs {
+  background-color: var(--main-bg-color);
+  display: flex;
+  justify-content: space-between;
+  padding: 0 20px;
+}
+
+.nav-tabs .nav-link {
+  color: #ffffff;
+  padding: 10px 15px;
+}
+
+
+.nav-tabs ul {
+  display: flex;
+  align-items: center;
+}
+
+.container{
+  max-width: 700px;
+  width: 100%;
+  height: 100%;
+  background-color: #fff;
+  padding: 25px 30px;
+  border-radius: 5px;
+  box-shadow: 0 0 40px rgba(8,7,16,0.6);
+  margin-top: 10%;
+  margin-bottom: 5%;
+
+}
+
+
+/* Styles for mobile view (max-width: 768px) */
+@media (max-width: 768px) {
+    /* Hide the title in mobile view */
+    #myTopnav #name {
+        display: none;
+    }
+
+    .container{
+  max-width: 700px;
+  width: 100%;
+  height: 100%;
+  background-color: #fff;
+  padding: 25px 30px;
+  border-radius: 5px;
+  box-shadow: 0 0 40px rgba(8,7,16,0.6);
+  margin-top: 35%;
+  margin-bottom: 5%;
+
+}
+
+    /* Make navigation links display in a single line */
+    #myTopnav ul {
+        display: flex;
+        justify-content: space-around; /* Distribute space evenly */
+        padding: 0;
+        margin: 0;
+    }
+
+    #myTopnav ul#rest {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        width: 100%; /* Ensure the navigation takes up full width */
+    }
+
+    #myTopnav ul#rest li {
+        list-style: none;
+    }
+
+    #myTopnav ul#rest a {
+        display: block;
+        padding: 30px;
+        color: #ffffff; /* Adjust text color if needed */
+        text-decoration: none; /* Remove underline from links */
+    }
+
+    /* Adjust font size for mobile view */
+    #myTopnav ul#rest a {
+        font-size: 14px; /* Adjust font size as needed */
+    }
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="topnav" id="myTopnav">
+    <ul>
+      <div id="name">
+        <h1>Peer Mentor Connect</h1>
+      </div>
+    </ul>
+    <ul id="rest">
+      {% if user.is_authenticated %}
+      <ul><a href="{% url 'home' %}" class="active">Home</a></ul>
+      <ul><a href="{% url 'searchmymentor' %}">Search</a></ul>
+      <ul><a href="{% url 'logout' %}">Logout</a></ul>
+      {% endif %}
+    </ul>
+
+  </div>
+
+  <!--<div class="dashboard1">
+    <h3>MY BOOKINGS</h3>
+
+  </div>-->
+
+  <div class="cssanimation sequence fadeInBottom">
+
+      <div class="container">
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item">
+          <a class="nav-link active" id="bookings-tab" data-toggle="tab" href="#bookings" role="tab" aria-controls="bookings" aria-selected="true">My Bookings</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="completed-tab" data-toggle="tab" href="#completed" role="tab" aria-controls="completed" aria-selected="false">Completed</a>
+        </li>
+      </ul>
+        <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade show active" id="bookings" role="tabpanel" aria-labelledby="bookings-tab">
+                    {% if upcoming_bookings %}
+                    {% for transaction in upcoming_bookings %}
+                    <div class="booking-container">
+                        <div class="booking-title">{{ transaction.service_title }}</div>
+                        <div class="booking-detail">Duration: {{ transaction.service_duration }} mins</div>
+                        <div class="booking-detail">Day: {{ transaction.selected_day }}</div>
+                        <div class="booking-detail">Time: {{ transaction.selected_time }}</div>
+                        <div class="booking-detail">Mentor: {{ transaction.driver_username }}</div>
+                        <div class="booking-detail">Date: {{ transaction.selected_date }}</div>
+                    </div>
+                    {% endfor %}
+                    {% else %}
+                    <p><center>No upcoming bookings!</center></p>
+                    {% endif %}
+                </div>
+                <div class="tab-pane fade" id="completed" role="tabpanel" aria-labelledby="completed-tab">
+                    {% if completed_bookings %}
+                    {% for transaction in completed_bookings %}
+                    <div class="booking-container">
+                        <div class="booking-title">{{ transaction.service_title }}</div>
+                        <div class="booking-detail">Duration: {{ transaction.service_duration }} mins</div>
+                        <div class="booking-detail">Day: {{ transaction.selected_day }}</div>
+                        <div class="booking-detail">Time: {{ transaction.selected_time }}</div>
+                        <div class="booking-detail">Mentor: {{ transaction.driver_username }}</div>
+                        <div class="booking-detail">Date: {{ transaction.selected_date }}</div>
+                    </div>
+                    {% endfor %}
+                    {% else %}
+                    <p><center>No completed bookings!</center></p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+
+</html>

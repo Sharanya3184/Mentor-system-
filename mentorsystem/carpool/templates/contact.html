@@ -1,0 +1,135 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Contact Us</title>
+   <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon">
+  <!-- <link rel="stylesheet" type="text/css" href="{% static 'styles/home.css' %}"> -->
+  <link rel="stylesheet" type="text/css" href="{% static 'styles/contact.css' %}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"></script>
+  <script src="{% static 'js/home.js' %}"></script>
+</head>
+
+<body>
+
+  <!-- Bootstrap Navbar -->
+   <nav class="navbar navbar-expand-lg navbar-dark" style="background-color:rgb(31, 31, 31);">
+
+    <a class="navbar-brand" href="#">
+ <a class="navbar-brand" href="/">
+      <img src="{% static 'images/guru tech logo.jpg' %}" alt="Guru Tech Logo" class="logo" style="height: 40px;">
+    </a>
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav"
+      aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav">
+          <a class="nav-link" href= "/" title="" class="text-base text-black       hover:px-5 hover:py-2.5  transition-all duration-200 hover:bg-[#fc8019] hover:text-black focus:text-black focus:bg-[#fc8019] font-semibold hover:text-white   rounded-full"> 
+          Home</a>
+        <li class="nav">
+          <a class="nav-link" href= "/register" title="" class="text-base text-black       hover:px-5 hover:py-2.5  transition-all duration-200 hover:bg-[#fc8019] hover:text-black focus:text-black focus:bg-[#fc8019] font-semibold hover:text-white   rounded-full"> 
+          Register</a>
+        </li>
+        <li class="nav">
+          <a class="nav-link" href= "/login" title="" class="text-base text-black       hover:px-5 hover:py-2.5  transition-all duration-200 hover:bg-[#fc8019] hover:text-black focus:text-black focus:bg-[#fc8019] font-semibold hover:text-white   rounded-full"> 
+          Login</a>
+        <li class="nav">
+          <a class="nav-link" href="/contact">Contact Us</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <div>
+    {% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+      <center>{{ message }}</center>
+    </div>
+    {% endfor %}
+    {% endif %}
+  </div>
+
+  <div class="cssanimation sequence fadeInBottom">
+    <div class="container3">
+      <div class="content1">
+        <div class="left-side">
+          <div class="address details">
+            <i class="fas fa-map-marker-alt"></i>
+            <div class="topic">Address</div>
+            <div class="text-one">Jaypee University Of Engineering and Technology AB ROAD, Raghogarh</div>
+            <div class="text-two">District-Guna(M.P), Pin-473226</div>
+          </div>
+          <div class="phone details">
+            <i class="fas fa-phone-alt"></i>
+            <div class="topic">Phone</div>
+            <div class="text-one">+91-7544-267051,</div>
+            <div class="text-two">267310, 267311</div>
+          </div>
+          <div class="email details">
+            <i class="fas fa-envelope"></i>
+            <div class="topic">Email</div>
+            <div class="text-one">contact@juet.ac.in</div>
+          </div>
+        </div>
+        <div class="right-side">
+          <form class="contactus" action="" method="post">
+            {% csrf_token %}
+            <div class="topic-text">
+              <h2>CONTACT US</h2>
+              <br>
+            </div>
+            <div class="input-box">
+              <input type="text" name="name" placeholder="Name">
+            </div>
+            <div class="input-box">
+              <input type="text" name="email" placeholder="Email">
+            </div>
+            <div class="input-box">
+              <input type="text" name="phone" placeholder="Phone">
+            </div>
+            <div class="input-box message-box">
+              <textarea name="msg" placeholder="Message"></textarea>
+            </div>
+            <button style="margin-top: 20px;">SUBMIT</button><br><br>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <div class="section1">
+      <h3>Contact us</h3>
+      <i class="fa fa-home"> Address No: XXXXXXX Street</i><br>
+      <i class="fa fa-phone"> Mobile: 1234567890</i><br>
+      <i class="fa fa-envelope"> Email: gurutechharkscorp@gmail.com</i><br>
+    </div>
+    <div class="section1">
+      <h3>Project Links</h3>
+      <a href="{% url 'home' %}">Home</a><br>
+      <a href="{% url 'contact' %}">Contact</a><br>
+      <a href="{% url 'login' %}">Login</a><br>
+      <a href="{% url 'register' %}">Register</a><br>
+    </div>
+  </div>
+
+</body>
+
+</html>

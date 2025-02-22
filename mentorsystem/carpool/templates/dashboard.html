@@ -1,0 +1,85 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard</title>
+    <link rel="shortcut icon" href="/static/images/favicon.ico" type="image/x-icon">
+    <!-- <link rel="stylesheet" href="{% static 'styles/registration.css' %}"> -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href='https://fonts.googleapis.com/css?family=Kalam' rel='stylesheet'>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/dashboard.css' %}">
+     <link rel="stylesheet" type="text/css" href="{% static 'styles/home.css' %}">
+    <script src="{% static 'js/home.js' %}"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+
+
+<div class="topnav" id="myTopnav">
+    <div id="name">
+        <a href="{% url 'home' %}">
+           <img src="{% static 'images/guru tech logo.jpg' %}" alt="Guru Tech Logo" class="logo">
+        </a>
+    </div>   
+    <div id="rest">
+        {% if user.is_authenticated %}
+        <ul><a href="{% url 'home' %}"  class="text-base text-black       hover:px-5 hover:py-2.5  transition-all duration-200 hover:bg-[#fc8019] hover:text-black focus:text-black focus:bg-[#fc8019] font-semibold hover:text-white   rounded-full">Home</a></ul>
+        <ul><a href="{% url 'dashboard' %}"  class="text-base text-black       hover:px-5 hover:py-2.5  transition-all duration-200 hover:bg-[#fc8019] hover:text-black focus:text-black focus:bg-[#fc8019] font-semibold hover:text-white   rounded-full">Become a Mentor</a></ul>
+        <ul><a href="{% url 'logout' %}"  class="text-base text-black       hover:px-5 hover:py-2.5  transition-all duration-200 hover:bg-[#fc8019] hover:text-black focus:text-black focus:bg-[#fc8019] font-semibold hover:text-white   rounded-full">Logout</a></ul>
+        {% endif %}
+    </div>
+    <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+</div>
+
+<div id="vertical-nav" class="vertical-nav">
+    <a href="{% url 'home' %}" id="home-link"  class="text-base text-black       hover:px-5 hover:py-2.5  transition-all duration-200 hover:bg-[#fc8019] hover:text-black focus:text-black focus:bg-[#fc8019] font-semibold hover:text-white   rounded-full">Home</a>
+    <a href="{% url 'dashboard' %}" id="'dashboard'-link"  class="text-base text-black       hover:px-5 hover:py-2.5  transition-all duration-200 hover:bg-[#fc8019] hover:text-black focus:text-black focus:bg-[#fc8019] font-semibold hover:text-white   rounded-full">'Become a Mentor'</a>
+    <a href="{% url 'logout' %}" id="logout-link"  class="text-base text-black       hover:px-5 hover:py-2.5  transition-all duration-200 hover:bg-[#fc8019] hover:text-black focus:text-black focus:bg-[#fc8019] font-semibold hover:text-white   rounded-full">Logout</a>
+</div>
+
+<div id="dash" class="dash">
+
+    <div class="dashboards">
+        <h3>DASHBOARD</h3>
+    </div>
+
+    <div class="dashboard">
+       <div class="circles"><a href="{% url 'bookings' %}">Start Service</a></div>
+    </div>
+
+
+    <div class="footer">
+        <div class="section1">
+            <h3>Contact us</h3>
+            <i class="fa fa-home">Address No: XXXXXXX Street</i><br>
+            <i class="fa fa-phone">Mobile: 1234567890</i><br>
+            <i class="fa fa-envelope">Email: abc@gmail.com</i><br>
+        </div>
+
+        <div class="section2">
+            <h3>Project Links</h3>
+            <a href="{% url 'home' %}">Home</a><br>
+            <a href="{% url 'contact' %}">Contact</a><br>
+            <a href="{% url 'searchmymentor' %}">Book</a><br>
+        </div>
+     </div>
+
+</div>
+
+<script>
+         function toggleMenu() {
+            const verticalNav = document.getElementById('vertical-nav');
+            const dash = document.querySelector('.dash');
+
+            // Toggle active classes
+            verticalNav.classList.toggle('active');
+            dash.classList.toggle('menu-active');
+        }
+</script>
+
+</body>
+
+</html>

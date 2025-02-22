@@ -1,0 +1,184 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href='https://fonts.googleapis.com/css?family=Kalam' rel='stylesheet'>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+    <title>My Account Details</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/registration.css'%}">
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/home.css'%}">
+
+    <style>
+        .container1 {
+            margin-top: 50px;
+        }
+
+        footer {
+
+            position: relative;
+            padding: 10px 10px 0px 10px;
+            bottom: 0;
+            width: 100%;
+            background: rgb(117, 174, 199);
+            padding: 30px;
+            text-decoration: none;
+            height: 250px;
+            color: #FFFFFF;
+
+        }
+
+        footer a{
+        border-bottom: 1px solid rgb(151, 140, 140);
+        padding-bottom: 5px;
+        text-decoration: none;
+        color: white;
+        padding-top: 3px;
+        }
+
+        footer a:hover{
+        color:#565665 ;
+        text-decoration: none;
+        }
+
+        button {
+            padding: 10px;
+            background-color: #50a0bb;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            vertical-align: middle;
+            width: 100%;
+
+        }
+
+        button:hover {
+            background-color: #31464d;
+        }
+
+        .cssanimation, .cssanimation span {
+      animation-duration: 0.8s;
+      animation-fill-mode: both;
+    }
+
+    .cssanimation span { display: inline-block }
+
+    .fadeInBottom { animation-name: fadeInBottom }
+    @keyframes fadeInBottom {
+      from {
+          opacity: 0;
+          transform: translateY(100%);
+      }
+      to { opacity: 1 }
+    }
+    </style>
+</head>
+
+<body>
+    <div class="topnav" id="myTopnav">
+        <ul>
+            <div id="name">
+                <h1>Car Pooling System</h1>
+            </div>
+        </ul>
+        <ul id="rest">
+            {% if user.is_authenticated %}
+            <ul><a href="{% url 'home' %}" class="active">Home</a></ul>
+            <ul><a href="{% url 'searchmycar' %}">Book Your Service</a></ul>
+            <ul><a href="{% url 'dashboard' %}">Dashboard</a></ul>
+
+            <ul><a href="{% url 'logout' %}">Logout</a></ul>
+            {% endif %}
+
+        </ul>
+
+    </div>
+
+    <div class="cssanimation sequence fadeInBottom">
+
+
+    <div class="container1">
+        <div class="title">
+            <h3>Details of User</h3>
+        </div>
+        <div class="content">
+            <form action="#" method="post">
+                {% if user.is_authenticated %}
+                <div class="user-details">
+                    <div class="input-box">
+                        <span class="details">Full Name</span>
+                        <input name="Name" value="{{cust.fname}}">
+                    </div>
+                    <div class="input-box">
+                        <span class="details">Username</span>
+                        <input name="Name" value="{{cust.usern}}">
+                    </div>
+                    <div class="input-box">
+                        <span class="details">Email</span>
+                        <input name="Name" value="{{cust.email}}">
+                    </div>
+                    <div class="input-box">
+                        <span class="details">Phone Number</span>
+                        <input name="Name" value="{{cust.mobile}}">
+                    </div>
+                    <div class="input-box" style="width: 100%;">
+                        <span class="details">Address</span>
+                        <input name="Name" value="{{cust.address}}">
+                    </div>
+                    <div class="input-box">
+                        <span class="details">City</span>
+                        <input name="Name" value="{{cust.city}}">
+                    </div>
+
+                    <div class="input-box">
+                        <span class="details">State</span>
+                        <input name="Name" value="{{cust.state}}">
+                    </div>
+                </div>
+
+            </form>
+            {% endif %}
+        </div>
+    </div>
+
+
+
+    </div>
+
+
+
+
+    <footer>
+        <div class="section1">
+            <h3>Contact us</h3>
+            <i class="fa fa-home">Address No: XXXXXXX Street</i></br>
+            <i class="fa fa-phone">Mobile: 1234567890</i></br>
+            <i class="fa fa-envelope">Email: gurutechharkscorp@gmail.com</i></br>
+        </div>
+        <div class="section1">
+            <h3>Project Links</h3>
+            <a href="{% url 'home' %}">Home</a></br>
+            <a href="{% url 'contact' %}">Contact</a></br>
+            <a href="{% url 'allcars' %}">Cars</a></br>
+            <a href="{% url 'searchmycar' %}">Book</a></br>
+        </div>
+
+    </footer>
+
+</body>
+
+
+</html>

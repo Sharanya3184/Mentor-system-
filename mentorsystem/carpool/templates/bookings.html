@@ -1,0 +1,352 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href='https://fonts.googleapis.com/css?family=Kalam' rel='stylesheet'>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9P/ScQsAP7Hfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+    <title>Bookings</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/page.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/calendar.css' %}">
+
+    <style>
+
+body {
+    background: rgba(0, 0, 0, 0.08);
+    font-family: 'Arial', sans-serif;
+}
+
+:root {
+    --main-bg-color: rgba(0, 0, 0, 0.7);
+    --text-color: #ffffff;
+    --highlight-color: #FFD700;
+    --border-color: #000;
+}
+
+.topnav {
+    z-index: 10;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: rgb(23, 23, 23);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 80px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+    animation: slideDown 0.5s ease; /* Slide down effect */
+}
+
+@keyframes slideDown {
+    from {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+#rest {
+    display: flex;
+    justify-content: flex-end;
+    padding-top: 40px;
+}
+
+#rest ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+#rest ul a {
+    display: block;
+    color: var(--text-color);
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+    font-weight: bold;
+    margin-left: 20px;
+    transition: background-color 0.3s ease, transform 0.2s ease, color 0.2s ease;
+}
+
+#rest ul a:hover,
+#rest ul a:focus {
+    background-color: #fc8019;
+    color: white;
+    transform: scale(1.05);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.vertical-nav {
+    width: 200px;
+    position: fixed;
+    top: 80px;
+    right: -200px;
+    height: calc(100% - 80px);
+    background-color: rgb(23, 23, 23);
+    padding-top: 20px;
+    transition: transform 0.3s ease;
+    z-index: 1000;
+}
+
+.vertical-nav a {
+    padding: 15px 25px;
+    text-align: left;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+    display: block;
+    transition: background-color 0.3s ease, padding 0.2s ease;
+    animation: fadeIn 0.3s ease; /* Fade in effect */
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.vertical-nav a:hover {
+    background-color: #0b0b0b;
+    color: orange;
+    padding-left: 30px; /* Add padding on hover */
+}
+
+.vertical-nav.active {
+    transform: translateX(0);
+    right: 0;
+}
+
+.booking-container {
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: var(--main-bg-color);
+    max-width: 400px;
+    margin: auto;
+    color: white;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.booking-title {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+.booking-detail {
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+.nav-tabs {
+    background-color: black;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    margin: 20px 0;
+}
+
+.nav-tabs .nav-link {
+    color: #ffffff;
+    padding: 10px 15px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    animation: fadeIn 0.5s ease; /* Fade in effect for nav links */
+}
+
+.nav-tabs .nav-link:hover {
+    background-color: #fc8019;
+    transform: translateY(-2px);
+}
+
+.container {
+    max-width: 700px;
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
+    padding: 25px 30px;
+    border-radius: 5px;
+    box-shadow: 0 0 40px rgba(8, 7, 16, 0.6);
+    margin-top: 3%;
+}
+
+@media (max-width: 375px) {
+    .topnav {
+        flex-direction: row;
+        padding: 10px 10px;
+    }
+
+    .topnav #rest {
+        padding-top: 0;
+    }
+
+    .topnav #rest ul {
+        display: flex;
+        padding: 0;
+    }
+
+    .topnav #rest ul a {
+        padding: 5px 10px;
+        font-size: 16px;
+    }
+
+    .vertical-nav {
+        width: 150px;
+        transform: translateX(200%);
+        width: 0;
+        position: fixed;
+        top: 80px;
+        right: -200px;
+        height: calc(100% - 80px);
+        background-color: var(--main-bg-color);
+        padding-top: 20px;
+        transition: transform 0.3s ease, width 0.3s ease;
+        z-index: 1000;
+        overflow: hidden;
+
+    }
+
+    .vertical-nav.active {
+        transform: translate(0);
+    }
+
+    .menu-toggle {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        z-index: 1001;
+        display: block;
+        font-size: 24px;
+        padding: 5px;
+        cursor: pointer;
+        color: white;
+        background-color: black;
+    }
+    .container {
+    max-width: 700px;
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
+    padding: 25px 30px;
+    border-radius: 5px;
+    box-shadow: 0 0 40px rgba(8, 7, 16, 0.6);
+    margin-top: 3%;
+}
+}
+
+
+    </style>
+</head>
+
+<body>
+<div class="topnav" id="myTopnav">
+    <div id="name">
+        <a href="{% url 'home' %}">
+           <img src="{% static 'images/guru tech logo.jpg' %}" alt="Guru Tech Logo" class="logo">
+        </a>
+    </div>
+    <div id="rest">
+        {% if user.is_authenticated %}
+        <ul><a href="{% url 'dashboard' %}"  class="text-base text-black       hover:px-5 hover:py-2.5  transition-all duration-200 hover:bg-[#fc8019] hover:text-black focus:text-black focus:bg-[#fc8019] font-semibold hover:text-white   rounded-full">Dashboard</a></ul>
+        <ul><a href="{% url 'logout' %}"  class="text-base text-black       hover:px-5 hover:py-2.5  transition-all duration-200 hover:bg-[#fc8019] hover:text-black focus:text-black focus:bg-[#fc8019] font-semibold hover:text-white   rounded-full">Logout</a></ul>
+        {% endif %}
+    </div>
+    <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+</div>
+<div class="vertical-nav">
+    <a href="{% url 'bookings' %}" id="bookings-link">Bookings</a>
+    <a href="{% url 'calendar' %}" id="calendar-link">Calendar</a>
+    <a href="{% url 'service' %}" id="service-link">Service</a>
+    <a href="{% url 'testimonial' %}" id="testimonial-link">Testimonial</a>
+</div>
+
+<div class="cssanimation sequence fadeInBottom" style="margin-left: 0; padding-top: 100px;">
+    <div class="container">
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" id="bookings-tab" data-toggle="tab" href="#bookings" role="tab"
+                   aria-controls="bookings" aria-selected="true">Bookings</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="completed-tab" data-toggle="tab" href="#completed" role="tab"
+                   aria-controls="completed" aria-selected="false">Completed</a>
+            </li>
+        </ul>
+        <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade show active" id="bookings" role="tabpanel" aria-labelledby="bookings-tab">
+                    {% if upcoming_bookings %}
+                    {% for transaction in upcoming_bookings %}
+                    <div class="booking-container">
+                        <div class="booking-title">{{ transaction.service_title }}</div>
+                        <div class="booking-detail">Duration: {{ transaction.service_duration }} mins</div>
+                        <div class="booking-detail">Day: {{ transaction.selected_day }}</div>
+                        <div class="booking-detail">Time: {{ transaction.selected_time }}</div>
+                        <div class="booking-detail">Student: {{ transaction.username }}</div>
+                        <div class="booking-detail">Date: {{ transaction.selected_date }}</div>
+                    </div>
+                    {% endfor %}
+                    {% else %}
+                    <p><center>No upcoming bookings!</center></p>
+                    {% endif %}
+                </div>
+                <div class="tab-pane fade" id="completed" role="tabpanel" aria-labelledby="completed-tab">
+                    {% if completed_bookings %}
+                    {% for transaction in completed_bookings %}
+                    <div class="booking-container">
+                        <div class="booking-title">{{ transaction.service_title }}</div>
+                        <div class="booking-detail">Duration: {{ transaction.service_duration }} mins</div>
+                        <div class="booking-detail">Day: {{ transaction.selected_day }}</div>
+                        <div class="booking-detail">Time: {{ transaction.selected_time }}</div>
+                        <div class="booking-detail">Student: {{ transaction.username }}</div>
+                        <div class="booking-detail">Date: {{ transaction.selected_date }}</div>
+                    </div>
+                    {% endfor %}
+                    {% else %}
+                    <p><center>No completed bookings!</center></p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+<script>
+    function toggleMenu() {
+        const verticalNav = document.querySelector('.vertical-nav');
+        const pageContent = document.querySelector('.cssanimation');
+
+        verticalNav.classList.toggle('active');
+        pageContent.classList.toggle('menu-active');
+    }
+</script>
+</body>
+
+</html>

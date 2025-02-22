@@ -1,0 +1,170 @@
+body {
+  align-content: center;
+  background-color: #f2f1f8;
+}
+
+.topnav {
+  background-color: #000; /* Changed to black */
+  overflow: hidden;
+  width: 100%;
+  height: 5em;
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+  position: relative;
+}
+
+.topnav a {
+  float: right;
+  display: block;
+  color: #fffcfc;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+  font-family: 'Poppins', sans-serif;
+}
+
+.topnav a:hover {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.topnav .icon {
+  display: none;
+}
+
+.logo {
+  width: 70px;
+  height: 70px;
+  margin-right: 150px;
+  border-radius: 50%;
+  margin-top: -9px;
+}
+
+form {
+  height: 500px;
+  width: 600px;
+  background-color: #fff;
+  border-radius: 5px;
+  backdrop-filter: blur(10px);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 0 40px rgba(8, 7, 16, 0.6);
+  margin: 6% auto 5%; /* Center form and set margins */
+  padding: 25px 30px;
+}
+
+form * {
+  font-family: 'Poppins', sans-serif;
+  color: #0a0a0a;
+  letter-spacing: 0.5px;
+  outline: none;
+  border: none;
+}
+
+form h3 {
+  font-size: 32px;
+  font-weight: 800;
+  line-height: 50px;
+  text-align: center;
+  color: #050505;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+#password {
+  border: 1px solid black; /* Password field styling */
+}
+
+label {
+  display: block;
+  margin-top: 30px;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+input {
+  display: block;
+  height: 50px;
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.07);
+  border-radius: 3px;
+  padding: 0 10px;
+  margin-top: 8px;
+  font-size: 14px;
+  font-weight: 300;
+  border: 1px solid black;
+}
+
+::placeholder {
+  color: #111010; /* Placeholder color */
+}
+
+.social {
+  margin-top: 30px;
+  display: flex;
+}
+
+.social div {
+  width: 150px;
+  border-radius: 3px;
+  padding: 5px 10px 10px 5px;
+  background-color: rgba(255, 255, 255, 0.27);
+  color: #0c0c0c;
+  text-align: center;
+}
+
+.social div:hover {
+  background-color: rgba(14, 13, 13, 0.47);
+}
+
+.login-button {
+  width: 100%;
+  background-color: rgb(0 0 0 / 70%);
+  color: white;
+  padding: 10px 0;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s; /* Transition for smooth hover effect */
+}
+
+.login-button:hover {
+  background-color: #fc8019; /* Change background color on hover */
+  transform: translateY(-2px); /* Slight lift effect */
+}
+
+#link {
+  text-decoration: underline; /* Underline link */
+  color: #007bff; /* Default link color */
+  transition: color 0.3s; /* Transition for smooth hover effect */
+}
+
+#link:hover {
+  color: #fc8019; /* Change link color on hover */
+}
+
+/* Animation styles */
+.cssanimation,
+.cssanimation span {
+  animation-duration: 0.8s;
+  animation-fill-mode: both;
+}
+
+.cssanimation span {
+  display: inline-block;
+}
+
+.fadeInBottom {
+  animation-name: fadeInBottom;
+}
+
+@keyframes fadeInBottom {
+  from {
+      opacity: 0;
+      transform: translateY(100%);
+  }
+  to {
+      opacity: 1; /* Fully visible */
+  }
+}

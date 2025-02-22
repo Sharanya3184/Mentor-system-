@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+     <link rel="shortcut icon" href="/static/images/favicon.ico" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+    <title>Service Details</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    <style>
+
+        :root {
+    --main-bg-color: rgba(0, 0, 0, 0.7);
+    --text-color: #ffffff;
+    --highlight-color: #FFD700;
+    --border-color: #000;
+    }
+
+    body {
+        margin: 0;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+        font-size: 1rem;
+        font-weight: 400;
+        line-height: 1.5;
+        text-align: left;
+        background-color: rgba(0, 0, 0, 0.08);
+    }
+
+
+        .topnav {
+            width: 100%;
+            background-color:rgb(26, 26, 26);
+            padding: 10px;
+            box-sizing: border-box;
+            position:relative;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .topnav #name h1 {
+            margin: 0;
+            color: white;
+        }
+
+        .topnav #rest {
+            display: flex;
+        }
+
+        .topnav #rest ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        .topnav #rest ul li {
+            margin-left: 20px;
+        }
+
+        .topnav #rest ul a {
+            
+            display: inline-block;
+            text-decoration: none;
+            color: rgb(255, 254, 254); /* Default text color */
+            padding: 10px 20px; /* Adjust padding as needed */
+            transition: all 0.3s ease; /* Smooth transition */
+
+
+        }
+
+        .topnav #rest ul a:hover {
+            background-color: #fc8019; /* Background color on hover */
+            color: white; /* Text color on hover */
+            padding: 12px 22px; 
+            border-radius: 25px; 
+        }
+
+        .topnav #rest ul a:focus{
+            outline: none; /* Remove default focus outline */
+            box-shadow: 0 0 5px #fc8019; /* Optional: add a glow effect on focus */
+
+        }
+        /* Hamburger menu styles for mobile view */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            align-items: center;
+        }
+
+
+
+        .hamburger div {
+            width: 25px;
+            height: 3px;
+            background-color: white;
+            margin: 4px 0;
+        }
+        .vertical-popup {
+            display: none;
+            position:fixed;
+            top: 60px;
+            height: 700px;
+            padding-top: 40px;
+            right: 0;
+            width: 200px;
+            background-color: var(--main-bg-color);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+        }
+        .vertical-popup.active{
+            margin-top: 26.5px;
+        }
+
+        .vertical-popup a {
+            padding: 15px 25px;
+            text-align: left;
+            text-decoration: none;
+            font-size: 18px;
+            color: white;
+            display: block;
+            transition: 0.3s;
+            font-weight: bold;
+        }
+
+        .vertical-popup a:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            color:#ffffff;
+        }
+        @media (max-width: 600px) {
+            .topnav #rest {
+                display: none;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .vertical-popup {
+                display: none;
+            }
+
+            .vertical-popup.active {
+                padding: 15px 20px;
+        text-align: left;
+        text-decoration: none;
+        font-size: 18px;
+        font-weight: bold;
+        color: white;
+        display: block;
+        transition: background-color 0.3s ease;
+            }
+        }
+        .main-content {
+            display: flex;
+            margin-top: 60px; /* Adjust according to topnav height */
+            height: calc(100vh - 60px); /* Adjust according to topnav height */
+        }
+
+        .content {
+            padding: 20px;
+            margin-top: 60px; /* Space for fixed top nav */
+            transition: all 0.3s ease;
+        }
+
+        .service-detail:hover  {
+            background-color: orange; /* Change to highlight color on hover */
+        }
+        .service-detail {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .service-title {
+            font-size: 24px;
+            margin-bottom: 10px;
+            font-weight:500;
+            text-transform:uppercase;
+        }
+
+        .service-details,
+        .service-amount {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+        .calendar-container {
+            max-width: 800px;
+            margin: 20px auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .calendar-header {
+            font-size: 20px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .calendar-header-text {
+            text-align: center;
+            font-weight: bold;
+            color:black;
+            margin-bottom: 10px; /* Space below the text */
+            font-size: 20px;
+        }
+
+        .arrow {
+            cursor: pointer;
+            user-select: none;
+            padding: 5px;
+            background-color:#02a1d6;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.3s ease, transform 0.3s ease; /* Add transform transition */
+        }
+        .arrow:hover {
+            background-color: orange;
+        }
+
+        .prev {
+            margin-right: 10px; /* Adjust spacing as needed */
+        }
+
+        .next {
+            margin-left: 10px; /* Adjust spacing as needed */
+            transform: scale(1.1);
+            transition: transform 0.3s ease;
+        }
+
+        .next:hover {
+            transform: scale(1.1); /* Scale up on hover */
+        }
+
+        .days-container {
+            display: flex;
+            white-space: nowrap;
+            overflow: hidden;
+            position: relative;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            padding: 10px;
+            margin-bottom: 10px;
+            align-items: center;
+        }
+
+        .day {
+            display: inline-block;
+            padding: 10px;
+            margin: 5px;
+            background-color: #696767; /* Default background */
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s ease; /* Updated transition */
+            color: white;
+        }
+
+        .day:hover {
+           padding: 2.5px 5px; /* Adjust padding on hover */
+           background-color: #fc8019; /* Background color on hover */
+           color: white; /* Text color on hover */
+        }
+
+        .day.selected {
+            background-color: var(--main-bg-color);
+            color: white;
+        }
+
+        .times-container {
+            display: flex;
+            flex-wrap: wrap;
+            margin-top: 10px;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .time {
+            padding: 10px;
+            margin: 5px;
+            background-color: #e0e0e0;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .time.selected {
+            background-color: #50a0bb;
+            color: white;
+        }
+
+
+        div.selected{
+        background-color: #696767;
+            color: white;
+        }
+
+        .selected:hover {
+         background-color: #fc8019; /* Change to highlight color on hover */
+         color: white; /* Ensure text color remains white */
+       }
+
+
+        .confirm-button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: var(--main-bg-color);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .confirm-button:hover {
+            background-color: orange; /* Light background on hover */
+            transition: background-color 0.3s ease; /* Smooth transition */
+        }
+
+        .payment-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        
+        .custom-razorpay-button {
+            background-color: #09333f !important; /* Add your custom color */
+            border: none;
+            color: white !important;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .custom-razorpay-button:hover {
+            background-color:orange !important;
+        }
+
+        .invisible-display {
+            display: none;
+
+        }
+
+
+   </style>
+
+</head>
+<body>
+    <div class="topnav">
+        <ul>
+            <div id="name">
+           <a class="navbar-brand" href="/">
+          <img src="/static/images/guru%20tech%20logo.jpg" alt="Guru Tech Logo" class="logo" style="height: 40px;">
+    </a>
+            </div>
+        </ul>
+    
+        <div id="rest">
+            <ul>
+                <li><a href="/" class="explore-link"  class="text-base text-black       hover:px-5 hover:py-2.5  transition-all duration-200 hover:bg-[#fc8019] hover:text-black focus:text-black focus:bg-[#fc8019] font-semibold hover:text-white   rounded-full">Home</a></li>
+                <li><a href="/searchmymentor" class="explore-link"  class="text-base text-black       hover:px-5 hover:py-2.5  transition-all duration-200 hover:bg-[#fc8019] hover:text-black focus:text-black focus:bg-[#fc8019] font-semibold hover:text-white   rounded-full">Mentor</a></li>
+                <li><a href="/logout" class="explore-link"  class="text-base text-black       hover:px-5 hover:py-2.5  transition-all duration-200 hover:bg-[#fc8019] hover:text-black focus:text-black focus:bg-[#fc8019] font-semibold hover:text-white   rounded-full">logout</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="vertical-popup" id="vertical-popup">
+        <a href="/" class="explore-link"  class="text-base text-black       hover:px-5 hover:py-2.5  transition-all duration-200 hover:bg-[#fc8019] hover:text-black focus:text-black focus:bg-[#fc8019] font-semibold hover:text-white   rounded-full">Home</a>
+        <a href="/searchmymentor" class="explore-link"  class="text-base text-black       hover:px-5 hover:py-2.5  transition-all duration-200 hover:bg-[#fc8019] hover:text-black focus:text-black focus:bg-[#fc8019] font-semibold hover:text-white   rounded-full">Mentor</a>
+        <a href="/logout" class="explore-link"  class="text-base text-black       hover:px-5 hover:py-2.5  transition-all duration-200 hover:bg-[#fc8019] hover:text-black focus:text-black focus:bg-[#fc8019] font-semibold hover:text-white   rounded-full">logout</a>
+    </div>
+
+    <div class="content">
+        <div class="service-detail" class="text-base text-black       hover:px-5 hover:py-2.5  transition-all duration-200 hover:bg-[#fc8019] hover:text-black focus:text-black focus:bg-[#fc8019] font-semibold hover:text-white   rounded-full">
+            <div class="absolute inset-x-0 top-0 flex h-72 items-end justify-end overflow-hidden rounded-lg p-4">
+                <div aria-hidden="true" class="absolute inset-x-0 bottom-0 h-36 bg-gradient-to-t from-black opacity-70 hover:opacity-40 transition-opacity duration-300"></div>
+            <div class="service-title">{{ service.title }}</div>
+            <div class="service-details">Duration: {{ service.duration }} mins</div>
+            <div class="service-amount">Amount: ₹{{ service.amount }}</div>
+            <div class="service-description">{{ service.description }}</div>
+        </div>
+    </div>
+
+    <div class="calendar-container">
+        <div class="calendar-header-text">When should we meet?</div>
+        <div class="calendar-header">
+            <div class="arrow prev">&lt;</div>
+            <div class="days-container">
+                {% for fmt_date, date_values in calendar_data.items %}
+                <div class="day" data-day="{{ date_values.day }}" data-formatted-date="{{ date_values.pretty_date }}" data-times="{{ date_values.from_times }}" class="day text-base text-black hover:px-5 hover:py-2.5 transition-all duration-200 hover:bg-[#fc8019] hover:text-black focus:text-black focus:bg-[#fc8019] font-semibold rounded-full">
+                    <div class="day-name" align="center">{{ date_values.day }}</div>
+                    <div class="formatted_date" align="center">{{ date_values.pretty_date }}</div>
+                </div>
+                {% endfor %}
+            </div>
+            <div class="arrow next">&gt;</div>
+        </div>
+        <div class="times-container" id="times-container">
+            <!-- Times will be dynamically populated based on the selected day -->
+            <input type="hidden" id="selected_day" name="selected_day" value="" class="day text-base text-black hover:px-5 hover:py-2.5 transition-all duration-200 hover:bg-[#fc8019] hover:text-black focus:text-black focus:bg-[#fc8019] font-semibold rounded-full">
+            <input type="hidden" id="selected_time" name="selected_time" value=""class="day text-base text-black hover:px-5 hover:py-2.5 transition-all duration-200 hover:bg-[#fc8019] hover:text-black focus:text-black focus:bg-[#fc8019] font-semibold rounded-full">
+            <input type="hidden" id="selected_date" name="selected_date" value="" class="day text-base text-black hover:px-5 hover:py-2.5 transition-all duration-200 hover:bg-[#fc8019] hover:text-black focus:text-black focus:bg-[#fc8019] font-semibold rounded-full">
+        </div>
+
+        <div class="invisible-display" id="payment-container" >
+            <!-- Add these hidden fields in your form to capture selected day, time, service title, duration, and amount -->
+            <form id="paymentForm" method="POST" action="{% url 'payment' service.pk %}">
+                {% csrf_token %}
+                <input type="hidden" id="service_title" name="service_title" value="{{ service.title }}">
+                <input type="hidden" id="service_duration" name="service_duration" value="{{ service.duration }}">
+                <input type="hidden" id="service_amount" name="service_amount" value="{{ service.amount }}">
+                <input type="hidden" id="username" name="username" value="{{ user.username }}">
+                <input type="hidden" id="driver_username" name="driver_username" value="{{ driver_username }}">
+                <input type="hidden" id="selected_day" name="selected_day">
+                <input type="hidden" id="selected_time" name="selected_time">
+                <input type="hidden" id="selected_date" name="selected_date">
+                <script src="https://checkout.razorpay.com/v1/checkout.js"
+                    data-key="rzp_test_tsuNnuJYVpl9O8"
+                    data-amount="{{ amount_in_paise }}"
+                    data-currency="INR"
+                    data-order_id="{{ payment.id }}"
+                    data-buttontext="Confirm"
+                    data-name="Make payment"
+                    data-description="{{ service.title }}"
+                    data-prefill.name="{{ request.user.first_name }} {{ request.user.last_name }}"
+                    data-prefill.email="{{ request.user.email }}"
+                    data-theme.color="#F37254">
+                </script>
+                <input type="hidden" custom="Hidden Element" name="hidden">
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const daysContainer = document.querySelector('.days-container');
+            const days = document.querySelectorAll('.day');
+            const timesContainer = document.getElementById('times-container');
+            const prevArrow = document.querySelector('.arrow.prev');
+            const nextArrow = document.querySelector('.arrow.next');
+            const confirmButton = document.getElementById('payment-container');
+
+            let scrollPosition = 0;
+            const dayWidth = days[0].offsetWidth + parseInt(window.getComputedStyle(days[0]).marginLeft) * 2;
+            const visibleDays = 4; // Number of days initially visible
+
+            prevArrow.addEventListener('click', () => {
+                if (scrollPosition > 0) {
+                    scrollPosition -= dayWidth;
+                    daysContainer.scrollTo({
+                        left: scrollPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+
+            nextArrow.addEventListener('click', () => {
+                if (scrollPosition < daysContainer.scrollWidth - daysContainer.clientWidth) {
+                    scrollPosition += dayWidth;
+                    daysContainer.scrollTo({
+                        left: scrollPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+
+            // Initially show first visibleDays days
+            days.forEach((day, index) => {
+                if (index < visibleDays) {
+                    day.style.display = 'inline-block';
+                } else {
+                    day.style.display = 'none';
+                }
+            });
+
+            // Update visibility of days when clicking arrows
+            let currentFirstVisibleDay = 0;
+            prevArrow.addEventListener('click', () => {
+                if (currentFirstVisibleDay > 0) {
+                    currentFirstVisibleDay--;
+                    updateDaysVisibility();
+                }
+            });
+
+            nextArrow.addEventListener('click', () => {
+                if (currentFirstVisibleDay < days.length - visibleDays) {
+                    currentFirstVisibleDay++;
+                    updateDaysVisibility();
+                }
+            });
+
+            function updateDaysVisibility() {
+                days.forEach((day, index) => {
+                    if (index >= currentFirstVisibleDay && index < currentFirstVisibleDay + visibleDays) {
+                        day.style.display = 'inline-block';
+                    } else {
+                        day.style.display = 'none';
+                    }
+                });
+            }
+
+            days.forEach(day => {
+                day.addEventListener('click', () => {
+                    confirmButton.classList.remove('payment-container');
+                    confirmButton.classList.add('invisible-display');
+
+                    days.forEach(d => d.classList.remove('selected'));
+                    day.classList.add('selected');
+
+                    // Fetch times for the selected day and update times container
+                    const timesData = day.dataset.times.split("|");
+                    const dayName = day.querySelector('.day-name').textContent;
+                    const selectedDate = day.dataset.formattedDate;
+                    console.log('Selected Date:', selectedDate);
+
+
+                    timesContainer.innerHTML = '';
+                    timesData.forEach(time => {
+                        const timeDiv = document.createElement('div');
+                        timeDiv.textContent = time;
+                        timeDiv.addEventListener('click', () => {
+                            timesContainer.querySelectorAll('.time').forEach(t => t.classList.remove('selected'));
+                            timeDiv.classList.add('selected');
+                            document.getElementById('selected_time').value = time;  // Set the selected time
+                            confirmButton.classList.remove('invisible-display');
+                            confirmButton.classList.add('payment-container');
+                        });
+                        timesContainer.appendChild(timeDiv);
+                    });
+
+                    document.getElementById('selected_day').value = dayName;  // Set the selected day
+                    document.getElementById('selected_date').value = selectedDate;  // Set the selected date
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>

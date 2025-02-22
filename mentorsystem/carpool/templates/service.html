@@ -1,0 +1,813 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+     <link rel="shortcut icon" href="/static/images/favicon.ico" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href='https://fonts.googleapis.com/css?family=Kalam' rel='stylesheet'>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/calendar.css' %}">
+    <title>Services</title>
+
+
+    <style>
+
+
+       body {
+            background: rgba(0, 0, 0, 0.08);
+        }
+        :root {
+            --main-bg-color: rgba(0, 0, 0, 0.7);
+            --text-color: #ffffff;
+            --highlight-color: #FFD700;
+            --border-color: #000;
+            }
+
+            @keyframes fadeInBottom {
+    0% {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+
+        .add-button {
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%; /* Make it round */
+    background-color: #50a0bb;
+    color: white;
+    font-size: 20px;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    margin-left: 50px;
+}
+
+.add-button:hover {
+    background-color: #31464d;
+}
+
+.plus-sign {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 14px;
+}
+
+
+        .remove-button {
+            display: inline-block;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            /* Make it round */
+            background-color: red;
+            color: white;
+            font-size: 20px;
+            border: none;
+            cursor: pointer;
+            position: relative;
+            margin-left: 50px;
+
+        }
+
+        .remove-button:hover {
+            background-color: darkred;
+        }
+
+        .minus-sign {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 14px;
+        }
+        .save-button-container {
+    margin-bottom: 20px;
+    margin-left: 300px;
+}
+
+.save-button {
+    background-color: #50a0bb;
+    border-color: #50a0bb;
+    padding: 10px 15px;
+    font-size: 15px;
+    width: auto;
+
+}
+
+
+
+
+.form-container {
+    width: 50%;
+    margin-bottom: 20px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeIn 0.5s forwards;
+}
+
+.details-container {
+    width: 45%;
+    max-height: 385px;
+    overflow-y: auto;
+    padding: 20px;
+    background-color: #ffffff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeIn 0.5s forwards;
+}
+
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.service-box {
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.service-box:hover {
+    transform: scale(1.03);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Form Input Styles */
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.form-control {
+    width: calc(100% - 20px);
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.btn {
+    width: 100%;
+    padding: 10px;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+    font-weight: bold;
+    transition: background-color 0.3s, transform 0.2s;
+
+}
+
+.btn:hover {
+    background-color: #414141; /* Slightly darker on hover */
+    transform: translateY(-2px);
+}
+
+/* Details Styles */
+.details-container h2 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.service-box {
+    padding: 20px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #ccc;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+}
+
+.service-title {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.service-details,
+.service-amount {
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+.btn-delete {
+    color: rgb(240, 23, 23);
+    cursor: pointer;
+    background: none;
+    border: none;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.btn-delete:hover {
+    color: darkred;
+}
+
+#message-container {
+    margin-top: 20px;
+    padding: 5px;
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+    border-radius: 5px;
+    text-align: center;
+}
+.popup-container {
+    display: none;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 9999;
+    overflow: auto;
+}
+
+.popup-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 300px;
+    text-align: center;
+    position: relative;
+    border-radius: 8px;
+}
+
+.close-popup {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    font-size: 20px;
+    color: #aaa;
+}
+
+.popup-buttons {
+    margin-top: 20px;
+}
+
+.btn-confirm, .btn-cancel {
+    padding: 10px 20px;
+    cursor: pointer;
+    border: none;
+    border-radius: 4px;
+    font-size: 14px;
+    margin-right: 10px;
+}
+
+.btn-confirm {
+    background-color: #a91b29;
+    color: white;
+}
+
+.btn-cancel {
+    background-color: #4a4949;
+    color: white;
+}
+
+
+
+.topnav {
+            z-index: 10;
+            overflow: hidden;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: rgb(23, 23, 23);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 80px;
+            }
+
+
+    #rest {
+        display: flex;
+        justify-content: flex-end;
+        padding-top: 40px;
+    }
+    
+    #rest ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+    }
+    
+    #rest ul a {
+        display: block;
+        color: var(--text-color);
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+        font-size: 17px;
+        font-weight: bold;
+        margin-left: 20px;
+        transition: background-color 0.3s ease, transform 0.2s ease, color 0.2s ease;
+    }
+    
+    #rest ul a:hover,
+    #rest ul a:focus {
+        background-color: #fc8019;
+        color: white;
+        transform: scale(1.05);
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    }
+    
+.vertical-nav {
+        width: 175px;
+        height: calc(100% - 80px);
+        background-color: rgb(23, 23, 23);
+        padding-top: 20px;
+        display: flex;
+        top: 80px;
+        flex-direction: column;
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        transform: transform 0.3s ease;
+        z-index: 1000;
+    }
+    .vertical-nav a {
+        padding: 15px 25px;
+        text-align: left;
+        text-decoration: none;
+        font-size: 18px;
+        font-weight: bold;
+        color: white;
+        display: block;
+        transition: background-color 0.3s ease, padding 0.2s ease;
+        animation: fadeIn 0.3s ease; /* Fade in effect */
+    }
+    
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    
+    .vertical-nav a:hover {
+        background-color: #0b0b0b;
+        color: orange;
+        padding-left: 30px; /* Add padding on hover */
+    }
+    
+    .vertical-nav.active {
+        transform: translateX(0);
+        right: 0;
+    }
+    
+
+/* Styles for larger screens (normal view) */
+@media (min-width: 769px) {
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 20px;
+    padding-top: 130px;
+    padding-left: 100px;
+    box-sizing: border-box;
+}
+
+button {
+            padding: 10px;
+            background-color: #50a0bb;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            vertical-align: middle;
+            width: 100%;
+        }
+
+        button:hover {
+            background-color: #31464d;
+        }
+
+
+        .logo {
+    width: 70px;
+    height: 70px;
+    margin-right: 150px;
+    margin-top: 10px;
+    margin-left: 30px;
+  }
+
+  .menu-toggle {
+                display: none;
+            }
+
+}
+
+
+/* Styles for smaller screens (mobile view) */
+@media (max-width: 768px) {
+
+
+.topnav {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        background-color:  rgb(23, 23, 23);
+        padding: 10px 20px;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 1000;
+        height: 80px;
+    }
+
+            .topnav img.logo {
+                display: block;
+                height: 30px;
+                 margin: 0;
+            }
+
+
+            .topnav #rest {
+                display:flex;
+                 margin-left: 0;
+            }
+
+            .topnav #rest ul {
+                display:  flex;
+                margin: 0;
+                padding: 0;
+            }
+            .topnav #rest ul a {
+                text-decoration: none;
+                color: white;
+                padding: 5px 10px;
+                display: block;
+                font-size: 16px;
+                margin: 0;
+                font-weight: bold;
+
+            }
+            .topnav::after {
+                content: "";
+                display: table;
+                clear: both;
+                }
+
+
+
+
+    .vertical-nav {
+        width: 200px;
+            height: calc(100% - 80px);
+            background-color:  rgb(23, 23, 23);
+            display: flex;
+            flex-direction: column;
+            position: fixed;
+            top: 80px;
+            right: 0;
+            bottom: 0;
+            transform: translateX(200%);
+            transition: transform 0.3s ease;
+            z-index: 1000;
+    }
+
+    .vertical-nav a {
+        padding: 15px 20px;
+        text-align: left;
+        text-decoration: none;
+        font-size: 18px;
+        font-weight: bold;
+        color: white;
+        display: block;
+        transition: background-color 0.3s ease;
+    }
+
+    .vertical-nav a:hover {
+        background-color:black;
+        color: orange;
+    }
+
+
+    .vertical-nav.active {
+        width: 180px;
+         transform: translate(200px);
+    }
+
+    .container {
+        display: block;
+        padding: 20px;
+        padding-top: 100px;
+        box-sizing: border-box;
+        width:auto;
+    }
+
+    .container.menu-active {
+        margin-right: 200px;
+         transition: margin-right 0.3s ease;
+    }
+
+    .menu-toggle {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        z-index: 1001;
+        display: block;
+        font-size: 24px;
+        padding: 5px;
+        cursor: pointer;
+        color: white;
+        background-color: black;
+    }
+
+
+    /* Form Container */
+    .form-container {
+        width: 100%;
+        margin-bottom: 20px;
+        padding: 20px;
+        background-color: #f9f9f9;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        border-radius: 5px;
+    }
+
+    .form-group {
+        margin-bottom: 15px;
+        margin-left: 0;
+    }
+
+    .form-group label {
+        font-weight: bold;
+        display: block;
+        margin-bottom: 5px;
+        font-size: 16px;
+    }
+
+    .form-group input {
+        width: 100%;
+        padding: 10px;
+        font-size: 16px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    /* Submit button */
+    .btn {
+        display: block;
+        width: 100%;
+        padding: 10px 0;
+        font-size: 16px;
+        background-color: #333;
+        color: black;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        text-align: center;
+        font-weight: bold;
+    }
+
+    /* Services Container */
+    .details-container {
+        width: 100%;
+        padding: 10px;
+        background-color: white;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        border-radius: 5px;
+    }
+
+
+    .services-scroll {
+        max-height: 400px;
+        overflow-y: auto;
+    }
+
+    .service-box {
+        padding: 10px;
+        border-bottom: 1px solid #ccc;
+        margin-bottom: 10px;
+    }
+
+    .service-title {
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+
+    .service-details, .service-amount {
+        margin-bottom: 5px;
+        font-size: 14px;
+    }
+
+}
+
+
+
+/* Slide down animation for the top navigation */
+@keyframes slideDown {
+    from {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+</style>
+</head>
+
+
+
+<body>
+    <div class="topnav" id="myTopnav">
+    <div id="name">
+        <a href="{% url 'home' %}">
+           <img src="{% static 'images/guru tech logo.jpg' %}" alt="Guru Tech Logo" class="logo">
+        </a>
+    </div>
+    <div id="rest">
+        {% if user.is_authenticated %}
+        <ul><a href="{% url 'dashboard' %}" class="text-base text-black       hover:px-5 hover:py-2.5  transition-all duration-200 hover:bg-[#fc8019] hover:text-black focus:text-black focus:bg-[#fc8019] font-semibold hover:text-white   rounded-full">Dashboard</a></ul>
+        <ul><a href="{% url 'logout' %}" class="text-base text-black       hover:px-5 hover:py-2.5  transition-all duration-200 hover:bg-[#fc8019] hover:text-black focus:text-black focus:bg-[#fc8019] font-semibold hover:text-white   rounded-full">Logout</a></ul>
+        {% endif %}
+    </div>
+    <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+</div>
+<div class="vertical-nav" id="vertical-nav">
+        <a href="{% url 'bookings' %}" id="bookings-link" class="text-base text-black       hover:px-5 hover:py-2.5  transition-all duration-200 hover:bg-[#fc8019] hover:text-black focus:text-black focus:bg-[#fc8019] font-semibold hover:text-white   rounded-full">Bookings</a>
+        <a href="{% url 'calendar' %}" id="calendar-link" class="text-base text-black       hover:px-5 hover:py-2.5  transition-all duration-200 hover:bg-[#fc8019] hover:text-black focus:text-black focus:bg-[#fc8019] font-semibold hover:text-white   rounded-full">Calendar</a>
+        <a href="{% url 'service' %}" id="service-link" class="text-base text-black       hover:px-5 hover:py-2.5  transition-all duration-200 hover:bg-[#fc8019] hover:text-black focus:text-black focus:bg-[#fc8019] font-semibold hover:text-white   rounded-full">Service</a>
+        <a href="{% url 'testimonial' %}" id="testimonial-link" class="text-base text-black       hover:px-5 hover:py-2.5  transition-all duration-200 hover:bg-[#fc8019] hover:text-black focus:text-black focus:bg-[#fc8019] font-semibold hover:text-white   rounded-full">Testimonial</a>
+    </div>
+
+
+<div class="popup-container" id="popupContainer">
+    <div class="popup-content">
+        <span class="close-popup" id="closePopup">&times;</span>
+        <p id="popupMessage">Are you sure you want to delete this service?</p>
+        <div class="popup-buttons">
+            <button class="btn-confirm" id="confirmDelete">Yes, delete</button>
+            <button class="btn-cancel" id="cancelDelete">Cancel</button>
+        </div>
+    </div>
+</div>
+
+
+        <div id="container" class="container">
+            <div class="form-container">
+                <form method="POST" action="{% url 'service_create' %}">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="title">Title</label>
+                        <input type="text" class="form-control" id="title" name="title" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="duration">Duration (mins)</label>
+                        <input type="number" class="form-control" id="duration" name="duration" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="amount">Amount (₹)</label>
+                        <input type="number" class="form-control" id="amount" name="amount" step="0.01" required>
+                    </div>
+                    <button type="submit" class="btn btn-dark btn-block">+ Add</button>
+                </form>
+
+                {% if messages %}
+                    <div id="message-container">
+                        {% for message in messages %}
+                            <p>{{ message }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+
+            <div class="details-container">
+                <h2>Services</h2>
+                <div class="services-scroll">
+                    {% for service in services %}
+                        <div class="service-box">
+                            <div class="service-title">{{ service.title }}</div>
+                            <div class="service-details">Duration: {{ service.duration }} mins</div>
+                            <div class="service-amount">Amount: ₹{{ service.amount }}</div>
+                            <button class="btn-delete" data-service-id="{{ service.id }}"><i class="fas fa-trash-alt"></i> Delete</button>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+
+
+    <script>
+         function toggleMenu() {
+            const verticalNav = document.getElementById('vertical-nav');
+            const container = document.querySelector('.container');
+
+            // Toggle active classes
+            verticalNav.classList.toggle('active');
+            container.classList.toggle('menu-active');
+        }
+
+
+        setTimeout(function() {
+            var messageContainer = document.getElementById('message-container');
+            if (messageContainer) {
+                messageContainer.style.display = 'none';
+            }
+        }, 5000); // 5000 milliseconds = 5 seconds
+document.querySelectorAll('.btn-delete').forEach(button => {
+    button.addEventListener('click', function() {
+        const serviceId = this.getAttribute('data-service-id');
+
+
+        document.getElementById('popupContainer').style.display = 'block';
+
+
+        document.getElementById('popupMessage').innerText = 'Are you sure you want to delete this service?';
+
+
+        document.getElementById('confirmDelete').addEventListener('click', function() {
+            fetch(`/service/delete/${serviceId}/`, {
+                method: 'DELETE',
+                headers: {
+                    'X-CSRFToken': '{{ csrf_token }}'
+                }
+            })
+            .then(response => {
+                if (response.ok) {
+                    window.location.reload();
+                } else {
+                    alert('Failed to delete service.');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Error deleting service.');
+            });
+
+
+            document.getElementById('popupContainer').style.display = 'none';
+        });
+
+
+        document.getElementById('cancelDelete').addEventListener('click', function() {
+
+            document.getElementById('popupContainer').style.display = 'none';
+        });
+
+        document.getElementById('closePopup').addEventListener('click', function() {
+
+            document.getElementById('popupContainer').style.display = 'none';
+        });
+    });
+});
+
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,294 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+     <link rel="shortcut icon" href="/static/images/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href='https://fonts.googleapis.com/css?family=Kalam' rel='stylesheet'>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin='anonymous'></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+    <title>Schedule Booking page</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/page.css'%}">
+    <!-- <link rel="stylesheet" type="text/css" href="{% static 'styles/home.css'%}"> -->
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/calendar.css'%}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+</head>
+
+<body>
+   <div class="topnav" id="myTopnav">
+    <div id="name">
+        <a href="{% url 'home' %}">
+           <img src="{% static 'images/guru tech logo.jpg' %}" alt="Guru Tech Logo" class="logo">
+        </a>
+    </div>
+    <div id="rest">
+        {% if user.is_authenticated %}
+        <ul><a href="{% url 'dashboard' %}"  class="text-base text-black       hover:px-5 hover:py-2.5  transition-all duration-200 hover:bg-[#fc8019] hover:text-black focus:text-black focus:bg-[#fc8019] font-semibold hover:text-white   rounded-full">Dashboard</a></ul>
+        <ul><a href="{% url 'logout' %}"  class="text-base text-black       hover:px-5 hover:py-2.5  transition-all duration-200 hover:bg-[#fc8019] hover:text-black focus:text-black focus:bg-[#fc8019] font-semibold hover:text-white   rounded-full">Logout</a></ul>
+        {% endif %}
+    </div>
+    <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+</div>
+<div class="vertical-nav" id="vertical-nav">
+        <a href="{% url 'bookings' %}" id="bookings-link"  class="text-base text-black       hover:px-5 hover:py-2.5  transition-all duration-200 hover:bg-[#fc8019] hover:text-black focus:text-black focus:bg-[#fc8019] font-semibold hover:text-white   rounded-full">Bookings</a>
+        <a href="{% url 'calendar' %}" id="calendar-link"  class="text-base text-black       hover:px-5 hover:py-2.5  transition-all duration-200 hover:bg-[#fc8019] hover:text-black focus:text-black focus:bg-[#fc8019] font-semibold hover:text-white   rounded-full">Calendar</a>
+        <a href="{% url 'service' %}" id="service-link"  class="text-base text-black       hover:px-5 hover:py-2.5  transition-all duration-200 hover:bg-[#fc8019] hover:text-black focus:text-black focus:bg-[#fc8019] font-semibold hover:text-white   rounded-full">Service</a>
+        <a href="{% url 'testimonial' %}" id="testimonial-link"  class="text-base text-black       hover:px-5 hover:py-2.5  transition-all duration-200 hover:bg-[#fc8019] hover:text-black focus:text-black focus:bg-[#fc8019] font-semibold hover:text-white   rounded-full"> Testimonial</a>
+    </div>
+
+<div class="page-content">
+
+    <div id="calendar-container" class="calendar-container">
+
+        <div class="content">
+            <!-- Display messages here -->
+            {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+
+            <!-- Form for calendar -->
+            <div class="form-table-container">
+                <div class="schedule">
+                    <div class="title">
+                        <h3>Schedule</h3>
+                    </div>
+                    <form action="" method="post" id="calendar-form">
+                        {% csrf_token %}
+                        <div class="user-details">
+                            {% for day in days %}
+                            <div class="form-group">
+                                <input type="checkbox" class="day-checkbox" data-day="{{ day | lower }}"
+                                       name="{{ day | lower }}_checkbox"></input>
+                                <label>{{ day }}</label>
+                                <div class="time-select" id="{{ day | lower }}-times" style="display: none;">
+                                    <label>From:</label>
+                                    <select class="from-time" name="{{ day | lower }}_from_time">
+                                        {% for time in times %}
+                                        <option value="{{ time }}">{{ time }}</option>
+                                        {% endfor %}
+                                    </select>
+                                    <label>To:</label>
+                                    <select class="to-time" name="{{ day | lower }}_to_time">
+                                        {% for time in times %}
+                                        <option value="{{ time }}">{{ time }}</option>
+                                        {% endfor %}
+                                    </select>
+                                    <!--<button class="add-button" type="button"
+                                            onclick="addTimeSelects('{{ day | lower }}-times', '{{ day | lower }}')">
+                                        <span class="plus-sign">+</span>
+                                    </button>-->
+                                    <button class="add-button" type="button"
+                                        onclick="addTimeSelects('{{ day | lower }}-times', '{{ day | lower }}')">
+                                        <span class="plus-sign"></span>
+                                    </button>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                        <div class="save-button-container">
+                            <button type="submit" class="save-button">Save</button>
+                        </div>
+                    </form>
+                </div>
+                <div id="selected-schedule" class="selected-schedule">
+                    <div class="selected-schedule-header"><h4>Selected Schedule</h4></div>
+                    <table id="schedule-table" class="table">
+                        <thead>
+                        <tr>
+                            <th>Day</th>
+                            <th>From</th>
+                            <th>To</th>
+                            <th>Action</th>
+                        </tr>
+                        </thead>
+                        <tbody id="schedule-tbody">
+                        {% for item in schedule_data %}
+                        <tr id="schedule-row-{{ item.id }}">
+                            <td>{{ item.day }}</td>
+                            <td>{{ item.from_time_formatted }}</td>
+                            <td>{{ item.to_time_formatted }}</td>
+                            <td>
+                                <form action="{% url 'delete_schedule' item.id %}" method="POST">
+                                    {% csrf_token %}
+                                    <button type="submit" class="delete-button">
+                                        <span class="trash-sign"><i class="fa fa-trash"></i></span>
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td colspan="4">No schedule data available</td>
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<script>
+
+
+    document.addEventListener("DOMContentLoaded", function() {
+    const toggleButton = document.querySelector(".menu-toggle");
+    const verticalNav = document.querySelector(".vertical-nav");
+    const calendarContainer = document.querySelector(".calendar-container");
+    const selectedSchedule = document.querySelector("#selected-schedule");
+
+    toggleButton.addEventListener("click", function() {
+        verticalNav.classList.toggle("active");
+        calendarContainer.classList.toggle("menu-active");
+        selectedSchedule.classList.toggle("menu-active");
+    });
+});
+
+
+
+    // Function to show a specific container
+    function showContainer(containerId) {
+            var containers = document.getElementsByClassName('container3');
+            for (var i = 0; i < containers.length; i++) {
+                containers[i].style.display = 'none';
+            }
+            document.getElementById(containerId).style.display = 'block';
+        }
+
+        // Event delegation for dynamically added buttons
+        document.addEventListener('click', function(event) {
+            if (event.target.matches('.add-button, .add-button .plus-sign')) {
+                addTimeSelects(event.target.closest('.time-select'));
+            } else if (event.target.matches('.remove-button, .remove-button .minus-sign')) {
+                removeTimeSelects(event.target.closest('.time-select-row'));
+            }
+        });
+
+
+
+        function addTimeSelects(parentId, day) {
+    var parentElement = document.getElementById(parentId);
+    var newTimeSelectRow = document.createElement('div');
+    newTimeSelectRow.className = 'time-select-row';
+    newTimeSelectRow.innerHTML = `
+        <label>From:</label>
+        <select class="from-time" name="${day}_from_time">
+            ${generateTimeOptions()}
+        </select>
+        <label>To:</label>
+        <select class="to-time" name="${day}_to_time">
+            ${generateTimeOptions()}
+        </select>
+        <button type="button" class="remove-button" onclick="removeTimeSelects(this.parentElement)">
+            <span class="minus-sign"></span>
+        </button>
+    `;
+    parentElement.appendChild(newTimeSelectRow);
+}
+
+// Helper function to generate time options for selects
+function generateTimeOptions() {
+    let times = [
+        "12:00 AM", "12:15 AM", "12:30 AM", "12:45 AM", "1:00 AM", "1:15 AM", "1:30 AM", "1:45 AM", "2:00 AM",
+        "2:15 AM", "2:30 AM", "2:45 AM", "3:00 AM", "3:15 AM", "3:30 AM", "3:45 AM", "4:00 AM", "4:15 AM",
+        "4:30 AM", "4:45 AM", "5:00 AM", "5:15 AM", "5:30 AM", "5:45 AM", "6:00 AM", "6:15 AM", "6:30 AM",
+        "6:45 AM", "7:00 AM", "7:15 AM", "7:30 AM", "7:45 AM", "8:00 AM", "8:15 AM", "8:30 AM", "8:45 AM",
+        "9:00 AM", "9:15 AM", "9:30 AM", "9:45 AM", "10:00 AM", "10:15 AM", "10:30 AM", "10:45 AM", "11:00 AM",
+        "11:15 AM", "11:30 AM", "11:45 AM", "12:00 PM", "12:15 PM", "12:30 PM", "12:45 PM", "1:00 PM", "1:15 PM",
+        "1:30 PM", "1:45 PM", "2:00 PM", "2:15 PM", "2:30 PM", "2:45 PM", "3:00 PM", "3:15 PM", "3:30 PM",
+        "3:45 PM", "4:00 PM", "4:15 PM", "4:30 PM", "4:45 PM", "5:00 PM", "5:15 PM", "5:30 PM", "5:45 PM",
+        "6:00 PM", "6:15 PM", "6:30 PM", "6:45 PM", "7:00 PM", "7:15 PM", "7:30 PM", "7:45 PM", "8:00 PM",
+        "8:15 PM", "8:30 PM", "8:45 PM", "9:00 PM", "9:15 PM", "9:30 PM", "9:45 PM", "10:00 PM", "10:15 PM",
+        "10:30 PM", "10:45 PM", "11:00 PM", "11:15 PM", "11:30 PM", "11:45 PM"
+    ];
+    return times.map(time => `<option value="${time}">${time}</option>`).join('');
+}
+
+function removeTimeSelects(rowElement) {
+    rowElement.remove();
+}
+
+        // Show/hide time select boxes based on day checkbox
+        document.querySelectorAll('.day-checkbox').forEach(function(checkbox) {
+            checkbox.addEventListener('change', function() {
+                var dayTimes = document.getElementById(checkbox.dataset.day + '-times');
+                if (checkbox.checked) {
+                    dayTimes.style.display = 'block';
+                } else {
+                    dayTimes.style.display = 'none';
+                }
+            });
+        });
+
+
+   // Function to toggle time select boxes and button
+function toggleTimeSelect(day, show) {
+const timeSelect = document.getElementById(`${day}-times`);
+const addButton = timeSelect.querySelector('.add-button');
+if (show) {
+    timeSelect.style.display = 'block';
+    addButton.style.display = 'inline-flex'; // Show the button
+} else {
+    timeSelect.style.display = 'none';
+    addButton.style.display = 'none'; // Hide the button
+}
+}
+
+
+
+// Add event listeners to the checkboxes
+document.querySelectorAll('.day-checkbox').forEach(function (checkbox) {
+    checkbox.addEventListener('change', function () {
+        const day = checkbox.getAttribute('data-day');
+        toggleTimeSelect(day, checkbox.checked);
+    });
+});
+// Handle dynamic add and remove of time selectors
+document.addEventListener('click', function(event) {
+if (event.target.classList.contains('delete-schedule')) {
+    // Find the closest <tr> element to delete
+    var tr = event.target.closest('tr');
+    if (tr) {
+        tr.remove(); // Remove the <tr> from the DOM
+        // Optionally, you can also send an AJAX request here to delete the data from the server
+    }
+}
+});
+
+
+
+document.addEventListener("DOMContentLoaded", () => {
+    const pageContent = document.querySelector('.page-content');
+    // Add 'active' class to trigger transition
+    pageContent.classList.add('active');
+    
+    // Add 'loaded' class after a brief delay for slide-in effect
+    setTimeout(() => {
+        pageContent.classList.add('loaded');
+    }, 100); // Adjust delay as needed
+});
+
+
+</script>
+
+
+</body>
+</html>

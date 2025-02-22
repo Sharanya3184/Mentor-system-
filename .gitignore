@@ -1,0 +1,4 @@
+**/__pycache__/
+**/site-packages/
+*.pyc
+*.cpython-38.pyc

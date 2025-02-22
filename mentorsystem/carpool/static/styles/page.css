@@ -1,0 +1,45 @@
+.container3 {
+    position: fixed;
+    top: 60px; /* Adjusted to account for the fixed topnav */
+    left: 205px; /* Adjusted to account for the width of the vertical-nav */
+    right: 0;
+    bottom: 0;
+    background-color: #fff;
+    padding: 25px 30px;
+    border-radius: 5px;
+    /* box-shadow: 0 0 40px rgba(8, 7, 16, 0.6); */
+    overflow: auto; /* Allow scrolling  content exceeds container */
+}
+
+
+        .container3 h3 {
+            font-size: 32px;
+            font-weight: 800;
+            line-height: 50px;
+            text-align: center;
+            color: #7d7d81;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        }
+
+        .container3 .title {
+            font-size: 25px;
+            font-weight: 500;
+            position: center;
+            font-size: 32px;
+            font-weight: 800;
+            line-height: 50px;
+            text-align: center;
+            color: #d1d1d6;
+        }
+
+        .container3 .title::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            height: 3px;
+            width: 30px;
+            border-radius: 5px;
+            /* background: #07411a; */
+        }
+

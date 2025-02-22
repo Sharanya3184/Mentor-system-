@@ -1,0 +1,267 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+     <link rel="shortcut icon" href="/static/images/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href='https://fonts.googleapis.com/css?family=Kalam' rel='stylesheet'>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+    <title>Testimonial</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/page.css'%}">
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/home.css'%}">
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/calendar.css'%}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Additional Calendar-specific styles -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+
+
+ </head>
+
+<style>
+   body {
+            background: rgba(0, 0, 0, 0.08);
+        }
+        :root {
+            --main-bg-color: rgba(0, 0, 0, 0.7);
+            --text-color: #ffffff;
+            --highlight-color: #FFD700;
+            --border-color: #000;
+            }
+            .topnav {
+    z-index: 10;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: rgb(23, 23, 23);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 80px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+    animation: slideDown 0.5s ease; /* Slide down effect */
+}
+
+@keyframes slideDown {
+    from {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+        #rest {
+    display: flex;
+    justify-content: flex-end;
+    padding-top: 40px;
+}
+
+#rest ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+#rest ul a {
+    display: block;
+    color: var(--text-color);
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+    font-weight: bold;
+    margin-left: 20px;
+    transition: background-color 0.3s ease, transform 0.2s ease, color 0.2s ease;
+}
+
+#rest ul a:hover,
+#rest ul a:focus {
+    background-color: #fc8019;
+    color: white;
+    transform: scale(1.05);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.vertical-nav {
+    width: 200px;
+    position: fixed;
+    top: 80px;
+    right: -200px;
+    height: calc(100% - 80px);
+    background-color: rgb(23, 23, 23);
+    padding-top: 20px;
+    transition: transform 0.3s ease;
+    z-index: 1000;
+}
+
+.vertical-nav a {
+    padding: 15px 25px;
+    text-align: left;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+    display: block;
+    transition: background-color 0.3s ease, padding 0.2s ease;
+    animation: fadeIn 0.3s ease; /* Fade in effect */
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.vertical-nav a:hover {
+    background-color: #0b0b0b;
+    color: orange;
+    padding-left: 30px; /* Add padding on hover */
+}
+
+.vertical-nav.active {
+    transform: translateX(0);
+    right: 0;
+}
+
+            .menu-toggle {
+                display: none;
+            }
+            .container {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                background-color: #fff;
+                padding-top: 20px;
+
+            }
+
+
+@media (max-width: 375px) {
+    .topnav {
+        flex-direction: row;
+        padding: 10px 10px;
+    }
+
+    .topnav #rest {
+        padding-top: 0;
+    }
+
+    .topnav #rest ul {
+        display: flex;
+        padding: 0;
+    }
+
+    .topnav #rest ul a {
+        padding: 5px 10px;
+        font-size: 16px;
+    }
+
+    .vertical-nav {
+        width: 200px;
+        transform: translateX(200%);
+    }
+
+    .vertical-nav.active {
+         width: 180px;
+         transform: translate(200px);
+    }
+    .menu-toggle {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        z-index: 1001;
+        display: block;
+        font-size: 24px;
+        padding: 5px;
+        cursor: pointer;
+        color: white;
+        background-color: black;
+    }
+
+    .page-content {
+        display: block;
+        padding: 20px;
+        padding-top: 50px;
+        box-sizing: border-box;
+        width:auto;
+    }
+    .page-content.menu-active {
+        margin-right: 200px;
+         transition: margin-right 0.3s ease;
+    }
+
+}
+
+
+</style>
+
+<body>
+    <div class="topnav" id="myTopnav">
+    <div id="name">
+        <a href="{% url 'home' %}">
+           <img src="{% static 'images/guru tech logo.jpg' %}" alt="Guru Tech Logo" class="logo">
+        </a>
+    </div>
+    <div id="rest">
+        {% if user.is_authenticated %}
+        <ul><a href="{% url 'dashboard' %}"  class="text-base text-black       hover:px-5 hover:py-2.5  transition-all duration-200 hover:bg-[#fc8019] hover:text-black focus:text-black focus:bg-[#fc8019] font-semibold hover:text-white   rounded-full">Dashboard</a></ul>
+        <ul><a href="{% url 'logout' %}"  class="text-base text-black       hover:px-5 hover:py-2.5  transition-all duration-200 hover:bg-[#fc8019] hover:text-black focus:text-black focus:bg-[#fc8019] font-semibold hover:text-white   rounded-full">Logout</a></ul>
+        {% endif %}
+    </div>
+    <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+</div>
+<div class="vertical-nav">
+    <a href="{% url 'bookings' %}" id="bookings-link">Bookings</a>
+    <a href="{% url 'calendar' %}" id="calendar-link">Calendar</a>
+    <a href="{% url 'service' %}" id="service-link">Service</a>
+    <a href="{% url 'testimonial' %}" id="testimonial-link">Testimonial</a>
+</div>
+
+    <div id="page-content" class="page-content">
+        <div class="content">
+            <div id="title-header" class="title-header">
+                <h1>Testimonial</h1>
+            </div>
+
+            <div class="container" id="container">
+                    <!-- Your testimonial content goes here -->
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+
+
+        function toggleMenu() {
+        const verticalNav = document.querySelector('.vertical-nav');
+        const pageContent = document.querySelector('.page-content');
+
+        verticalNav.classList.toggle('active');
+        pageContent.classList.toggle('menu-active');
+    }
+    </script>
+
+</body>
+</html>

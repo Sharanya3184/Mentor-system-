@@ -1,0 +1,331 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A platform for personalized mentoring services connecting students with experienced mentors.">
+    <meta name="keywords" content="Mentoring, Peer Mentoring, Academic Support, Student Guidance">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href='https://fonts.googleapis.com/css?family=Kalam' rel='stylesheet'>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title>Peer Mentor Connect</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/home.css' %}">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin='anonymous'></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+            
+    <script src="{% static 'js/home.js' %}"></script>
+</head>
+
+<body>
+
+<section class="peer">
+
+    <div class="topnav" id="myTopnav">
+        <ul>
+            <div id="name-logo">
+                <!-- Logo and Title with updated structure -->
+                <a href="{% url 'home' %}">
+                    <div>
+                        <div class="relative w-20 h-20 -ml-2">
+                            <img src="{% static 'images/guru tech logo.jpg' %}" class="logo" alt="Guru Tech Logo" >
+                        </div>
+                    </div>
+                </a>
+                <!-- Title -->
+                <h1>
+                    <a href="{% url 'home' %}">Personalized Mentoring Services</a>
+                </h1>
+            </div>
+        </ul>
+
+
+        <ul id="rest">
+            {% if user.is_authenticated %}
+                {% if userType == 'Mentor' %}
+                    <li><a href="{% url 'dashboard' %}" class="explore-link"  class="text-base text-black       hover:px-5 hover:py-2.5  transition-all duration-200 hover:bg-[#fc8019] hover:text-black focus:text-black focus:bg-[#fc8019] font-semibold hover:text-white   rounded-full">Dashboard</a></li>
+                {% endif %}
+                <li><a href="{% url 'logout' %}" class="explore-link"  class="explore-link" class="text-sm text-base text-black  hover:px-5  py-2.5  transition-all duration-200 hover:bg-[#fc8019] hover:text-black focus:text-black focus:bg-[#fc8019] hover:bg-opacity-80 font-semibold hover:text-white   rounded-full">Logout</a></li>
+            {% else %}
+                <li><a href="{% url 'register' %}" class="explore-link"  class="explore-link" class="text-sm text-base text-black  hover:px-5  py-2.5  transition-all duration-200 hover:bg-[#fc8019] hover:text-black focus:text-black focus:bg-[#fc8019] hover:bg-opacity-80 font-semibold hover:text-white   rounded-full">Register</a></li>
+                <li><a href="{% url 'login' %}" class="explore-link"   class="explore-link" class="text-sm text-base text-black  hover:px-5  py-2.5  transition-all duration-200 hover:bg-[#fc8019] hover:text-black focus:text-black focus:bg-[#fc8019] hover:bg-opacity-80 font-semibold hover:text-white   rounded-full">Login</a></li>
+                <li><a href="{% url 'contact' %}" class="explore-link" class="explore-link" class="text-sm text-base text-black  hover:px-5  py-2.5  transition-all duration-200 hover:bg-[#fc8019] hover:text-black focus:text-black focus:bg-[#fc8019] hover:bg-opacity-80 font-semibold hover:text-white   rounded-full">Contact us</a></li>
+            {% endif %}
+        </ul>
+        
+        <button class="menu-toggle">&#9776;</button>
+
+
+        <div class="vertical-nav">
+            {% if user.is_authenticated %}
+            <a href="{% url 'dashboard' %}" class="explore-link"  class="text-base text-black       hover:px-5 hover:py-2.5  transition-all duration-200 hover:bg-[#fc8019] hover:text-black focus:text-black focus:bg-[#fc8019] font-semibold hover:text-white   rounded-full">Dashboard</a>
+            <a href="{% url 'logout' %}"  class="explore-link"  class="text-base text-black       hover:px-5 hover:py-2.5  transition-all duration-200 hover:bg-[#fc8019] hover:text-black focus:text-black focus:bg-[#fc8019] font-semibold hover:text-white   rounded-full">Logout</a>
+            {% else %}
+            <a href="{% url 'register' %}" class="explore-link"  class="text-base text-black       hover:px-5 hover:py-2.5  transition-all duration-200 hover:bg-[#fc8019] hover:text-black focus:text-black focus:bg-[#fc8019] font-semibold hover:text-white   rounded-full">Register</a>
+            <a href="{% url 'login' %}" class="explore-link"  class="text-base text-black       hover:px-5 hover:py-2.5  transition-all duration-200 hover:bg-[#fc8019] hover:text-black focus:text-black focus:bg-[#fc8019] font-semibold hover:text-white   rounded-full">Login</a>
+            <a href="{% url 'contact' %}" class="explore-link"  class="text-base text-black       hover:px-5 hover:py-2.5  transition-all duration-200 hover:bg-[#fc8019] hover:text-black focus:text-black focus:bg-[#fc8019] font-semibold hover:text-white   rounded-full">Contact us</a>
+            {% endif %}
+        </div>
+    </div>
+
+
+    <picture class="fade-in">
+        <source media="(min-width: 1020px)"
+                srcset="{% static 'images/peer-desktop-750w.webp' %} 750w, {% static 'images/peer-desktop-1366w.webp' %} 1366w, {% static 'images/peer-desktop-1500w.webp' %} 1500w, {% static 'images/peer-desktop-2500w.webp' %} 2500w"
+                type="image/webp" width="1366" height="724">
+        <source media="(min-width: 1020px)"
+                srcset="{% static 'images/peer-desktop-750w.jpg' %} 750w, {% static 'images/peer-desktop-1366w.jpg' %} 1366w, {% static 'images/peer-desktop-1500w.jpg' %} 1500w, {% static 'images/peer-desktop-2500w.jpg' %} 2500w"
+                type="image/jpeg" width="1366" height="724">
+        <source srcset="{% static 'images/peer-mobile-100w.webp' %} 100w, {% static 'images/peer-mobile-300w.webp' %} 300w, {% static 'images/peer-mobile-500w.webp' %} 500w, {% static 'images/peer-mobile-750w.webp' %} 750w"
+                type="image/webp" width="375" height="203">
+        <source srcset="{% static 'images/peer-mobile-100w.jpg' %} 100w, {% static 'images/peer-mobile-300w.jpg' %} 300w, {% static 'images/peer-mobile-500w.jpg' %} 500w, {% static 'images/peer-mobile-750w.jpg' %} 750w"
+                type="image/jpeg" width="375" height="203">
+        <img class="peer__background-image" src="{% static 'images/peer-mobile-750w.webp' %}"
+             alt="Background Image"
+             loading="eager" width="375" height="203" decoding="async">
+    </picture>
+
+
+    <div class="button-container  fade-in">
+        <p class="service-text">
+            <span class="shine-text same-style">To</span>
+            <span class="shine-text different-style">Book</span>
+            <span class="shine-text same-style">Your Service</span>
+        </p>
+        <a href="{% url 'searchmymentor' %}" class="book-service-btn shine-text">Get Started</a>
+    </div>
+</section>
+
+
+
+<div class="content-body fade-in">
+    <div class="container">
+        <div class="image-container fade-in">
+            <img src="{% static 'images/m1.jpg' %}" alt="PeerMentor">
+            <div class="overlay"></div>
+            <p class="relative text-lg font-semibold text-white shine-text">About PeerMentor Connect</p>
+        </div>
+        <div class="content fade-in">
+            <h1 class="create-mentor-profile shine-text">About PeerMentor Connect</h1>
+            <p class="slide-in">
+                PeerMentor Connect (also known as student mentoring and academic support) is a platform designed to connect students with experienced mentors, allowing them to benefit from personalized guidance and expertise. 
+                PeerMentor Connect helps students navigate their educational journey by providing tailored advice, career insights, and skill development support. 
+                Unlike traditional tutoring, mentorship through PeerMentor Connect focuses on holistic growth, offering students a collaborative approach to achieving their academic and professional goals. 
+                The service is ideal for students seeking targeted help and valuable connections to enhance their learning experience and future opportunities.
+            </p>
+        </div>
+    </div>
+</div>
+
+<div class="features fade-in">
+    <div class="box fade-in col-span-4 text-center text-[10px] sm:text-[10px] md:text-lg font-semibold md:font-bold">
+        <div class="card">
+            <img src="{% static 'images/m5.jpg' %}">
+            <h1 class="create-mentor-profile shine-text">Find Your Mentor</h1>
+            <p>An online platform that simulates the experience of choosing an advisor or tutor at a physical center. Select and book sessions with expert mentors to receive personalized guidance and support for your academic and career goals.</p>
+        </div>
+    </div>
+
+    <div class="box fade-in">
+        <div class="card fade-in col-span-4 text-center text-[10px] sm:text-[10px] md:text-lg font-semibold md:font-bold">
+            <img src="{% static 'images/m6.jpg' %}">
+            <h1 class="create-mentor-profile shine-text">Search Mentor by Category</h1>
+            <p>Explore mentors based on their role, years of experience, languages spoken, and specialized services. Our platform allows you to find the perfect mentor for your needs, with detailed profiles and availability displayed for a seamless mentoring experience. Choose the right expert to guide your academic and career journey with ease.</p>
+        </div>
+    </div>
+
+    <div class="box fade-in">
+        <div class="card fade-in col-span-4 text-center text-[10px] sm:text-[10px] md:text-lg font-semibold md:font-bold">
+            <img src="{% static 'images/m7.jpg' %}">
+            <h1 class="create-mentor-profile shine-text">Book Your Mentor Online</h1>
+            <p>Easily book your mentoring sessions online by selecting the service you need, and choosing the date and time that work best for you. Some sessions can be scheduled instantly, while others may require confirmation from the mentor. Booking your personalized mentoring support is straightforward and convenient.</p>
+        </div>
+    </div>
+</div>
+
+<div class="footer">
+    <div class="footer-container">
+        <div class="section1">
+            <h3>Contact us</h3>
+            <p>
+                <i class="fa fa-home"></i> Address No: XXXXXXX Street<br>
+                <i class="fa fa-phone"></i> Mobile: 1234567890<br>
+                <i class="fa fa-envelope"></i> Email: <a href="gurutechharkscorp@gmail.com">abc@123.com</a>
+            </p>
+        </div>
+
+        <div class="section2">
+            <h3>Project Links</h3>
+            <p>
+                <a href="{% url 'home' %}">Home</a><br>
+                <a href="{% url 'contact' %}">Contact</a><br>
+                <a href="{% url 'login' %}">Login</a><br>
+                <a href="{% url 'register' %}">Register</a>
+            </p>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const toggleButton = document.querySelector(".menu-toggle");
+        const verticalNav = document.querySelector(".vertical-nav");
+
+        if (toggleButton) {
+            toggleButton.addEventListener("click", function() {
+                verticalNav.classList.toggle("active");
+            });
+        }
+    });
+
+    //for page fade-in
+document.addEventListener('DOMContentLoaded', function() {
+    const fadeElements = document.querySelectorAll('.fade-in');
+
+    const options = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.1
+    };
+
+    const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                observer.unobserve(entry.target); // Stop observing after it's visible
+            }
+        });
+    }, options);
+
+    fadeElements.forEach(element => {
+        observer.observe(element);
+    });
+});
+
+//images, box (fade-in )
+
+document.addEventListener('DOMContentLoaded', function() {
+    const fadeElements = document.querySelectorAll('.fade-in');
+
+    const options = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.1
+    };
+
+    const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, options);
+
+    fadeElements.forEach(element => {
+        observer.observe(element);
+    });
+});
+
+
+
+//fade-out content 
+
+document.addEventListener('DOMContentLoaded', function() {
+    const fadeInElements = document.querySelectorAll('.fade-in');
+    const fadeOutElement = document.querySelector('.fade-out');
+
+    const options = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.1
+    };
+
+    const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                observer.unobserve(entry.target); // Stop observing after it's visible
+            }
+        });
+    }, options);
+
+    fadeInElements.forEach(element => {
+        observer.observe(element);
+    });
+
+    // Scroll event for fade-out effect
+    window.addEventListener('scroll', () => {
+        if (fadeOutElement) {
+            const rect = fadeOutElement.getBoundingClientRect();
+            if (rect.top < 0) {
+                fadeOutElement.classList.add('hidden');
+            } else {
+                fadeOutElement.classList.remove('hidden');
+            }
+        }
+    });
+});
+
+//slide-in for para tag in content
+document.addEventListener('DOMContentLoaded', function() {
+    const fadeInElements = document.querySelectorAll('.fade-in');
+    const slideInParagraph = document.querySelector('.slide-in');
+
+    const options = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.1
+    };
+
+    const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                observer.unobserve(entry.target); // Stop observing after it's visible
+            }
+        });
+    }, options);
+
+    fadeInElements.forEach(element => {
+        observer.observe(element);
+    });
+
+    // Scroll event for slide-in effect
+    if (slideInParagraph) {
+        observer.observe(slideInParagraph);
+    }
+});
+
+
+//shine for service-content
+document.addEventListener('DOMContentLoaded', () => {
+    const shineElements = document.querySelectorAll('.shine-text');
+
+    shineElements.forEach(element => {
+      element.addEventListener('click', () => {
+        element.classList.toggle('active');
+
+        // Optional: Remove the class after the animation completes
+        setTimeout(() => {
+          element.classList.remove('active');
+        }, 1500); // Match the duration of the animation
+      });
+    });
+  });
+
+
+
+</script>
+
+
+</body>
+
+</html>

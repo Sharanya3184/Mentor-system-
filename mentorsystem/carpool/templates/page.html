@@ -1,0 +1,477 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+     <link rel="shortcut icon" href="/static/images/favicon.ico" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href='https://fonts.googleapis.com/css?family=Kalam' rel='stylesheet'>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+    <title>Page</title>
+    <!-- <link rel="stylesheet" type="text/css" href="{% static 'styles/page.css'%}"> -->
+    <!-- <link rel="stylesheet" type="text/css" href="{% static 'styles/home.css'%}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}"> -->
+    <link rel="stylesheet" href="css/styles.css">
+    
+
+
+
+    <style>
+  /* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary-color: #50a0bb;
+    --hover-color: #31464d;
+    --accent-color: #fc8019;
+    --background-color: #f4f4f4;
+    --text-color: #333;
+    --light-text: #666;
+    --white: #fff;
+    --shadow: rgba(0, 0, 0, 0.1);
+}
+
+/* Body Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, var(--background-color), var(--light-text));
+    color: var(--text-color);
+    overflow-x: hidden;
+    animation: gradientAnimation 5s ease infinite;
+}
+
+/* Button Styles */
+button {
+    padding: 0.625rem;
+    background: linear-gradient(45deg, var(--primary-color), var(--accent-color));
+    color: var(--white);
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    width: 100%;
+    transition: background-color 0.3s, transform 0.2s, box-shadow 0.2s;
+    font-size: 1em;
+}
+
+button:hover {
+    background: linear-gradient(45deg, var(--hover-color), var(--accent-color));
+    transform: translateY(-0.125rem);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Loading Indicator */
+.loading {
+    position: relative;
+}
+
+.loading::after {
+    content: '';
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--white);
+    animation: loading-spin 1s infinite;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+}
+
+@keyframes loading-spin {
+    0% {
+        transform: translate(-50%, -50%) scale(0);
+    }
+    50% {
+        transform: translate(-50%, -50%) scale(1);
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(0);
+    }
+}
+
+/* Navigation Bar Styles */
+.topnav {
+    z-index: 10;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background-color: #000;
+    height: 80px;
+    box-shadow: 0 2px 5px var(--shadow);
+}
+
+#name {
+    display: flex;
+    align-items: center;
+}
+
+.topnav .logo {
+    height: 40px;
+}
+
+#rest {
+    display: flex;
+}
+
+#rest ul {
+    list-style-type: none;
+    display: flex;
+}
+
+#rest ul li {
+    margin-left: 20px;
+}
+
+#rest ul a {
+    display: inline-block;
+    text-decoration: none;
+    color: var(--white);
+    padding: 10px 20px;
+    border-radius: 0.5rem;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+#rest ul a:hover {
+    background-color: var(--accent-color);
+    transform: scale(1.05);
+}
+
+#rest ul a:focus {
+    outline: none;
+    box-shadow: 0 0 5px var(--accent-color);
+}
+
+/* Main Content Styles */
+.main-content {
+    display: flex;
+    margin-top: 1.25rem;
+    padding: 1.25rem;
+}
+
+/* Vertical Navigation */
+.vertical-nav {
+    background-color: var(--white);
+    width: 250px;
+    height: calc(100vh - 80px);
+    padding: 1.25rem;
+    box-shadow: 0 2px 5px var(--shadow);
+    border-radius: 0.5rem;
+}
+
+.profile-picture-container {
+    text-align: center;
+    margin-bottom: 1.25rem;
+}
+
+.profile-picture {
+    width: 6.25rem;
+    height: 6.25rem;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--accent-color);
+    box-shadow: 0 2px 5px var(--shadow);
+}
+
+.user-info h2 {
+    margin: 0.625rem 0;
+    font-size: 1.5em;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.description p {
+    color: var(--light-text);
+    font-size: 0.9em;
+}
+
+/* Navigation Links in Vertical Nav */
+.nav-links ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.nav-links li {
+    margin: 0.625rem 0;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: var(--text-color);
+    padding: 0.625rem;
+    border-radius: 0.3125rem;
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+}
+
+.nav-links a:hover {
+    background-color: var(--accent-color);
+    color: var(--white);
+    transform: scale(1.05);
+}
+
+/* Service Section Styles */
+.services-section {
+    flex: 1;
+    padding: 1.25rem;
+    background-color: var(--white);
+    margin-left: 1.25rem;
+    box-shadow: 0 2px 5px var(--shadow);
+    border-radius: 0.5rem;
+}
+
+.details-container {
+    margin-bottom: 1.25rem;
+}
+
+.details-container h2 {
+    font-size: 1.5em;
+    margin-bottom: 0.9375rem;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.service-box {
+    border: 1px solid #ddd;
+    border-radius: 0.625rem;
+    padding: 0.9375rem;
+    margin-bottom: 0.9375rem;
+    transition: transform 0.3s, box-shadow 0.3s, border 0.3s;
+}
+
+.service-box:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    border: 1px solid var(--accent-color);
+}
+
+.service-title {
+    font-weight: bold;
+    font-size: 1.2em;
+}
+
+.service-details,
+.service-amount {
+    font-size: 0.9em;
+    color: var(--light-text);
+}
+
+/* Gradient Background for the Div */
+.absolute {
+    position: relative;
+}
+
+.absolute .bg-gradient {
+    position: absolute;
+    bottom: 0;
+    height: 36px; /* Adjusted height for the gradient */
+    background: linear-gradient(to top, black, transparent);
+    opacity: 0.7; /* Base opacity */
+    transition: opacity 0.3s; /* Smooth transition for hover */
+}
+
+.absolute:hover .bg-gradient {
+    opacity: 0.4; /* Change opacity on hover */
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .main-content {
+        flex-direction: column;
+        padding: 1rem;
+    }
+
+    .vertical-nav {
+        width: 100%;
+        height: auto;
+        margin-bottom: 1rem;
+    }
+
+    .services-section {
+        margin-left: 0;
+    }
+
+    .topnav #rest {
+                display: none;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+            .vertical-popup {
+                display: none;
+            }
+
+            .topnav {
+            z-index: 10;
+            overflow: hidden;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: #000 ;
+            position:relative;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 80px;
+        }
+
+
+
+
+        .topnav #name h1 {
+            margin: 0;
+            color: white;
+        }
+
+        .topnav #rest {
+            display: flex;
+
+        }
+
+        .topnav #rest ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+        .topnav #rest ul li {
+            margin-left: 20px;
+        }
+
+        .topnav #rest ul a {
+            float: right;
+            display: block;
+            color: #fffcfc;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+            font-size: 17px;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .topnav #rest ul a:hover {
+            color: #ffffff;
+           text-decoration: none;
+        }
+
+
+    .profile-picture {
+        width: 80px;
+        height: 80px;
+    }
+
+    .nav-links a {
+        padding: 0.5rem;
+    }
+}
+
+/* Animation for Gradient Background */
+@keyframes gradientAnimation {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+
+    </style>
+</head>
+
+<body>
+    <div class="topnav">
+        <div id="name">
+            <a class="navbar-brand" href="/">
+                <img src="/static/images/guru%20tech%20logo.jpg" alt="Guru Tech Logo" class="logo" style="height: 40px;">
+            </a>
+        </div>
+        <div id="rest">
+            <ul>
+                <li><a href="{% url 'home' %}" class="explore-link">Home</a></li>
+                <li><a href="{% url 'contact' %}" class="explore-link">Contact</a></li>
+                <li><a href="{% url 'logout' %}" class="explore-link">Logout</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="main-content">
+        <div class="vertical-nav {% if user_type == 'driver' %}driver{% endif %}">
+            {% if user_type == "driver" %}
+                <div class="profile-picture-container">
+                    {% if profile_picture %}
+                        <img src="{{ profile_picture }}" alt="Profile Picture" class="profile-picture">
+                    {% else %}
+                        <p>No profile picture available</p>
+                    {% endif %}
+                </div>
+                <div class="user-info">
+                    <h2><strong>{{ name }}</strong></h2>
+                </div>
+                <div class="description">
+                    <p><strong>{{ description }}</strong></p>
+                </div>
+            {% else %}
+                <div class="nav-links">
+                    <ul>
+                        <li><a href="{% url 'bookings' %}" id="bookings-link">Bookings</a></li>
+                        <li><a href="{% url 'calendar' %}" id="calendar-link">Calendar</a></li>
+                        <li><a href="{% url 'service' %}" id="service-link">Service</a></li>
+                        <li><a href="{% url 'testimonial' %}" id="testimonial-link">Testimonial</a></li>
+                    </ul>
+                </div>
+            {% endif %}
+        </div>
+
+        {% if user_type == "driver" %}
+        <div class="services-section">
+            <div class="details-container">
+                <h2>Services</h2>
+                <div class="services-scroll">
+                    {% for service in services %}
+                        <div class="service-box">
+                            <a href="{% url 'service_detail' service.id %}">
+                                <div class="service-title">{{ service.title }}</div>
+                                <div class="service-details">Duration: {{ service.duration }} mins</div>
+                                <div class="service-amount">Amount: ₹{{ service.amount }}</div>
+                            </a>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+
+
+
+    <!-- <div class="vertical-nav">
+        <a href="{% url 'bookings' %}" id="bookings-link">Bookings</a>
+        <a href="{% url 'calendar' %}" id="calendar-link">Calendar</a>
+        <a href="{% url 'service' %}" id="service-link">Service</a>
+        <a href="{% url 'testimonial' %}" id="testimonial-link">Testimonial</a>
+    </div>
+     -->
+
+ </body>
+
+</html>

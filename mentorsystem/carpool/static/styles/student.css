@@ -1,0 +1,140 @@
+body {
+  margin: 0;
+  background-color: #f0f0f0;
+  overflow: hidden; /* Prevent scrolling on the body */
+}
+
+.topnav {
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  position: fixed; /* Fix the navigation bar at the top */
+  top: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px; /* Add some padding for better spacing */
+}
+
+#name h1 {
+  margin: 0;
+  padding: 10px;
+  color: #09333f;
+}
+
+#rest ul {
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+
+#rest ul a {
+  padding: 10px 20px;
+  color: #09333f;
+  text-decoration: none;
+}
+
+.container4 {
+  position: absolute;
+  top: 80px; /* Adjusted to account for the fixed topnav */
+  bottom: 0;
+  width: 100%;
+  background-color: #d1d1d6;;
+  padding: 25px 30px;
+  border-radius: 5px;
+  overflow-y: auto; /* Enable vertical scrolling for the content area */
+}
+
+.container4 .title {
+  font-size: 32px;
+  font-weight: 800;
+  line-height: 50px;
+  text-align: center;
+  color: #d1d1d6;
+  position: relative;
+}
+
+.container4 .title::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+  height: 3px;
+  width: 30px;
+  border-radius: 5px;
+}
+
+.content form .user-details {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+form .user-details .input-box {
+  width: 50%;
+  margin-bottom: 15px;
+}
+
+form .input-box span.details1 {
+  display: block;
+  font-weight: 500;
+  margin-bottom: 5px;
+}
+
+.user-details .input-box input {
+  height: 45px;
+  width: 100%;
+  outline: none;
+  font-size: 16px;
+  border-radius: 5px;
+  padding-left: 15px;
+  border: 1px solid #0c0b0b;
+}
+
+form .button {
+  height: 45px;
+  margin: 35px 0;
+}
+
+form .button input {
+  height: 100%;
+  width: 100%;
+  border-radius: 5px;
+  border: none;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background: #09333f;
+}
+
+@media (max-width: 584px) {
+  .container4 {
+    max-width: 100%;
+  }
+
+  form .user-details .input-box {
+    width: 100%;
+  }
+
+  .content form .user-details {
+    max-height: 300px;
+    overflow-y: scroll;
+  }
+
+  .user-details::-webkit-scrollbar {
+    width: 5px;
+  }
+}
+
+@media (max-width: 459px) {
+  .container4 .content .user-details {
+    flex-direction: column;
+  }
+}
+

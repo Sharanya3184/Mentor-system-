@@ -1,0 +1,1077 @@
+
+
+{% load static %}
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+   <link rel="shortcut icon" href="/static/images/favicon.ico" type="image/x-icon">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link href='https://fonts.googleapis.com/css?family=Kalam' rel='stylesheet'>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"></script>
+  <title>Search</title>
+  <link rel="stylesheet" type="text/css" href="{% static 'styles/page.css'%}">
+
+
+
+  <style>
+
+    body {
+        background: rgba(0, 0, 0, 0.08);
+    }
+:root {
+    --main-bg-color: rgba(0, 0, 0, 0.7);
+    --text-color: #ffffff;
+    --highlight-color: #FFD700;
+    --border-color: #000;
+    }
+
+
+      .topnav {
+      background-color:rgb(28, 28, 28);
+      overflow: hidden;
+      width: 100%;
+      height: 5em;
+      display: inline-block;
+      margin: 0;
+      padding: 0;
+      position: relative;
+
+    }
+
+    .topnav a {
+    float: right;
+    display: block;
+    color:white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+    font-weight: bold;
+    font-family: 'Poppins', sans-serif;
+    margin-top: -50px;
+    transition: background-color 0.3s ease;
+    }
+
+
+
+    .topnav a:hover{
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+
+
+    .topnav .icon {
+      display: none;
+    }
+
+    h1 {
+    margin-bottom: -1.5rem;
+    font-family: inherit;
+    font-weight: 500;
+    line-height: 2.0;
+    color:rgb(255, 251, 251);
+
+}
+
+.results h4, h3 {
+    text-align: center;
+    font-size: 24px;
+    font-weight: 600;
+    color: #fffefe;
+    margin-bottom: 20px;
+}
+
+#add {
+
+  width: 100%;
+    background-color: rgb(49, 49, 49);
+    color:turquoise;
+    padding: 15px 0;
+    font-size: 18px;
+    font-weight: 600;
+
+}
+
+#add:hover{
+  background-color: orange;
+  color:#0c0b0b;
+}
+
+    /* Adjustments for mobile responsiveness */
+  @media screen and (max-width: 768px) {
+    .topnav a {
+      float: none; /* Remove float to stack links vertically */
+      display: block; /* Make links block level for full width */
+      text-align: center; /* Center align the links */
+      padding: 12px 16px; /* Adjust padding for better touch targets */
+    }
+
+    .topnav ul {
+      margin: 0; /* Remove default margins */
+      padding: 0; /* Remove default padding */
+    }
+
+    .topnav #name {
+      text-align: center; /* Center align the logo or title */
+    }
+
+    .topnav #rest {
+      display: block; /* Ensure rest of the links stack below */
+      text-align: center; /* Center align the links */
+    }
+
+    .topnav .icon {
+      display: inline-block; /* Display menu icon if needed */
+    }
+
+
+
+        .topnav ul {
+          margin: 0; /* Remove default margins */
+          padding: 0; /* Remove default padding */
+        }
+
+        .topnav #name {
+          text-align: center; /* Center align the logo or title */
+        }
+
+        .topnav #rest {
+          display: block; /* Ensure rest of the links stack below */
+          text-align: center; /* Center align the links */
+        }
+
+        .topnav .icon {
+          display: inline-block; /* Display menu icon if needed */
+        }
+      }
+
+      /* Side window CSS */
+      .sidewindow {
+      height: 100%;
+      width: 0;
+      position: fixed;
+      z-index: 1;
+      top: 0;
+      right: 0;
+      background-color: var(--main-bg-color);
+      overflow-x: hidden;
+      transition: 0.5s;
+      padding-top: 70px;
+    }
+
+    .sidewindow a {
+      padding: 8px 8px 8px 32px;
+      text-decoration: none;
+      font-size: 25px;
+      color: #f1f1f1;
+      display: block;
+      transition: 0.3s;
+    }
+
+    .sidewindow a:hover {
+      color: #f1f1f1;
+    }
+
+    .sidewindow .closebtn {
+      position: absolute;
+      top: 0;
+      right: 25px;
+      font-size: 36px;
+      margin-left: 50px;
+    }
+
+      .parentDiv {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 10px;
+      }
+
+      .content1 {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        width: 100%;
+        padding: 15px;
+        border: 1px solid #ccc;
+        margin-right: 10px;
+      }
+
+      .content1 img {
+        height: 200px;
+        width: 200px;
+        margin-right: 30px;
+        vertical-align: middle;
+        float: left;
+      }
+
+
+
+      .content1 button {
+        display: inline-block;
+        padding: 10px;
+        /* float: right; */
+        background-color: #50a0bb;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        margin-left: 40px;
+        vertical-align: middle;
+        width: 150px;
+
+      }
+
+      .content1 button:hover {
+        background-color: orange;
+      }
+
+      .content1 p {
+        display: inline-block;
+        vertical-align: middle;
+        margin-left: 30px;
+      }
+
+      .title {
+        font-size: 32px;
+        font-weight: 800;
+        line-height: 50px;
+        text-align: center;
+        color: #7d7d81;
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+      }
+
+
+
+      .cssanimation, .cssanimation span {
+        animation-duration: 0.8s;
+        animation-fill-mode: both;
+      }
+
+      .cssanimation span { display: inline-block }
+
+      .fadeInBottom { animation-name: fadeInBottom }
+      @keyframes fadeInBottom {
+        from {
+            opacity: 0;
+            transform: translateY(100%);
+        }
+        to { opacity: 1 }
+      }
+      .container4 {
+        position: absolute;
+        top: 10px; /* Adjusted to account for the fixed topnav */
+        left: calc(250px + 10px); /* Width of left container + margin */
+        right: calc(250px + 10px); /* Width of right container + margin */
+        width: auto; /* Adjusted to automatically fill the available space */
+        max-width: 800px; /* Maximum width */
+        height: auto;
+        background-color: #fff;
+        padding: 25px 30px;
+        border-radius: 10px; /* Rounded corners */
+        overflow-y: auto; /* Enable vertical scrolling for the content area */
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Adding a subtle shadow */
+        margin: 0 auto; /* Centering horizontally */
+      }
+
+      /* Adjustments for mobile responsiveness */
+      @media screen and (max-width: 768px) {
+        .container4 {
+          left: 0; /* Reset position for smaller screens */
+          right: 0; /* Reset position for smaller screens */
+          width: 100%; /* Full width on smaller screens */
+          padding: 20px; /* Adjusted padding */
+        }
+      }
+
+
+      .user-details .input-box input,
+      .user-details .input-box select {
+        height: 45px;
+        width: 100%;
+        outline: none;
+        font-size: 16px;
+        border-radius: 5px;
+        padding-left: 15px;
+        border: 1px solid #0c0b0b;
+      }
+
+      .centered-title {
+        font-size: 32px;
+        font-weight: 800;
+        line-height: 50px;
+        text-align: center;
+        text-transform:capitalize;
+        position: relative;
+        margin: 20px 0; /* Add margin for spacing */
+
+      }
+
+      .centered-title::before {
+        content: "";
+        position: absolute;
+        left: 50%;
+        bottom: 0;
+        transform: translateX(-50%);
+        height: 3px;
+        width: 30px;
+        border-radius: 5px;
+
+      }
+
+
+
+
+
+      /* Additional adjustments for left and right containers */
+      #left-container {
+        position: fixed;
+        top: 10px; /* Adjusted to account for the fixed topnav */
+        left: 10px; /* Adjusted left margin */
+        width: 250px; /* Adjust width as needed */
+        height: 500px; /* Adjusted height to fit the viewport minus topnav */
+        background-color: #ffffff; /* White background */
+        border: 1px solid #e0e0e0; /* Light border */
+        border-radius: 10px; /* Rounded corners */
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+        padding: 15px; /* Padding inside the container */
+        z-index: 999;
+        overflow-y: auto; /* Enable vertical scrolling */
+        transition: background-color 0.2s ease, color 0.2s ease; 
+      }
+
+      #left-container:hover{
+        background-color: orange;
+      }
+
+      .filter-heading {
+        display: block;
+        font-size: 18px;
+        font-weight: bold;
+        margin-bottom: 10px;
+        text-transform: uppercase;
+        text-align: center;
+        width: 100%;
+        border-bottom: 1px solid #ddd; /* Add a bottom border */
+        padding-bottom: 5px; /* Add some padding below the text */
+      }
+      .filter-title {
+        font-weight: bold;
+        color: var(--main-bg-color);
+        
+    }
+
+
+      #right-container {
+        position: fixed;
+        top: 10px; /* Adjusted to account for the fixed topnav */
+        right: 10px; /* Adjusted right margin */
+        width: 250px; /* Adjust width as needed */
+        height: 500px; /* Adjusted height to fit the viewport minus topnav */
+        background-color: #ffffff; /* White background */
+        border: 1px solid gray; /* Light border */
+        border-radius: 10px; /* Rounded corners */
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+        padding: 15px; /* Padding inside the container */
+        z-index: 999;
+        overflow-y: auto; /* Enable vertical scrolling */
+        transition: background-color 0.2s ease, color 0.2s ease; 
+      }
+
+      #right-container:hover{
+        background-color: orange;
+        
+      }
+
+      @media (max-width: 768px) {
+        #left-container,
+        #right-container {
+          display: none; /* Hide containers on smaller screens */
+        }
+      }
+
+
+      mark {
+        background-color: #75AEC7;
+        color: black;
+        font-weight: bold;
+      }
+
+      .services-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .service-item {
+      background-color: #ffffff;
+      border: 1px solid gray;
+      border-radius: 5px;
+      padding: 5px 10px;
+      margin: 0;
+    }
+
+    .service-item:hover{
+      background-color: black;
+    }
+
+
+    .languages-list {
+    margin: 0;
+    padding: 0;
+    display: flex; /* Align items horizontally */
+    flex-wrap: wrap; /* Wrap items to the next line if needed */
+    justify-content: flex-start; /* Align items to the left */
+  }
+
+  .languages-list .language-item {
+    display: inline-block; /* Display items in a single row */
+    margin-right: 10px; /* Adjust spacing between items */
+    color: red; /* Set text color to red */
+    font-size: 16px; /* Adjust font size of the text */
+  }
+
+  .languages-list .language-item:before {
+    content: "\2022"; /* Unicode character for bullet point */
+    margin-right: 8px; /* Adjust space between bullet and text */
+    color: red; /* Set bullet point color to red */
+    font-size: 16px; /* Adjust font size of the bullet point */
+  }
+  .mentor-container {
+    background: white;
+    border: 1px solid #ddd; /* Light border */
+    border-radius: 20px; /* Adjust border radius as needed */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15), 0 0 15px rgba(0, 123, 255, 0.25); /* Initial shadow */
+    padding: 15px;
+    transform: translateY(-1px);
+    margin-bottom: 20px;
+    width: 100%;
+    text-align: left;
+    margin: 10px auto;
+    color: rgb(15, 15, 15);
+    padding-left: 250px;
+    position: relative; /* Ensure positioning context */
+    transition: box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out; /* Smooth transition for shadow and transform */
+    cursor: pointer;
+  }
+  .mentor-container:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15), 0 0 15px rgba(0, 123, 255, 0.25); /* Light glow effect */
+    transform: translateY(-1px); /* Slight lift effect */
+    background-color: orange;
+    cursor: pointer; /* Change cursor to pointer */
+    color: white;
+  }
+  .mentor-container img.profile-picture {
+    position: absolute; /* Position the image absolutely */
+    top: 50%; /* Center vertically */
+    left: 50px; /* Adjust position from the left */
+    transform: translateY(-50%); /* Center vertically */
+    width: 100px; /* Adjust image width */
+    height: 100px; /* Adjust image height */
+    border-radius: 50%; /* Create circular shape */
+    border: 3px solid #f9fbfb; /* Optional: Add a border around the image */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Optional: Add a subtle shadow */
+    background-color: rgb(194, 247, 241);
+  }
+
+  .mentor-container p {
+    margin: 5px 0;
+  }
+
+  .no-mentors {
+    display: none; /* Initially hide the "No mentors" message */
+    text-align: center; /* Center text horizontally */
+    margin-top: 20px; /* Add space above the message */
+  }
+
+  .no-mentors h4 {
+    font-size: 24px; /* Font size */
+    font-weight: 600; /* Font weight */
+    color: #75AEC7; /* Text color */
+    margin-bottom: 20px; /* Space below the message */
+  }
+
+  .mentor-details {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 20px; /* Add margin top to create space */
+    justify-content: space-between; /* Distribute items evenly */
+  }
+
+  .mentor-details .detail-item {
+    display: flex;
+    align-items: center;
+    margin-right: 20px; /* Space between detail items */
+  }
+
+  .mentor-details .detail-item i {
+    margin-right: 10px; /* Space between icon and text */
+    font-size: 20px; /* Adjust icon size */
+  }
+
+  .mentor-container .username {
+    color: rgb(7, 7, 7);
+    font-size: 18px; /* Increase font size of username */
+  }
+
+  .mentor-container .view-button {
+    margin-top: 10px; /* Adjust spacing */
+    width: 100%; /* Full width button */
+    background-color: #75AEC7; /* Button background color */
+    color: rgb(10, 10, 10); /* Button text color */
+    padding: 8px 12px; /* Button padding */
+    font-size: 14px; /* Button font size */
+    font-weight: 600; /* Button font weight */
+    border: none; /* Remove button border */
+    border-radius: 5px; /* Button border radius */
+    cursor: pointer; /* Cursor style */
+    text-align: center; /* Center align text */
+  }
+
+  @media (max-width: 768px) {
+
+    .fa {
+    float: right;
+    margin-left: 300px;
+    }
+
+    .topnav a {
+        display: none;
+    }
+
+     .mentor-container {
+    background: white;
+    border: 1px solid #ddd; /* Light border */
+    border-radius: 20px; /* Adjust border radius as needed */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15), 0 0 15px rgba(0, 123, 255, 0.25); /* Initial shadow */
+    padding: 15px;
+    transform: translateY(-1px);
+    margin-bottom: 20px;
+    width: 100%;
+    text-align: left;
+    margin: 10px auto;
+    color: rgb(15, 15, 15);
+    padding-left: 250px;
+    position: relative; /* Ensure positioning context */
+    transition: box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out; /* Smooth transition for shadow and transform */
+    cursor: pointer;
+     }
+
+     .mentor-container:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15), 0 0 15px rgba(0, 123, 255, 0.25); /* Light glow effect */
+    transform: translateY(-1px); /* Slight lift effect */
+    background-color: orange;
+    cursor: pointer; /* Change cursor to pointer */
+    color: white;
+     }
+
+     .mentor-container img.profile-picture {
+    position: absolute; /* Position the image absolutely */
+    top: 50%; /* Center vertically */
+    left: 50px; /* Adjust position from the left */
+    transform: translateY(-50%); /* Center vertically */
+    width: 100px; /* Adjust image width */
+    height: 100px; /* Adjust image height */
+    border-radius: 50%; /* Create circular shape */
+    border: 3px solid #f9fbfb; /* Optional: Add a border around the image */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Optional: Add a subtle shadow */
+    background-color: rgb(194, 247, 241);
+  }
+
+
+    .mentor-details {
+      display: flex;
+      flex-direction: column; /* Stack detail items vertically */
+      align-items: center; /* Center align items */
+      margin-top: 120px; /* Add margin top to create space below the profile picture */
+      margin-bottom: 20px; /* Add margin bottom */
+      margin-left: -280px;
+    }
+
+    .mentor-details .detail-item {
+      display: flex;
+      align-items: center;
+      margin: 10px 0; /* Space between detail items vertically */
+      width: 100%; /* Make detail items take full width */
+      justify-content: flex-start; /* Align items to the left */
+    }
+
+    .mentor-container .username {
+      font-size: 16px; /* Decrease font size */
+      color:black; /* Set username color */
+    }
+
+    .mentor-container .view-button {
+    margin-top: 10px; /* Adjust spacing */
+    width: 100%; /* Full width button */
+    background-color: #75AEC7; /* Button background color */
+    color: rgb(10, 10, 10); /* Button text color */
+    padding: 8px 12px; /* Button padding */
+    font-size: 14px; /* Button font size */
+    font-weight: 600; /* Button font weight */
+    border: none; /* Remove button border */
+    border-radius: 5px; /* Button border radius */
+    cursor: pointer; /* Cursor style */
+    text-align: center; /* Center align text */
+  }
+
+
+    /* Ensure the last mentor container is fully visible */
+    .container4 {
+      padding-bottom: 100px; /* Add extra padding at the bottom */
+      }
+    }
+    .mentor-link {
+    text-decoration: none; /* Remove underline */
+    color: inherit; /* Use the default text color */
+  }
+
+  .mentor-link:hover {
+    text-decoration: none; /* Ensure underline is not added on hover */
+  }
+  .arrow-icon {
+    cursor: pointer;
+    margin-left: 5px; /* Adjust as needed */
+    transition: transform 0.3s ease; /* Smooth transition for rotation */
+}
+
+.arrow-icon.rotated {
+    transform: rotate(90deg); /* Rotate arrow to point downwards */
+}
+
+.hidden {
+    display: none;
+}
+
+
+
+
+
+
+    
+
+  </style>
+</head>
+
+<body>
+  <div class="topnav" id="myTopnav">
+    <ul>
+      <div id="name">
+        <h1>Welcome</h1>
+      </div>
+    </ul>
+
+    <ul id="rest">
+      {% if user.is_authenticated %}
+      <ul><a href="{% url 'home' %}"  class="explore-link"  class="text-base text-black       hover:px-5 hover:py-2.5  transition-all duration-200 hover:bg-[#fc8019] hover:text-black focus:text-black focus:bg-[#fc8019] font-semibold hover:text-white   rounded-full" >Home</a></ul>
+      <ul><a href="{% url 'mybookings' %}"  class="explore-link"  class="text-base text-black       hover:px-5 hover:py-2.5  transition-all duration-200 hover:bg-[#fc8019] hover:text-black focus:text-black focus:bg-[#fc8019] font-semibold hover:text-white   rounded-full">My bookings</a></ul>
+      <ul><a href="{% url 'logout' %}" class="explore-link"  class="text-base text-black       hover:px-5 hover:py-2.5  transition-all duration-200 hover:bg-[#fc8019] hover:text-black focus:text-black focus:bg-[#fc8019] font-semibold hover:text-white   rounded-full">Logout</a></ul>
+      {% endif %}
+      <a href="javascript:void(0);" class="icon" onclick="openNav()">
+        <i class="fa fa-bars"></i>
+      </a>
+    </ul>
+  </div>
+  <!-- Side window -->
+  <div id="mySidewindow" class="sidewindow">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    <a href="{% url 'home' %}"  class="explore-link"  class="text-base text-black       hover:px-5 hover:py-2.5  transition-all duration-200 hover:bg-[#fc8019] hover:text-black focus:text-black focus:bg-[#fc8019] font-semibold hover:text-white   rounded-full">Home</a>
+    <a href="{% url 'mybookings' %}"  class="explore-link"  class="text-base text-black       hover:px-5 hover:py-2.5  transition-all duration-200 hover:bg-[#fc8019] hover:text-black focus:text-black focus:bg-[#fc8019] font-semibold hover:text-white   rounded-full">My bookings</a>
+    <a href="{% url 'logout' %}"  class="explore-link"  class="text-base text-black       hover:px-5 hover:py-2.5  transition-all duration-200 hover:bg-[#fc8019] hover:text-black focus:text-black focus:bg-[#fc8019] font-semibold hover:text-white   rounded-full">Logout</a>
+  </div>
+
+  <div class="cssanimation sequence fadeInBottom">
+    <div id="left-container">
+      <span class="filter-heading">Filters</span>
+      <!-- Filters Section -->
+      <div class="filters">
+          <div class="filter-item">
+              <div class="filter-title">
+                  <i class="fa fa-chevron-right arrow-icon"></i> <!-- Initially points right -->
+                  Role
+              </div>
+              <div class="checkboxes hidden">
+                  {% for role in unique_roles %}
+                      <label>
+                          <input type="checkbox" id="role_{{ role }}" name="role" value="{{ role }}"> {{ role }}
+                      </label><br>
+                  {% endfor %}
+              </div>
+          </div>
+
+          <div class="filter-item">
+              <div class="filter-title">
+                  <i class="fa fa-chevron-right arrow-icon"></i> <!-- Initially points right -->
+                  Year of Experience
+              </div>
+              <div class="checkboxes hidden">
+                  {% for year in unique_years_of_experience %}
+                      <label>
+                          <input type="checkbox" id="year_{{ year }}" name="year_of_experience" value="{{ year }}"> {{ year }}
+                      </label><br>
+                  {% endfor %}
+              </div>
+          </div>
+
+          <div class="filter-item">
+              <div class="filter-title">
+                  <i class="fa fa-chevron-right arrow-icon"></i> <!-- Initially points right -->
+                  Languages Spoken
+              </div>
+              <div class="checkboxes hidden">
+                  {% for language in unique_languages_spoken %}
+                      <label>
+                          <input type="checkbox" id="language_{{ language }}" name="languages_spoken" value="{{ language }}"> {{ language }}
+                      </label><br>
+                  {% endfor %}
+              </div>
+          </div>
+
+          <div class="filter-item">
+              <div class="filter-title">
+                  <i class="fa fa-chevron-right arrow-icon"></i> <!-- Initially points right -->
+                  Services
+              </div>
+              <div class="checkboxes hidden">
+                  {% for service in unique_services %}
+                      <label>
+                          <input type="checkbox" id="service_{{ service }}" name="services" value="{{ service }}"> {{ service }}
+                      </label><br>
+                  {% endfor %}
+              </div>
+          </div>
+      </div>
+  </div>
+
+
+    <div class="container4" id="container4">
+      <div class="inner-wrapper">
+      <div class="title">
+        <h3>Search Your Mentors</h3>
+      </div>
+      <div class="content" id="content">
+        <form action="" method="get">
+          <div class="user-details">
+            <div class="input-box">
+              <span class="details">Search Term</span>
+              <input type="text" id="searchInput" placeholder="Search term" name="search_term" value="{{ search_term }}" required>
+            </div>
+            <div class="input-box">
+              <span class="details">Year of Experience</span>
+              <select name="year_of_experience" id="yearofexperience">
+                <option value="" disabled>Select year of experience</option>
+                <option value="">Select Year of Experience</option>
+                <option value="1" {% if year_of_experience == "1" %}selected{% endif %}>1 year</option>
+                <option value="2" {% if year_of_experience == "2" %}selected{% endif %}>2 years</option>
+                <option value="greater_than_2" {% if year_of_experience == "greater_than_2" %}selected{% endif %}>Greater than 2 years</option>
+              </select>
+            </div>
+          </div>
+          <div id="add-container">
+            <button type="submit" id="add">Search</button>
+          </div>
+        </form>
+        <div class="no-mentors">
+          <h4 class="centered-title">No mentors found</h4>
+        </div>
+        {% if mentors is not None %}
+          {% if mentors %}
+            <div class="results">
+              <h4 class="centered-title">Mentors matching your search</h4>
+              {% for mentor in mentors %}
+              <a class="mentor-link" href="{% url 'page' mentor.usern %}">
+                <div class="mentor-container" data-search="{{ mentor.usern }} {{ mentor.role }} {{ mentor.services }} {{ mentor.languages_spoken }} {{ mentor.year_of_experience }}" data-year="{{ mentor.year_of_experience }}">
+                  {% if mentor.profile_picture %}
+                    <img src="{{ mentor.profile_picture.url }}" alt="Profile Picture" class="profile-picture">
+                  {% else %}
+                    <img src="{% static 'path/to/default/profile_picture.jpg' %}" alt="Default Profile Picture" class="profile-picture">
+                  {% endif %}
+
+                  <div class="mentor-details">
+                    <div class="detail-item">
+                      <i class="fa fa-user"></i>
+                      <strong class="username">{{ mentor.usern }}</strong>
+                    </div>
+                    <div class="detail-item">
+                      <i class="fa fa-address-card"></i>
+                      <span>{{ mentor.role }}</span>
+                    </div>
+                    <div class="detail-item">
+                      <i class="fa fa-briefcase"></i>
+                      <span>{{ mentor.year_of_experience }}</span>
+                    </div>
+                  </div>
+
+                  <p class="languages-list">
+                    {% if mentor.languages_spoken %}
+                      {% for language in mentor.languages_spoken %}
+                        <span class="language-item">{{ language }}</span>
+                      {% endfor %}
+                    {% else %}
+                      <span>No languages listed</span>
+                    {% endif %}
+                  </p>
+
+                  <div class="services-list">
+                    {% if mentor.services %}
+                      {% for service in mentor.services %}
+                        <span class="service-item">{{ service }}</span>
+                      {% endfor %}
+                    {% else %}
+                      <span>No services listed</span>
+                    {% endif %}
+                  </div>
+                </div>
+              </a>
+              {% endfor %}
+            </div>
+          {% else %}
+            <div class="results">
+              <h4 class="centered-title">No mentors found</h4>
+            </div>
+          {% endif %}
+        {% endif %}
+      </div>
+    </div>
+    </div>
+    <div id="right-container"></div>
+  </div>
+
+  <script>
+    // Function to perform filtering based on selected filters
+    function performFiltering() {
+      let filter = document.getElementById('searchInput').value.toLowerCase().trim();
+      let yearOfExperience = document.getElementById('yearofexperience').value;
+      let mentorLinks = document.getElementsByClassName('mentor-link');
+      let filterTerms = filter.split(' ').filter(term => term.trim() !== '');
+      let roleFilters = getCheckedValues('role');
+      let yearFilters = getCheckedValues('year_of_experience');
+      let languageFilters = getCheckedValues('languages_spoken');
+      let serviceFilters = getCheckedValues('services');
+
+      let matchesFound = false;
+
+      // Array to hold mentors and their match scores
+      let mentorMatches = [];
+
+      for (let i = 0; i < mentorLinks.length; i++) {
+        let mentorContainer = mentorLinks[i].querySelector('.mentor-container');
+        let mentorData = mentorContainer.getAttribute('data-search').toLowerCase();
+        let mentorYear = mentorContainer.getAttribute('data-year');
+
+        // Check if mentor matches any of the search terms (roles)
+        let matchesAnyTerm = filterTerms.length === 0 || filterTerms.some(term => mentorData.includes(term));
+
+        // Check if mentor matches selected role, year of experience, languages spoken, and services
+        let matchesRoleFilter = roleFilters.length === 0 || roleFilters.some(filter => mentorData.includes(filter.toLowerCase()));
+        let matchesYearFilter = yearFilters.length === 0 || yearFilters.includes(mentorYear);
+        let matchesLanguageFilter = languageFilters.length === 0 || languageFilters.some(filter => mentorData.includes(filter.toLowerCase()));
+        let matchesServiceFilter = serviceFilters.length === 0 || serviceFilters.some(filter => mentorData.includes(filter.toLowerCase()));
+
+        // Check if mentor matches search input
+        let matchesSearchInput = filter === '' || mentorData.includes(filter);
+
+        // Check if mentor matches the year of experience
+        let matchesYear = yearOfExperience === '' || mentorYear === yearOfExperience || (yearOfExperience === 'greater_than_2' && parseInt(mentorYear) > 2);
+
+        if (matchesAnyTerm && matchesRoleFilter && matchesYearFilter && matchesLanguageFilter && matchesServiceFilter && matchesYear) {
+          // Reset innerHTML to original content
+          mentorContainer.innerHTML = mentorContainer.getAttribute('data-original-html');
+          // Highlight matching terms
+          filterTerms.forEach(term => {
+            highlightTerm(mentorContainer, term);
+          });
+          // Calculate number of matched terms
+          let matchCount = filterTerms.filter(term => mentorData.includes(term)).length;
+
+          // Store mentor and match count
+          mentorMatches.push({ container: mentorLinks[i], matchCount: matchCount });
+
+          matchesFound = true;
+        } else {
+          mentorLinks[i].style.display = 'none';
+        }
+      }
+
+      // Sort mentor containers based on match count (descending)
+      mentorMatches.sort((a, b) => b.matchCount - a.matchCount);
+
+      // Reset display and order based on sorted match count
+      let resultsContainer = document.querySelector('.results');
+      for (let i = 0; i < mentorMatches.length; i++) {
+        mentorMatches[i].container.style.display = '';  // Reset display to default
+        resultsContainer.appendChild(mentorMatches[i].container);  // Append to content in sorted order
+      }
+
+      // Handle no matches found display
+      if (matchesFound) {
+        document.querySelector('.no-mentors').style.display = 'none';
+        document.querySelector('.results').style.display = 'block';
+      } else {
+        document.querySelector('.no-mentors').style.display = 'block';
+        document.querySelector('.results').style.display = 'none';
+      }
+    }
+
+    // Function to get checked values for a given checkbox group name
+    function getCheckedValues(groupName) {
+      let checkboxes = document.querySelectorAll('input[name="' + groupName + '"]:checked');
+      return Array.from(checkboxes).map(checkbox => checkbox.value);
+    }
+
+    // Initial setup on DOMContentLoaded
+    document.addEventListener('DOMContentLoaded', function() {
+      // Store original HTML content of mentor containers for reset
+      let mentorContainers = document.getElementsByClassName('mentor-container');
+      for (let i = 0; i < mentorContainers.length; i++) {
+        mentorContainers[i].setAttribute('data-original-html', mentorContainers[i].innerHTML);
+      }
+
+      // Perform initial filtering on page load
+      performFiltering();
+
+      // Add event listener to input field for real-time filtering
+      document.getElementById('searchInput').addEventListener('input', function () {
+        performFiltering();  // Perform filtering on input change
+        resetFilters();  // Uncheck all checkboxes and close arrows
+      });
+
+      // Add event listener to year of experience select for filtering
+      document.getElementById('yearofexperience').addEventListener('change', function () {
+        performFiltering();  // Perform filtering on select change
+        resetFilters();  // Uncheck all checkboxes and close arrows
+      });
+
+      // Add event listener to search button to perform filtering
+      document.getElementById('add').addEventListener('click', function (event) {
+        event.preventDefault(); // Prevent form submission
+        performFiltering();  // Perform filtering when search button is clicked
+      });
+
+      // Add event listeners to checkboxes for filtering
+      document.querySelectorAll('.filters input[type="checkbox"]').forEach(function(checkbox) {
+        checkbox.addEventListener('change', function() {
+          performFiltering();  // Perform filtering on checkbox change
+        });
+      });
+
+      // Add event listeners to input field and select box for clicks
+      document.getElementById('searchInput').addEventListener('click', function() {
+        resetFilters();  // Uncheck all checkboxes and close arrows on click
+      });
+
+      document.getElementById('yearofexperience').addEventListener('click', function() {
+        resetFilters();  // Uncheck all checkboxes and close arrows on click
+      });
+    });
+    // Function to reset search input field and select box
+    function resetSearchAndSelect() {
+      document.getElementById('searchInput').value = '';  // Reset search input field
+      document.getElementById('yearofexperience').selectedIndex = 0;  // Reset select box
+    }
+
+    // Initial setup on DOMContentLoaded
+    document.addEventListener('DOMContentLoaded', function() {
+      // Add event listener to arrow icons for resetting search input and select box
+      document.querySelectorAll('.arrow-icon').forEach(function(arrow) {
+        arrow.addEventListener('click', function() {
+          resetSearchAndSelect();  // Reset search input field and select box
+        });
+      });
+    });
+
+
+    // Function to highlight search terms within mentor data
+    function highlightTerm(element, term) {
+      const regex = new RegExp(`(${term})`, 'gi');
+
+      function traverse(node) {
+        if (node.nodeType === 3) { // Text node
+          let matches = node.nodeValue.match(regex);
+          if (matches) {
+            let span = document.createElement('span');
+            span.innerHTML = node.nodeValue.replace(regex, '<mark>$1</mark>');
+            let frag = document.createDocumentFragment();
+            while (span.firstChild) {
+              frag.appendChild(span.firstChild);
+            }
+            node.parentNode.replaceChild(frag, node);
+          }
+        } else if (node.nodeType === 1 && node.nodeName !== 'MARK') { // Element node and not already highlighted
+          for (let i = 0; i < node.childNodes.length; i++) {
+            traverse(node.childNodes[i]);
+          }
+        }
+      }
+
+      traverse(element);
+    }
+
+    // Function to uncheck all checkboxes and close all arrows
+    function resetFilters() {
+      // Uncheck all checkboxes
+      document.querySelectorAll('.filters input[type="checkbox"]').forEach(function(checkbox) {
+        checkbox.checked = false;
+      });
+
+      // Close all arrows and hide checkboxes sections
+      document.querySelectorAll('.filter-item .checkboxes').forEach(function(checkboxesDiv) {
+        checkboxesDiv.classList.add('hidden');
+      });
+      document.querySelectorAll('.arrow-icon').forEach(function(arrowIcon) {
+        arrowIcon.classList.remove('rotated');
+      });
+
+      // Reset year of experience select box
+      document.getElementById('yearofexperience').selectedIndex = 0;
+    }
+
+    function openNav() {
+      document.getElementById("mySidewindow").style.width = "250px";
+    }
+
+    function closeNav() {
+      document.getElementById("mySidewindow").style.width = "0";
+    }
+
+    function showLeftContainer() {
+      document.getElementById("left-container").style.display = "block";
+      document.getElementById("right-container").style.display = "none";
+      closeNav();
+    }
+
+    function showRightContainer() {
+      document.getElementById("left-container").style.display = "none";
+      document.getElementById("right-container").style.display = "block";
+      closeNav();
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+      // Add event listeners to arrow icons for toggle
+      document.querySelectorAll('.arrow-icon').forEach(function(arrow) {
+        arrow.addEventListener('click', function() {
+          let checkboxes = this.parentElement.nextElementSibling; // Get the checkboxes div
+          checkboxes.classList.toggle('hidden'); // Toggle visibility
+
+          // Toggle arrow rotation
+          this.classList.toggle('rotated');
+        });
+      });
+    });
+
+  </script>
+
+
+</body>
+</html>
