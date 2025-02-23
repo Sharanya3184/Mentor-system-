@@ -24,7 +24,7 @@ pip install setuptools
 pip install python_dateutil or
 (pip install -r requiremnent.txt)
 
-cd carpool
+cd mentor system
 
 python manage.py makemigrations
 
